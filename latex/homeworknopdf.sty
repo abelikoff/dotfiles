@@ -1,0 +1,88 @@
+%% $URL$ $Id$
+
+%% Useful settings for homeworks
+
+
+%% Packages
+
+\usepackage{bm}
+\usepackage[usenames]{color}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{paralist}
+\usepackage{framed}
+\usepackage{listings}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.png}
+\usepackage{hyperref}
+
+
+
+%% Commands
+
+\newcommand{\deq}               {\stackrel{\mathrm{d}}{=}}
+\newcommand{\diff}[2]           {\frac{d^2#1}{d{#2}^2}}
+\newcommand{\dif}[2]            {\frac{d#1}{d#2}}
+\newcommand{\divg}[1]           {\mathrm{div}\left(#1\right)}
+\newcommand{\dom}[1]            {\mathcal{D}(#1)}
+\newcommand{\exwpp}[3]          {\mathbb{E}_{#1}^{#2}\left[#3\right]}
+\newcommand{\exwp}[2]           {\mathbb{E}_{#1}\left[#2\right]}
+\newcommand{\ex}[1]             {\mathbb{E}\left[#1\right]}
+\newcommand{\fixme}[1]          {\textbf{FIXME -  #1}}
+\newcommand{\ftx}               {\mathcal{F}}
+\newcommand{\geng}              {\mathfrak{G}}
+\newcommand{\half}              {\oo{2}}
+\newcommand{\I}[1]              {\mathbb{I}_{#1}}
+\newcommand{\intlims}[2]        {\biggl\lvert_{#1}^{#2}}
+\newcommand{\ndist}[2]          {\mathcal{N}(#1,#2)}
+\newcommand{\norm}[1]           {\lVert#1\rVert}
+\newcommand{\note}[1]           {\textsc{#1}}
+\newcommand{\oo}[1]             {\frac{1}{#1}}
+\newcommand{\ord}[1]            {\mathcal{O}(#1)}
+\newcommand{\pdd}[2]            {\frac{\partial^2 #1}{\partial {#2}^2}}
+\newcommand{\pd}[2]             {\frac{\partial #1}{\partial #2}}
+\newcommand{\prwpp}[3]          {\mathbb{P}_{#1}^{#2}\left(#3\right)}
+\newcommand{\prwp}[2]           {\mathbb{P}_{#1}\left(#2\right)}
+\newcommand{\pr}[1]             {\mathbb{P}\left(#1\right)}
+\newcommand{\rv}[1]             {\mathbb{#1}}
+\newcommand{\saf}               {\sa{F}}
+\newcommand{\sa}[1]             {\mathcal{#1}}
+\newcommand{\spc}[1]            {\mathbb{#1}}
+\newcommand{\toinf}[1]          {#1 \rightarrow \infty}
+\newcommand{\tominf}[1]         {#1 \rightarrow -\infty}
+\newcommand{\tozero}[1]         {#1 \rightarrow 0}
+\newcommand{\Var}[1]            {\mathrm{Var}\left[#1\right]}
+\newcommand{\veca}[1]           {\vec{#1}}
+\newcommand{\vecb}[1]           {\boldsymbol{#1}}
+\newcommand{\vect}[1]           {\vec{\mbox{\boldmath$#1$}}}
+
+
+%% New environments
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+
+%% Misc settings
+
+\definecolor{shadecolor}{rgb}{0.8,0.8,0.8} 

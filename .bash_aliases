@@ -1,0 +1,139 @@
+# $Id$  -*- sh -*-
+
+#  aliases
+
+# miscellaneous 
+
+if [ "`whoami`" = root ]; then
+    alias rm='rm -i'
+
+else
+    if type rm | grep aliased > /dev/null; then
+	unalias rm
+    fi
+fi
+
+alias btd='btdownloadcurses.bittorrent'
+alias cln='rm *~'
+alias cp='cp -i'
+alias e=emacs
+alias em='emacs -nw'
+alias ev='env | grep $@'
+alias hn=hostname
+alias la='ls -a'
+alias latr='ls -latr'
+alias ll='ls -l'
+function loc() { locate -i -0 "$1" | xargs --null ls -sd ; }
+alias lrpm='rpm -qvlp'
+alias m='less -i -f -M'
+alias mv='mv -i'
+alias po='popd'
+alias pu='pushd'
+alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
+alias svn_setexec="svn propset svn:executable 1"
+alias svn_setkw="svn propset svn:keywords 'Id URL Revision Date'"
+alias tf='tail -f'
+
+
+# this is a hack for RPM building. /usr/sbin/Check (invoked by rpmbuild) is
+# an sh script but it sources the environment and fails on bash/ksh function
+# declarations. To avoid it, we don't load functions when run from rpmbuild
+# directory
+
+if [[ $PWD != */rpmbuild/* ]]; then
+
+    function cdf {
+	typeset dir
+
+	dir=$(hfdir "$1")
+
+	if [[ -n $dir ]]; then
+	    echo $dir
+	#cd $HOME/${dir#*/}
+	    cd $dir
+	fi
+    }
+
+    function fbk {
+	typeset file
+	typeset rc
+
+	rc=0
+
+	for file in "$@"; do
+	    cp -a "$file" "$file.`date +%Y%m%d-%H%M`" || rc=1
+	done
+
+	return $rc
+    }
+
+    function lc {
+	for x in $@ ; do 
+	    mv $x `echo $x | tr '[:upper:]' '[:lower:]'`
+	done
+    }
+
+    function mkcd { mkdir "$1"; cd "$1" ; }
+    function psnam { ps auxw | grep "$@" | grep -v grep ; }
+    function rpm-xtr { rpm2cpio $1 | cpio -iv --make-directories ; }
+    function rpmgrep { rpm -qa | grep "$@" ; }
+
+    function setapp { 
+	if [[ -d $1 ]]; then
+	    export PATH=$1/bin:$PATH
+	    export LD_LIBRARY_PATH=$1/lib:$LD_LIBRARY_PATH
+	    export MANPATH=$1/man:$MANPATH
+	else
+	    echo "ERROR: no such directory: $1"
+	fi
+    }
+
+    function setappi {
+	setapp $HOME/apps/$1
+    }
+
+    function uc {
+	for x in $@ ; do 
+	    mv $x `echo $x | tr '[:lower:]' '[:upper:]'`
+	done
+    }
+
+    function vrz { unzip -p "$@" | recode2 -ak; }
+    function vrzm { unzip -p "$@" | recode2 -ak | m; }
+
+    function xtermname { echo -en '\033]0;'$@'\007'; }
+    function xtl { xterm -T "$1" -geometry 200x20 -e tail -f "$1"; }
+
+    function xtn { 
+	if [ "$1" != "" ]; then
+	    xtermname "`hostname`: $1"
+	else
+	    xtermname "`hostname`"
+	fi
+    }
+
+    function ztv  {
+	typeset file
+
+	for file in "$@"; do
+	    case "$file" in
+		*.bz2) bunzip2 -c < "$file" ;;
+		*.[Zz]) zcat "$file" ;;
+                *) gunzip -c "$file" ;;
+            esac | tar tvf -
+	done
+    }
+
+    function ztx  {
+	typeset file
+
+	for file in "$@"; do
+	    case "$file" in
+		*.bz2) bunzip2 -c < "$file" ;;
+		*.[Zz]) zcat "$file" ;;
+                *) gunzip -c "$file" ;;
+            esac | tar xf -
+        done
+    }
+
+fi

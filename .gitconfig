@@ -1,0 +1,12 @@
+[core]
+	editor = vi
+[color]
+	ui = auto
+[alias]
+	ci = commit
+	co = checkout
+	br = branch
+	st = status
+[user]
+	name = Alexander L. Belikoff
+	email = abelikoff@gmail.com

@@ -1,0 +1,5 @@
+unalias ls
+alias ls='ls -F'
+export PAGER=cat
+export EDITOR=emacsclient
+echo
