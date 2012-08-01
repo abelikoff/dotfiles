@@ -116,7 +116,7 @@ umask 022
 
 GREP_COLOR="43;30"
 GREP_OPTIONS="--color=auto"
-export EDITOR="emacs -nw"
+export EDITOR="vim"
 export GREP_COLOR GREP_OPTIONS
 
 
