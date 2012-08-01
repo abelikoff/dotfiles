@@ -1,5 +1,4 @@
-;; $Id$
-
+;; emacs configuration
 
 ;;; paths
 
@@ -21,12 +20,15 @@
 
 (setq default-frame-alist
       '((width . 80)
-	(height . 80)
+	(height . 50)
 	(menu-bar-lines . 0)
 	(tool-bar-lines . 0)
 	(vertical-scroll-bars . nil)
 ;;	(font . "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1")
-	(font . "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*")
+;;	(font . "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*")
+        ;;(font . "-outline-Consolas-normal-r-normal-normal-12-97-96-96-c-*-iso8859-1")
+        ;;(font . "Monospace-9")
+        (font . "Liberation Mono-9")
 	(foreground-color . "Gray80")
 ))
 
@@ -61,6 +63,7 @@
 
 (autoload 'zenburn "zenburn" "Load zenburn" t)
 
+(cond (nil
 (defun color-theme-black ()
   "Gray on black theme - made from Arjen theme"
   
@@ -285,9 +288,15 @@
      (woman-unknown-face ((t (:foreground "LightSalmon"))))
      (yellow ((t (:foreground "yellow"))))
      (zmacs-region ((t (:background "snow" :foreground "blue")))))))
+))
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-gray30)
+;;(color-theme-black)
 
-(color-theme-black)
-
+(add-hook 'window-setup-hook '(lambda () (set-cursor-color "red")))
+(add-hook 'after-make-frame-functions
+          '(lambda (f) (with-selected-frame f (set-cursor-color "red"))))
 
 
 ;;
@@ -914,7 +923,7 @@ up automatically"
 	 (string-match "\\(aix\\|solaris\\)" system-configuration))
     (setq default-frame-alist
 	  '((width . 80)
-	    (height . 80)
+	    (height . 45)
 	    (menu-bar-lines . 0)
 	    (tool-bar-lines . 0)
 	    (vertical-scroll-bars . nil)
