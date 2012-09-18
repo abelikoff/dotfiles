@@ -208,6 +208,12 @@
 (global-set-key [S-f8] 'previous-error)
 
 
+;;; ANTLR mode
+
+(autoload 'antlr-mode "antlr-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.g$" . antlr-mode))
+
+
 ;;; C mode
 
 (setq-default c-default-style "c#")
