@@ -380,6 +380,15 @@
 (setq-default ess-indent-level 4)
 
 
+;;; GO
+
+(let ((go-dir "/opt/go/misc/emacs"))
+  (if (file-directory-p go-dir)
+      (add-to-list 'load-path go-dir)))
+
+(require 'go-mode)
+
+
 ;;; GDB
 
 ;;(require "'speedbar")
@@ -393,23 +402,31 @@
 
 ;;; indentation
 
-(require 'filladapt)
-(setq-default filladapt-mode t)
-(setq sentence-end-double-space nil)
+;; (require 'filladapt)
+;; (setq-default filladapt-mode t)
+;; (setq sentence-end-double-space nil)
 
-(push '("\\(>\\| \\|:\\||\\)+?" citation->) filladapt-token-table)
-(setq-default adaptive-fill-mode nil)
-(setq-default filladapt-mode t)
-(setq-default filladapt-mode-line-string nil)
+;; (push '("\\(>\\| \\|:\\||\\)+?" citation->) filladapt-token-table)
+;; (setq-default adaptive-fill-mode nil)
+;; (setq-default filladapt-mode t)
+;; (setq-default filladapt-mode-line-string nil)
 
-(setq sentence-end-double-space nil
-      sentence-end "[.?!][]\"')}]*\\($\\| $\\|	\\| \\)[ 	\n]*")
+;; (setq sentence-end-double-space nil
+;;       sentence-end "[.?!][]\"')}]*\\($\\| $\\|	\\| \\)[ 	\n]*")
 
 
 ;;; man/woman
 
 (autoload 'woman "woman" "Load woman" t)
 (global-set-key [f1] 'man-word)
+
+
+;;; IDO
+
+(require 'ido)
+(ido-mode t)
+
+(provide 'ido-settings)
 
 
 ;;; org-mode
@@ -443,6 +460,48 @@
 (set-face-background 'show-paren-match-face "Blue")
 
 ;;(paren-set-mode 'blink-paren)
+
+
+;;; python
+
+;;(require 'python-mode)
+
+;; (setq-default py-shell-name "ipython")
+;; (setq-default py-which-bufname "IPython")
+;; ; use the wx backend, for both mayavi and matplotlib
+;; (setq py-python-command-args
+;;       '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+;; (setq py-force-py-shell-name-p t)
+
+;; ; switch to the interpreter after executing code
+;; (setq py-shell-switch-buffers-on-execute-p t)
+;; (setq py-switch-buffers-on-execute-p t)
+;; ; don't split windows
+;; (setq py-split-windows-on-execute-p nil)
+;; ; try to automagically figure out indentation
+;; (setq py-smart-indentation t)
+
+; pymacs
+;; (autoload 'pymacs-apply "pymacs")
+;; (autoload 'pymacs-call "pymacs")
+;; (autoload 'pymacs-eval "pymacs" nil t)
+;; (autoload 'pymacs-exec "pymacs" nil t)
+;; (autoload 'pymacs-load "pymacs" nil t)
+;; (autoload 'pymacs-autoload "pymacs")
+;; (setq py-load-pymacs-p t)
+
+;;                                         ; ropemacs
+;; (require 'pymacs)
+;; (pymacs-load "ropemacs" "rope-")
+
+;; (provide 'python-settings)
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (set-variable 'py-indent-offset 4)
+            (set-variable 'indent-tabs-mode nil)
+            (define-key py-mode-map (kbd "RET") 'newline-and-indent)))
+
 
 
 ;; load tags
