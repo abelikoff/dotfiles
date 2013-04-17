@@ -386,7 +386,7 @@
   (if (file-directory-p go-dir)
       (add-to-list 'load-path go-dir)))
 
-(require 'go-mode)
+(require 'go-mode-load)
 
 
 ;;; GDB
@@ -419,14 +419,6 @@
 
 (autoload 'woman "woman" "Load woman" t)
 (global-set-key [f1] 'man-word)
-
-
-;;; IDO
-
-(require 'ido)
-(ido-mode t)
-
-(provide 'ido-settings)
 
 
 ;;; org-mode
