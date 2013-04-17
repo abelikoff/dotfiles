@@ -98,7 +98,7 @@ fi
 
 ignoreeof=0
 
-PS1='\h\$ '
+PS1='(\W)\$ '
 unset PROMPT_COMMAND
 export PS1
 
