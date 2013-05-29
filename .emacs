@@ -61,27 +61,21 @@
 
 (require 'color-theme)
 
-(autoload 'zenburn "zenburn" "Load zenburn" t)
+;;;(autoload 'zenburn "zenburn" "Load zenburn" t)
 
-(cond (nil
-(defun color-theme-black ()
+;;;(cond (nil
+(defun color-theme-sasha ()
   "Gray on black theme - made from Arjen theme"
   
   (interactive)
   (color-theme-install
-   '(color-theme-black
+   '(color-theme-sasha
      ((background-color . "black")
       (background-mode . dark)
       (border-color . "black")
       (cursor-color . "OrangeRed")
       (foreground-color . "Gray")
       (mouse-color . "OrangeRed"))
-     ((buffers-tab-face . buffers-tab)
-      (cperl-here-face . font-lock-string-face)
-      (cperl-invalid-face quote underline)
-      (cperl-pod-face . font-lock-comment-face)
-      (cperl-pod-head-face . font-lock-variable-name-face)
-      (vc-mode-face . highlight))
      (default ((t (:background "black" :foreground "Gray80"))))
      (blue ((t (:foreground "blue"))))
      (bold ((t (:bold t))))
@@ -110,17 +104,6 @@
      (diff-added-face ((t (:foreground "Green"))))
      (diff-header-face ((t (:background "Gray" :foreground "Black"))))
      (diff-removed-face ((t (:foreground "Red"))))
-     (erc-action-face ((t (:bold t))))
-     (erc-bold-face ((t (:bold t))))
-     (erc-default-face ((t (nil))))
-     (erc-direct-msg-face ((t (:foreground "sandybrown"))))
-     (erc-error-face ((t (:bold t :foreground "IndianRed"))))
-     (erc-input-face ((t (:foreground "Beige"))))
-     (erc-inverse-face ((t (:background "wheat" :foreground "darkslategrey"))))
-     (erc-notice-face ((t (:foreground "MediumAquamarine"))))
-     (erc-pal-face ((t (:foreground "pale green"))))
-     (erc-prompt-face ((t (:foreground "MediumAquamarine"))))
-     (erc-underline-face ((t (:underline t))))
      (eshell-ls-archive-face ((t (:bold t :foreground "IndianRed"))))
      (eshell-ls-backup-face ((t (:foreground "Grey"))))
      (eshell-ls-clutter-face ((t (:foreground "DimGray"))))
@@ -135,93 +118,23 @@
      (eshell-ls-unreadable-face ((t (:foreground "DimGray"))))
      (eshell-prompt-face ((t (:foreground "MediumAquamarine"))))
 ;;     (fixme-face ((t (:bold t :foreground "White" :background "Red"))))
-     (fl-comment-face ((t (:foreground "pink"))))
-     (fl-doc-string-face ((t (:foreground "purple"))))
-     (fl-function-name-face ((t (:foreground "red"))))
-     (fl-keyword-face ((t (:foreground "cadetblue"))))
-     (fl-string-face ((t (:foreground "green"))))
-     (fl-type-face ((t (:foreground "yellow"))))
      (font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
-     (font-lock-comment-face ((t (:foreground "Orange"))))
+     (font-lock-comment-face ((t (:foreground "DarkCyan"))))
      (font-lock-comment-delimiter-face ((t (:foreground "Orange"))))
      ;;(font-lock-constant-face ((t (:foreground "Green"))))
      (font-lock-constant-face ((t (nil))))
      (font-lock-doc-string-face ((t (:foreground "DarkOrange"))))
-     (font-lock-function-name-face ((t (:bold t :foreground "Magenta"))))
+     (font-lock-function-name-face ((t (:bold t :foreground "Yellow"))))
      ;;(font-lock-keyword-face ((t (:foreground "PaleYellow"))))
-     (font-lock-keyword-face ((t (:foreground "PaleYellow" :bold t))))
+     (font-lock-keyword-face ((t (:foreground "Magenta" :bold t))))
      (font-lock-preprocessor-face ((t (:foreground "Yellow" :bold t))))
      (font-lock-reference-face ((t (:foreground "SlateBlue"))))
      ;;(font-lock-string-face ((t (:foreground "IndianRed"))))
-     (font-lock-string-face ((t (:foreground "DarkCyan"))))
+     (font-lock-string-face ((t (:foreground "Orange"))))
      (font-lock-type-face ((t (nil))))
      ;;(font-lock-variable-name-face ((t (nil))))
      (font-lock-variable-name-face ((t (:foreground "PaleGreen"))))
      (font-lock-warning-face ((t (:bold t :background "Red" :foreground "White"))))
-     (qt-classes-face ((t (:foreground "Red"))))
-     (gnus-cite-attribution-face ((t (nil))))
-     (gnus-cite-face-1 ((t (:bold nil :foreground "deep sky blue"))))
-     (gnus-cite-face-10 ((t (:foreground "medium purple"))))
-     (gnus-cite-face-11 ((t (:foreground "turquoise"))))
-     (gnus-cite-face-2 ((t (:bold nil :foreground "cadetblue"))))
-     (gnus-cite-face-3 ((t (:bold nil :foreground "gold"))))
-     (gnus-cite-face-4 ((t (:foreground "light pink"))))
-     (gnus-cite-face-5 ((t (:foreground "pale green"))))
-     (gnus-cite-face-6 ((t (:bold nil :foreground "chocolate"))))
-     (gnus-cite-face-7 ((t (:foreground "orange"))))
-     (gnus-cite-face-8 ((t (:foreground "magenta"))))
-     (gnus-cite-face-9 ((t (:foreground "violet"))))
-     (gnus-emphasis-bold ((t (:bold nil))))
-     (gnus-emphasis-bold-italic ((t (:bold nil))))
-     (gnus-emphasis-highlight-words ((t (:background "black" :foreground "yellow"))))
-     (gnus-emphasis-italic ((t (nil))))
-     (gnus-emphasis-underline ((t (:underline t))))
-     (gnus-emphasis-underline-bold ((t (:underline t :bold nil))))
-     (gnus-emphasis-underline-bold-italic ((t (:underline t :bold nil))))
-     (gnus-emphasis-underline-italic ((t (:underline t))))
-     (gnus-group-mail-1-empty-face ((t (:foreground "aquamarine1"))))
-     (gnus-group-mail-1-face ((t (:bold nil :foreground "aquamarine1"))))
-     (gnus-group-mail-2-empty-face ((t (:foreground "aquamarine2"))))
-     (gnus-group-mail-2-face ((t (:bold nil :foreground "aquamarine2"))))
-     (gnus-group-mail-3-empty-face ((t (:foreground "aquamarine3"))))
-     (gnus-group-mail-3-face ((t (:bold nil :foreground "aquamarine3"))))
-     (gnus-group-mail-low-empty-face ((t (:foreground "aquamarine4"))))
-     (gnus-group-mail-low-face ((t (:bold nil :foreground "aquamarine4"))))
-     (gnus-group-news-1-empty-face ((t (:foreground "PaleTurquoise"))))
-     (gnus-group-news-1-face ((t (:bold nil :foreground "PaleTurquoise"))))
-     (gnus-group-news-2-empty-face ((t (:foreground "turquoise"))))
-     (gnus-group-news-2-face ((t (:bold nil :foreground "turquoise"))))
-     (gnus-group-news-3-empty-face ((t (nil))))
-     (gnus-group-news-3-face ((t (:bold nil))))
-     (gnus-group-news-4-empty-face ((t (nil))))
-     (gnus-group-news-4-face ((t (:bold nil))))
-     (gnus-group-news-5-empty-face ((t (nil))))
-     (gnus-group-news-5-face ((t (:bold nil))))
-     (gnus-group-news-6-empty-face ((t (nil))))
-     (gnus-group-news-6-face ((t (:bold nil))))
-     (gnus-group-news-low-empty-face ((t (:foreground "DarkTurquoise"))))
-     (gnus-group-news-low-face ((t (:bold nil :foreground "DarkTurquoise"))))
-     (gnus-header-content-face ((t (:foreground "forest green"))))
-     (gnus-header-from-face ((t (:bold nil :foreground "spring green"))))
-     (gnus-header-name-face ((t (:foreground "deep sky blue"))))
-     (gnus-header-newsgroups-face ((t (:bold nil :foreground "purple"))))
-     (gnus-header-subject-face ((t (:bold nil :foreground "orange"))))
-     (gnus-signature-face ((t (:bold nil :foreground "khaki"))))
-     (gnus-splash-face ((t (:foreground "Brown"))))
-     (gnus-summary-cancelled-face ((t (:background "black" :foreground "yellow"))))
-     (gnus-summary-high-ancient-face ((t (:bold nil :foreground "SkyBlue"))))
-     (gnus-summary-high-read-face ((t (:bold nil :foreground "PaleGreen"))))
-     (gnus-summary-high-ticked-face ((t (:bold nil :foreground "pink"))))
-     (gnus-summary-high-unread-face ((t (:bold nil))))
-     (gnus-summary-low-ancient-face ((t (:foreground "SkyBlue"))))
-     (gnus-summary-low-read-face ((t (:foreground "PaleGreen"))))
-     (gnus-summary-low-ticked-face ((t (:foreground "pink"))))
-     (gnus-summary-low-unread-face ((t (nil))))
-     (gnus-summary-normal-ancient-face ((t (:foreground "SkyBlue"))))
-     (gnus-summary-normal-read-face ((t (:foreground "PaleGreen"))))
-     (gnus-summary-normal-ticked-face ((t (:foreground "pink"))))
-     (gnus-summary-normal-unread-face ((t (nil))))
-     (gnus-summary-selected-face ((t (:underline t))))
      (green ((t (:foreground "green"))))
      (gui-button-face ((t (:background "grey75" :foreground "black"))))
      (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
@@ -235,35 +148,19 @@
      (isearch-secondary ((t (:foreground "red3"))))
      (italic ((t (nil))))
      (left-margin ((t (nil))))
+     (linum ((t (:foreground "Gray40"))))
      (list-mode-item-selected ((t (:background "gray68" :foreground "white"))))
-     (message-cited-text-face ((t (:bold t :foreground "green"))))
-     (message-header-cc-face ((t (:bold t :foreground "green4"))))
-     (message-header-name-face ((t (:bold t :foreground "orange"))))
-     (message-header-newsgroups-face ((t (:bold t :foreground "violet"))))
-     (message-header-other-face ((t (:bold t :foreground "chocolate"))))
-     (message-header-subject-face ((t (:bold t :foreground "yellow"))))
-     (message-header-to-face ((t (:bold t :foreground "cadetblue"))))
-     (message-header-xheader-face ((t (:bold t :foreground "light blue"))))
-     (message-mml-face ((t (:bold t :foreground "Green3"))))
-     (message-separator-face ((t (:foreground "blue3"))))
 ;;      (modeline ((t (:background "Gray60"
 ;; 		    :foreground "Black"
 ;; 		    :box (:line-width 1 :style released-button)))))
      (modeline ((t (:background "Gray60" :foreground "Black"))))
+     (mode-line ((t (:background "Gray60" :foreground "Black"))))
      (mode-line-inactive ((t (:background "Gray60" :foreground "Black"))))
      (modeline-buffer-id ((t (:bold t :background "Gray60"
-				      :foreground "Black"))))
+                                    :foreground "Black"))))
      (modeline-mousable ((t (:background "Gray60" :foreground "Black"))))
      (modeline-mousable-minor-mode ((t (:background "Gray60"
 					:foreground "Black"))))
-     (p4-depot-added-face ((t (:foreground "blue"))))
-     (p4-depot-deleted-face ((t (:foreground "red"))))
-     (p4-depot-unmapped-face ((t (:foreground "grey30"))))
-     (p4-diff-change-face ((t (:foreground "dark green"))))
-     (p4-diff-del-face ((t (:foreground "red"))))
-     (p4-diff-file-face ((t (:background "gray90"))))
-     (p4-diff-head-face ((t (:background "gray95"))))
-     (p4-diff-ins-face ((t (:foreground "blue"))))
      (pointer ((t (nil))))
      (primary-selection ((t (:background "blue"))))
      (red ((t (:foreground "red"))))
@@ -288,11 +185,15 @@
      (woman-unknown-face ((t (:foreground "LightSalmon"))))
      (yellow ((t (:foreground "yellow"))))
      (zmacs-region ((t (:background "snow" :foreground "blue")))))))
-))
+
+;;;))
+
+
+
 (require 'color-theme)
-(color-theme-initialize)
-(color-theme-gray30)
-;;(color-theme-black)
+;;(color-theme-initialize)
+;;(color-theme-gray30)
+(color-theme-sasha)
 
 (add-hook 'window-setup-hook '(lambda () (set-cursor-color "red")))
 (add-hook 'after-make-frame-functions
@@ -388,6 +289,12 @@
 
 (require 'go-mode-load)
 
+(add-hook 'go-mode-hook
+	  (lambda ()
+            (setq indent-tabs-mode nil
+                  tab-width 4)))
+
+
 
 ;;; GDB
 
@@ -413,6 +320,19 @@
 
 ;; (setq sentence-end-double-space nil
 ;;       sentence-end "[.?!][]\"')}]*\\($\\| $\\|	\\| \\)[ 	\n]*")
+
+
+;;; JavaScript / JSON
+
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
+
+;;; linum
+
+(setq-default linum-format "%4d  ")
+(require 'linum)
+(global-linum-mode 1)
 
 
 ;;; man/woman
@@ -473,26 +393,11 @@
 ;; ; try to automagically figure out indentation
 ;; (setq py-smart-indentation t)
 
-; pymacs
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-exec "pymacs" nil t)
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-autoload "pymacs")
-;; (setq py-load-pymacs-p t)
-
-;;                                         ; ropemacs
-;; (require 'pymacs)
-;; (pymacs-load "ropemacs" "rope-")
-
-;; (provide 'python-settings)
-
 (add-hook 'python-mode-hook
           (lambda ()
             (set-variable 'py-indent-offset 4)
-            (set-variable 'indent-tabs-mode nil)
-            (define-key py-mode-map (kbd "RET") 'newline-and-indent)))
+            (set-variable 'indent-tabs-mode nil)))
+;;;            (define-key py-mode-map (kbd "RET") 'newline-and-indent)))
 
 
 
@@ -502,27 +407,16 @@
   (interactive "")
 
   (let ((pfx "/bbsrc/tools/tags/")
-	(libs '("acclib" "appscrn" "apptwoline" "apputil" "calclib" "datelib"
-		"dbutil" "derscrn" "derutil" "mathutil" "msgutil" "mtgescrn"
-		"mtgeutil" "peutil" "rptutil" "volderlib")))
+	(libs '("acclib" "appscrn")))
     (setq tags-table-list 
 	  (append tags-table-list
 		  (mapcar (lambda (e) (concat pfx e)) libs)))))
-
-;; (let* ((tag-dir "/zzz/bbsrc/tools/tags"))
-;;   (if (file-directory-p tag-dir)
-;;       (setq tags-table-list 
-;; 	    (remove-if (lambda (x)
-;; 			 (or (not (file-directory-p x))
-;; 			     (string-match "\\.\\.*$" x)))
-;; 		       (directory-files tag-dir t))))))
 
 
 
 ;;; Version control
 
 (setq diff-switches "-uw")
-;;(add-to-list 'vc-handled-backends 'SVN)
 
 
 ;;; Cyrillic support
