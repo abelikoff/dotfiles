@@ -2,46 +2,72 @@
 
 ;;; paths
 
-(setq load-path (append (mapcar #'expand-file-name
-				'("~/lib/elisp/elc"
-				  "~/lib/elisp"
-				  "/opt/local/emacs/"
-				  ))
-			load-path))
+(defun my-filter (condp lst)
+  "Filter list elements not matching the predicate."
+
+  (delq nil
+        (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
+
+(setq load-path (append
+                 (my-filter 'file-directory-p
+                            (mapcar #'expand-file-name
+                                    '("C:\\tools\\elisp"
+				      "C:\\tools\\elisp\\color-theme-6.6.0"
+                                      "C:\\tools\\elisp\\ess-12.09\\lisp"
+				      "~/lib/elisp/elc"
+				      "~/lib/elisp"
+                                      "~/lib/elisp/color-theme"
+                                      "~/Documents/lib/elisp"
+                                      "~/Documents/lib/elisp/color-theme"
+                                      "/opt/local/emacs/"
+                                      )))
+                 load-path))
 
 
 
 ;;; general packages
 
-(load "crypt++" t t t)
+;;(load "crypt++" t t t)
 
 
 ;;; X11 setup
 
-(setq default-frame-alist
-      '((width . 80)
-	(height . 50)
-	(menu-bar-lines . 0)
-	(tool-bar-lines . 0)
-	(vertical-scroll-bars . nil)
+(defconst is-windows
+  (if (string-match "mingw-nt" system-configuration) t nil)
+  "Non-nil when running on Windows.")
+
+(defconst is-macintosh
+  (if (string-match "apple-darwin" system-configuration) t nil)
+  "Non-nil when running on a Mac.")
+
+(defconst my-default-font
+  (cond (is-windows "Consolas-10")
+        (is-macintosh "Monaco-12")
+        (t "Liberation Mono-9")))
+
+;;        (t "DejaVu Sans Mono-10")))
 ;;	(font . "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1")
 ;;	(font . "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*")
         ;;(font . "-outline-Consolas-normal-r-normal-normal-12-97-96-96-c-*-iso8859-1")
         ;;(font . "Monospace-9")
-        (font . "Liberation Mono-9")
-	(foreground-color . "Gray80")
-))
 
+
+(defconst my-default-height 50)
+(defconst my-default-bg-color "Black")
+(defconst my-default-fg-color "Gray")
+
+(setq default-frame-alist
+      `((width . 90)
+        (height . ,my-default-height)
+        (menu-bar-lines . 0)
+        (tool-bar-lines . 0)
+        (vertical-scroll-bars . nil)
+        (font . ,my-default-font)
+        (foreground-color . ,my-default-fg-color)))
+
+(tool-bar-mode -1)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
-
-;; Emacs on *stupid* AIX and Solaris boxes doesn't handle 'background-color'
-;; frame attribute properly
-
-(if window-system
-    (if (string-match "\\(aix\\|solaris\\)" system-configuration)
-	(set-background-color "Black")
-      (add-to-list 'default-frame-alist '(background-color . "Black"))))
 
 ;; (set-background-color "rgbi:.325/.91/.52")   ;; Harvey's colors
 
@@ -54,10 +80,6 @@
 
 
 ;;; color-theme
-
-(let ((dir (expand-file-name "~/lib/elisp/color-theme")))
-  (cond ((file-exists-p dir)
-	 (add-to-list 'load-path dir))))
 
 (require 'color-theme)
 
@@ -208,7 +230,9 @@
 (column-number-mode 1)
 (global-set-key "\r" 'reindent-then-newline-and-indent)
 
-(let ((dir (expand-file-name "~/tmp/emacs-backup/")))
+(let ((dir (expand-file-name (if is-windows
+                                 (concat (getenv "TEMP") "/emacs-backup/")
+                               "~/tmp/emacs-backup/"))))
   (if (file-exists-p dir)
       (setq backup-directory-alist `((".*" . ,dir)))))
 
@@ -219,6 +243,8 @@
               require-final-newline nil
               modeline-click-swaps-buffers t
               indent-tabs-mode nil
+              ;;printer-name "//nycs01vfp/06SCopier"
+              frame-title-format '("" "%b - Emacs " emacs-version)
               )
 
 (put 'eval-expression 'disabled nil)
@@ -231,6 +257,7 @@
 
 ;;; C mode
 
+(setq-default c-default-style "c#")
 (setq-default c-style-variables-are-local-p nil)
 (setq-default c-basic-offset 4)
 
@@ -241,6 +268,8 @@
 	    (font-lock-add-keywords
 	     nil
 	     '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
+
+(add-hook 'c-mode-common-hook 'untabify-buffer)
 
 
 ;;; CPerl mode
@@ -273,6 +302,13 @@
 (add-hook 'diary-hook 'appt-make-list)
 (add-hook 'diary-display-hook 'fancy-diary-display)
 (display-time)
+
+
+;;; DOS batch
+
+(autoload 'dos-mode "dos" "Edit MS-DOS scripts." t)
+(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
+(add-to-list 'auto-mode-alist '("\\.cmd$" . dos-mode))
 
 
 ;;; ESS
@@ -452,9 +488,25 @@
 (autoload 'php-mode "php-mode" "PHP Mode" t)
 
 
+;;; Powershell mode
+
+(setq-default powershell-indent 4)
+(autoload 'powershell-mode "powershell-mode"
+  "Major mode for editing PowerShell scripts." t)
+(add-to-list 'auto-mode-alist '("\\.ps1$" . powershell-mode))
+(add-hook 'powershell-mode-hook 'untabify-buffer)
+
+
 ;;; Print setup
  
 ;; (setq lpr-switches '("-Pduplex"))
+
+
+;; protobuf
+
+(autoload 'protobuf-mode "protobuf-mode"
+  "Major mode for editing Google Protobuf code." t)
+(add-to-list 'auto-mode-alist '("\\.proto$" . protobuf-mode))
 
 
 ;;; Voctest
@@ -854,27 +906,17 @@ up automatically"
     (voctest)))
 
 
+(defun untabify-buffer ()
+  (add-hook 'before-save-hook
+            (lambda ()
+              (untabify (point-min) (point-max)))))
+
+
 ;; startup
 
 (if (file-exists-p "~/.diary")
     (diary))
 
-
-
-;; STUPID Solaris/AIX keep losing bg/fg settings unless default-frame-alist
-;; is re-initialized
-
-(if (and window-system
-	 (string-match "\\(aix\\|solaris\\)" system-configuration))
-    (setq default-frame-alist
-	  '((width . 80)
-	    (height . 45)
-	    (menu-bar-lines . 0)
-	    (tool-bar-lines . 0)
-	    (vertical-scroll-bars . nil)
-	    (font . "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*")
-	    (foreground-color . "Gray80")
-	    )))
 
 
 ;;; Local Variables:
