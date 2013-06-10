@@ -41,7 +41,7 @@
   "Non-nil when running on a Mac.")
 
 (defconst my-default-font
-  (cond (is-windows "Consolas-10")
+  (cond (is-windows "Consolas-11")
         (is-macintosh "Monaco-12")
         (t "Droid Sans Mono-9")))
 
