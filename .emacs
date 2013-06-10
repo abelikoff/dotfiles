@@ -12,10 +12,10 @@
                  (my-filter 'file-directory-p
                             (mapcar #'expand-file-name
                                     '("C:\\tools\\elisp"
-				      "C:\\tools\\elisp\\color-theme-6.6.0"
+                                      "C:\\tools\\elisp\\color-theme-6.6.0"
                                       "C:\\tools\\elisp\\ess-12.09\\lisp"
-				      "~/lib/elisp/elc"
-				      "~/lib/elisp"
+                                      "~/lib/elisp/elc"
+                                      "~/lib/elisp"
                                       "~/lib/elisp/color-theme"
                                       "~/Documents/lib/elisp"
                                       "~/Documents/lib/elisp/color-theme"
@@ -178,8 +178,8 @@
      (linum ((t (:foreground "Gray40"))))
      (list-mode-item-selected ((t (:background "gray68" :foreground "white"))))
 ;;      (modeline ((t (:background "Gray60"
-;; 		    :foreground "Black"
-;; 		    :box (:line-width 1 :style released-button)))))
+;;                  :foreground "Black"
+;;                  :box (:line-width 1 :style released-button)))))
      (modeline ((t (:background "Gray60" :foreground "Black"))))
      (mode-line ((t (:background "Gray60" :foreground "Black"))))
      (mode-line-inactive ((t (:background "Gray60" :foreground "Black"))))
@@ -187,7 +187,7 @@
                                     :foreground "Black"))))
      (modeline-mousable ((t (:background "Gray60" :foreground "Black"))))
      (modeline-mousable-minor-mode ((t (:background "Gray60"
-					:foreground "Black"))))
+                                        :foreground "Black"))))
      (pointer ((t (nil))))
      (primary-selection ((t (:background "blue"))))
      (red ((t (:foreground "red"))))
@@ -233,7 +233,8 @@
 
 (line-number-mode 1)
 (column-number-mode 1)
-(global-set-key "\r" 'reindent-then-newline-and-indent)
+;;(global-set-key "\r" 'reindent-then-newline-and-indent)
+(global-set-key "\r" 'newline-and-indent)
 
 (let ((dir (expand-file-name (if is-windows
                                  (concat (getenv "TEMP") "/emacs-backup/")
@@ -268,12 +269,12 @@
 (setq-default c-basic-offset 4)
 
 (add-hook 'c-mode-common-hook
-	  (lambda ()
-	    (setq-default c-basic-offset 4)
-	    (imenu-add-to-menubar "Functions")
-	    (font-lock-add-keywords
-	     nil
-	     '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
+          (lambda ()
+            (setq-default c-basic-offset 4)
+            (imenu-add-to-menubar "Functions")
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 (add-hook 'c-mode-common-hook 'untabify-buffer)
 
@@ -287,11 +288,11 @@
  (append auto-mode-alist interpreter-mode-alist))
 
 (add-hook 'cperl-mode-hook
-	  (lambda ()
-	    (local-set-key [f1] 'cperl-perldoc-at-point)
-	    (font-lock-add-keywords
-	     nil
-	     '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
+          (lambda ()
+            (local-set-key [f1] 'cperl-perldoc-at-point)
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 (setq cperl-indent-level 4)
@@ -333,7 +334,7 @@
 ;;(require 'go-mode-load)
 
 (add-hook 'go-mode-hook
-	  (lambda ()
+          (lambda ()
             (setq indent-tabs-mode nil
                   tab-width 4)))
 
@@ -362,7 +363,10 @@
 ;; (setq-default filladapt-mode-line-string nil)
 
 ;; (setq sentence-end-double-space nil
-;;       sentence-end "[.?!][]\"')}]*\\($\\| $\\|	\\| \\)[ 	\n]*")
+;;       sentence-end "[.?!][]\"')}]*\\($\\| $\\|       \\| \\)[        \n]*")
+
+
+;;; Java
 
 
 ;;; JavaScript / JSON
@@ -388,11 +392,11 @@
 
 (let ((dir "~/lib/elisp/org-mode/lisp"))
   (cond ((file-exists-p (concat dir "/org-install.el"))
-	 (add-to-list 'load-path (expand-file-name dir))
-	 (require 'org-install)
-	 (eval-after-load 'info
-	   '(add-to-list 'Info-directory-list 
-			 (concat dir "/../info"))))))
+         (add-to-list 'load-path (expand-file-name dir))
+         (require 'org-install)
+         (eval-after-load 'info
+           '(add-to-list 'Info-directory-list 
+                         (concat dir "/../info"))))))
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
@@ -450,10 +454,10 @@
   (interactive "")
 
   (let ((pfx "/bbsrc/tools/tags/")
-	(libs '("acclib" "appscrn")))
+        (libs '("acclib" "appscrn")))
     (setq tags-table-list 
-	  (append tags-table-list
-		  (mapcar (lambda (e) (concat pfx e)) libs)))))
+          (append tags-table-list
+                  (mapcar (lambda (e) (concat pfx e)) libs)))))
 
 
 
@@ -557,9 +561,9 @@
 ;; (setq compilation-error-regexp-alist
 ;;       (append
 ;;        (list
-;; 	'("\\(\n\\|on \\|before \\|after \\)[Ll]ine[ \t]+\\([0-9]+\\)[ \t]+\
+;;      '("\\(\n\\|on \\|before \\|after \\)[Ll]ine[ \t]+\\([0-9]+\\)[ \t]+\
 ;; of[ \t]+\"?\\([^\":\n]+\\)\"?:" 3 2)
-;; 	'("\n\\([^, \n]+\\), line \\([0-9]+\\)[^:]*: \\(Warning:\\|Note:\\|Error:\\)" 1 2))
+;;      '("\n\\([^, \n]+\\), line \\([0-9]+\\)[^:]*: \\(Warning:\\|Note:\\|Error:\\)" 1 2))
 ;;        compilation-error-regexp-alist))
 
 
@@ -590,28 +594,28 @@
 (setq guile-program "guile")
 
 (set-default 'auto-mode-alist
-	     (append '(("\\.lisp$" . lisp-mode)
+             (append '(("\\.lisp$" . lisp-mode)
                        ("\\.lsp$" . lisp-mode)
                        ("\\.cl$" . lisp-mode))
                      auto-mode-alist))
 
 (setq lisp-mode-hook 
       (lambda () 
-	(require 'ilisp)
-	(imenu-add-to-menubar "Functions")
-	(font-lock-add-keywords
-	 nil
-	 '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
+        (require 'ilisp)
+        (imenu-add-to-menubar "Functions")
+        (font-lock-add-keywords
+         nil
+         '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 (setq emacs-lisp-mode-hook 
       (lambda () 
-	(imenu-add-to-menubar "Functions")
-	(local-set-key [f1] 'describe-function)
-	(local-set-key [S-f1] 'describe-variable)
-	(font-lock-add-keywords
-	 nil
-	 '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
+        (imenu-add-to-menubar "Functions")
+        (local-set-key [f1] 'describe-function)
+        (local-set-key [S-f1] 'describe-variable)
+        (font-lock-add-keywords
+         nil
+         '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 (setq ilisp-*use-fsf-compliant-keybindings* t)
@@ -666,9 +670,9 @@
 ; (add-hook 'inferior-lisp-mode-hook #'my-lisp-family-setup)
 
 ; (add-hook 'emacs-lisp-mode-hook
-; 	  (function (lambda ()
-; ;;		      (local-set-key [f8] 'eval-and-advance)
-; 		      )))
+;         (function (lambda ()
+; ;;                  (local-set-key [f8] 'eval-and-advance)
+;                     )))
 
 
 ;; HyperSpec
@@ -690,7 +694,7 @@
 
 (setq cmuscheme-load-hook
       '((lambda () (define-key inferior-scheme-mode-map "\C-c\C-t"
-		     'favorite-cmd))))
+                     'favorite-cmd))))
 
 
 ;; TeX/LaTeX
@@ -714,51 +718,51 @@
 (add-hook 'LaTeX-mode-hook
           (lambda ()
             (push `("^pdf$" "." "acroread %o") TeX-output-view-style)
-	    (turn-on-auto-fill)
-	    (setq abbrev-mode t)
+            (turn-on-auto-fill)
+            (setq abbrev-mode t)
 
-	    ;; abbreviations
+            ;; abbreviations
 
-	    (define-abbrev text-mode-abbrev-table "\\a" "\\alpha" nil)
-	    (define-abbrev text-mode-abbrev-table "gga" "\\alpha" nil)
-	    (define-abbrev text-mode-abbrev-table "ggb" "\\beta" nil)
-	    (define-abbrev text-mode-abbrev-table "ggg" "\\gamma" nil)
-	    (define-abbrev text-mode-abbrev-table "ggd" "\\delta" nil)
-	    (define-abbrev text-mode-abbrev-table "ggf" "\\phi" nil)
-	    (define-abbrev text-mode-abbrev-table "ggr" "\\rho" nil)
-	    (define-abbrev text-mode-abbrev-table "ggs" "\\sigma" nil)
-	    
-	    (mapcar
-	     (lambda (e)
-	       (define-abbrev text-mode-abbrev-table (car e) 
-		 (format "\\begin{%s}\n\n\\end{%s}\n" (cdr e) (cdr e))
-		 '(lambda ()
-		    (insert-latex-env-abbrev))))
-	     '(("eal" . "align*")
-	       ("ega" . "gather*")
-	       ("ee" . "")
-	       ("eeq" . "equation")
-	       ("een" . "enumerate")
-	       ("eit" . "itemize")
-	       ))
+            (define-abbrev text-mode-abbrev-table "\\a" "\\alpha" nil)
+            (define-abbrev text-mode-abbrev-table "gga" "\\alpha" nil)
+            (define-abbrev text-mode-abbrev-table "ggb" "\\beta" nil)
+            (define-abbrev text-mode-abbrev-table "ggg" "\\gamma" nil)
+            (define-abbrev text-mode-abbrev-table "ggd" "\\delta" nil)
+            (define-abbrev text-mode-abbrev-table "ggf" "\\phi" nil)
+            (define-abbrev text-mode-abbrev-table "ggr" "\\rho" nil)
+            (define-abbrev text-mode-abbrev-table "ggs" "\\sigma" nil)
+            
+            (mapcar
+             (lambda (e)
+               (define-abbrev text-mode-abbrev-table (car e) 
+                 (format "\\begin{%s}\n\n\\end{%s}\n" (cdr e) (cdr e))
+                 '(lambda ()
+                    (insert-latex-env-abbrev))))
+             '(("eal" . "align*")
+               ("ega" . "gather*")
+               ("ee" . "")
+               ("eeq" . "equation")
+               ("een" . "enumerate")
+               ("eit" . "itemize")
+               ))
 
-	    (font-lock-add-keywords
-	     nil
-	     '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)
-	       ("\\<\\(fixme *.*\\)" 1 font-lock-warning-face t)))))
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)
+               ("\\<\\(fixme *.*\\)" 1 font-lock-warning-face t)))))
 
 (setq
-    TeX-pdf-mode  t			; generate PDF
+    TeX-pdf-mode  t                     ; generate PDF
 )
 
 
 ;; shell script mode
 
 (add-hook 'sh-mode-hook
-	  (lambda ()
-	    (font-lock-add-keywords
-	     nil
-	     '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
+          (lambda ()
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 ;; Comint mode setup
@@ -766,7 +770,7 @@
 (require 'comint)
 (setq comint-output-filter-functions
       (cons #'comint-watch-for-password-prompt
-	    comint-output-filter-functions))
+            comint-output-filter-functions))
 
 
 ;; Browse URL
@@ -781,15 +785,15 @@
 
 ;; (setq ffap-require-prefix t
 ;;       ffap-c-path (append '("/usr/include")
-;; 			  ))
-;			  (mapcar (lambda (s) (concat
-;					       "/home/aaron/app/var/src/"
-;					       s))
-;				  '("block-data" "containers" "cov-method" "db"
-;				    "dg1-tsk" "drivers" "foreign"
-;				    "global-headers" "makefiles" "mapping"
-;				    "primitives" "slatec" "structures"
-;				    "util"))))
+;;                        ))
+;                         (mapcar (lambda (s) (concat
+;                                              "/home/aaron/app/var/src/"
+;                                              s))
+;                                 '("block-data" "containers" "cov-method" "db"
+;                                   "dg1-tsk" "drivers" "foreign"
+;                                   "global-headers" "makefiles" "mapping"
+;                                   "primitives" "slatec" "structures"
+;                                   "util"))))
 
 
 
@@ -811,9 +815,9 @@
 ;(add-hook 'latex-mode-hook 'turn-on-filladapt-mode)
 
 (add-hook 'forms-mode-hooks
-	  (function (lambda ()
-		      (local-set-key [S-right] 'forms-next-field)
-		      (local-set-key [S-left] 'forms-next-field))))
+          (function (lambda ()
+                      (local-set-key [S-right] 'forms-next-field)
+                      (local-set-key [S-left] 'forms-next-field))))
 
 ;; redefine indent-for-comment to kill the comment with negative prefix
 
@@ -890,8 +894,8 @@ up automatically"
   (interactive)
   (save-excursion
     (let ((beg-word (progn
-		      (forward-word -1)
-		      (point))))
+                      (forward-word -1)
+                      (point))))
       (forward-word 1)
       (funcall #'man (buffer-substring beg-word (point))))))
 
