@@ -43,13 +43,16 @@
 (defconst my-default-font
   (cond (is-windows "Consolas-10")
         (is-macintosh "Monaco-12")
-        (t "Liberation Mono-9")))
+        (t "Droid Sans Mono-9")))
 
-;;        (t "DejaVu Sans Mono-10")))
-;;	(font . "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1")
-;;	(font . "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*")
-        ;;(font . "-outline-Consolas-normal-r-normal-normal-12-97-96-96-c-*-iso8859-1")
-        ;;(font . "Monospace-9")
+;;; Other good fonts:
+;;;
+;;;  "Monospace-9"
+;;;  "Liberation Mono-9"
+;;;  "DejaVu Sans Mono-10"
+;;;  "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1"
+;;;  "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*"
+;;;  "-outline-Consolas-normal-r-normal-normal-12-97-96-96-c-*-iso8859-1"
 
 
 (defconst my-default-height 50)
@@ -141,18 +144,20 @@
      (eshell-prompt-face ((t (:foreground "MediumAquamarine"))))
 ;;     (fixme-face ((t (:bold t :foreground "White" :background "Red"))))
      (font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
-     (font-lock-comment-face ((t (:foreground "DarkCyan"))))
-     (font-lock-comment-delimiter-face ((t (:foreground "DarkCyan"))))
+     ;;(font-lock-comment-face ((t (:foreground "DarkCyan"))))
+     (font-lock-comment-face ((t (:foreground "RoyalBlue3"))))
+     (font-lock-comment-delimiter-face ((t (:foreground "RoyalBlue3"))))
      ;;(font-lock-constant-face ((t (:foreground "Green"))))
      (font-lock-constant-face ((t (nil))))
      (font-lock-doc-string-face ((t (:foreground "DarkOrange"))))
      (font-lock-function-name-face ((t (:bold t :foreground "Magenta"))))
      ;;(font-lock-keyword-face ((t (:foreground "PaleYellow"))))
-     (font-lock-keyword-face ((t (:foreground "Yellow" :bold t))))
+     ;;(font-lock-keyword-face ((t (:foreground "Yellow" :bold t))))
+     (font-lock-keyword-face ((t (:foreground "SeaGreen" :bold t))))
      (font-lock-preprocessor-face ((t (:foreground "Yellow" :bold t))))
      (font-lock-reference-face ((t (:foreground "SlateBlue"))))
      ;;(font-lock-string-face ((t (:foreground "IndianRed"))))
-     (font-lock-string-face ((t (:foreground "Salmon"))))
+     (font-lock-string-face ((t (:foreground "Chocolate"))))
      (font-lock-type-face ((t (nil))))
      ;;(font-lock-variable-name-face ((t (nil))))
      (font-lock-variable-name-face ((t (:foreground "PaleGreen"))))
@@ -245,6 +250,7 @@
               indent-tabs-mode nil
               ;;printer-name "//nycs01vfp/06SCopier"
               frame-title-format '("" "%b - Emacs " emacs-version)
+              line-move-visual nil
               )
 
 (put 'eval-expression 'disabled nil)
@@ -323,7 +329,8 @@
   (if (file-directory-p go-dir)
       (add-to-list 'load-path go-dir)))
 
-(require 'go-mode-load)
+(load "go-mode-load" t t t)
+;;(require 'go-mode-load)
 
 (add-hook 'go-mode-hook
 	  (lambda ()
