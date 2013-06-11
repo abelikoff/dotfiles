@@ -42,12 +42,14 @@
 
 (defconst my-default-font
   (cond (is-windows "Consolas-11")
-        (is-macintosh "Monaco-12")
+;;        (is-macintosh "Monaco-12")
+        (is-macintosh "Droid Sans Mono-12")
         (t "Droid Sans Mono-9")))
 
 ;;; Other good fonts:
 ;;;
 ;;;  "Monospace-9"
+;;;  "Monaco-12"
 ;;;  "Liberation Mono-9"
 ;;;  "DejaVu Sans Mono-10"
 ;;;  "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1"
@@ -55,7 +57,10 @@
 ;;;  "-outline-Consolas-normal-r-normal-normal-12-97-96-96-c-*-iso8859-1"
 
 
-(defconst my-default-height 50)
+(defconst my-default-height
+  (cond (is-macintosh 45)
+        (t 50)))
+
 (defconst my-default-bg-color "Black")
 (defconst my-default-fg-color "Gray")
 
