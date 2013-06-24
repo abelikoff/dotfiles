@@ -32,6 +32,11 @@
 
 ;;; X11 setup
 
+(defconst is-work-desktop
+;;;  (and (equal (string-match "sho" system-name) 0)
+  (string-match "^sho.*e.com" system-name)
+  "Non-nil when running on work desktop.")
+
 (defconst is-windows
   (if (string-match "mingw-nt" system-configuration) t nil)
   "Non-nil when running on Windows.")
@@ -42,8 +47,8 @@
 
 (defconst my-default-font
   (cond (is-windows "Consolas-11")
-;;        (is-macintosh "Monaco-12")
-        (is-macintosh "Droid Sans Mono-12")
+        (is-work-desktop "Droid Sans Mono-12")
+        (is-macintosh "Droid Sans Mono-10")
         (t "Droid Sans Mono-9")))
 
 ;;; Other good fonts:
@@ -59,6 +64,7 @@
 
 (defconst my-default-height
   (cond (is-macintosh 45)
+        (is-work-desktop 70)
         (t 50)))
 
 (defconst my-default-bg-color "Black")
