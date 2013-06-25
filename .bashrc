@@ -1,8 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
+#if [ -f /etc/bashrc ]; then
+#	. /etc/bashrc
+#fi
 
 
 # only execute for interactive sessions
@@ -94,6 +94,24 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 
+# paths
+
+# Ruby
+
+if [ -d $HOME.rvm ]; then
+    PATH=$PATH:$HOME/.rvm/bin
+    export PATH
+fi
+
+
+# TeX
+
+if [[ $TEXINPUTS != */home/* ]]; then
+    TEXINPUTS=".:$HOME/lib/latex:"
+    export TEXINPUTS
+fi
+
+
 # shell control
 
 ignoreeof=0
@@ -111,18 +129,3 @@ GREP_COLOR="43;30"
 GREP_OPTIONS="--color=auto"
 export EDITOR="vim"
 export GREP_COLOR GREP_OPTIONS
-
-
-# Ruby
-
-if [ -d $HOME.rvm ]; then
-    PATH=$PATH:$HOME/.rvm/bin
-    export PATH
-fi
-
-
-# TeX
-
-if [[ $TEXINPUTS != */home/* ]]; then
-    export TEXINPUTS=".:$HOME/lib/latex:"
-fi
