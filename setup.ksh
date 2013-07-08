@@ -113,6 +113,11 @@ else
 fi
 
 DF_DIR=$(dirname $0)
+
+if [[ $DF_DIR == "." ]]; then
+    DF_DIR=$(pwd)
+fi
+
 cd ~ || exit 1
 DF_DIR=${DF_DIR##$(pwd)/}       # change to relative path
 BACKUP_DIR=~/CONFIG_BACKUP.$(date +"%Y%m%d-%H%M%S")
