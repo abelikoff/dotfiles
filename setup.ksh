@@ -78,7 +78,7 @@ function warning {
 unset do_verbose
 dry_run=1
 
-while getopts ":htVv" opt ; do
+while getopts ":fhVv" opt ; do
     case $opt in
 	f) unset dry_run
 	   ;;
@@ -121,7 +121,6 @@ fi
 cd ~ || exit 1
 DF_DIR=${DF_DIR##$(pwd)/}       # change to relative path
 BACKUP_DIR=~/CONFIG_BACKUP.$(date +"%Y%m%d-%H%M%S")
-$pfx mkdir -p $BACKUP_DIR
 
 for file in $CONF_FILES; do
     tgt=$DF_DIR/$file
@@ -130,7 +129,7 @@ for file in $CONF_FILES; do
 	old_tgt="$(readlink $file)"
 
 	if [[ $tgt == $old_tgt ]]; then
-	    verbose $file is already set up correctly - skipping.
+	    verbose "NOTICE: $file is already set up correctly - skipping."
 	    continue
 	fi
     fi
@@ -140,9 +139,12 @@ for file in $CONF_FILES; do
 	    print -u2 "NOTICE: $file is same as target - not backing up"
             $pfx rm -f $file
 	else
+            $pfx mkdir -p $BACKUP_DIR
+            print -u2 "NOTICE: $file will be saved to $BACKUP_DIR"
 	    $pfx mv $file $BACKUP_DIR/
 	fi
     fi
 
+    verbose "$file -> $tgt"
     $pfx ln -s $tgt .
 done
