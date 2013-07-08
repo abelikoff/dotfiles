@@ -138,6 +138,7 @@ for file in $CONF_FILES; do
     if [[ -e $file ]]; then
 	if diff -w $file $tgt > /dev/null; then
 	    print -u2 "NOTICE: $file is same as target - not backing up"
+            $pfx rm -f $file
 	else
 	    $pfx mv $file $BACKUP_DIR/
 	fi
