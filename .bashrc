@@ -9,8 +9,9 @@
 
 [ -z "$PS1" ] && return
 
+# history control
+
 # don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
 HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
@@ -19,6 +20,12 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+
+# eternal history
+export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S  "
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $USER $PWD \
+                               "$(history 1)" >> ~/.bash_eternal_history'
+
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -131,7 +138,6 @@ fi
 ignoreeof=0
 
 PS1='(\W)\$ '
-unset PROMPT_COMMAND
 export PS1
 
 umask 022
