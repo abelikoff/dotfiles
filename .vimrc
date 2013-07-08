@@ -1,10 +1,25 @@
 " $Id$
 
+
+" Add highlighting for function definition in C++
+function! EnhanceCppSyntax()
+  syn match cppFuncDef "::\~\?\zs\h\w*\ze([^)]*\()\s*\(const\)\?\)\?$"
+  hi def link cppFuncDef Special
+endfunction
+
+autocmd Syntax cpp call EnhanceCppSyntax()
+autocmd Syntax cc call EnhanceCppSyntax()
+autocmd Syntax cxx call EnhanceCppSyntax()
+autocmd Syntax c call EnhanceCppSyntax()
+autocmd Syntax java call EnhanceCppSyntax()
+
+
 syntax on
 "colorscheme sasha
 "colorscheme darkgraymild
 "colorscheme bluegreen
-colorscheme sasha4
+"colorscheme sasha4
+colorscheme milkyway
 
 if has("gui_running")
    set lines=50
@@ -20,7 +35,7 @@ set nocompatible        " Use Vim defaults (much better!)
 set bs=2                " allow backspacing over everything in insert mode
 set ai                  " always set autoindenting on
 set ic                  " case-insensitive search
-set hlsearch		" highlite search results
+set hlsearch            " highlite search results
 set scs                 " revert to case-sensitive search on mixed case
 set viminfo='20,\"50    " read/write a .viminfo file, don't store more
                         " than 50 lines of registers
