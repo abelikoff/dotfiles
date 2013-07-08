@@ -6,6 +6,7 @@
 CONF_FILES=".bash_aliases
             .bashrc
             .emacs
+            .gitconfig
             .profile
             .pylintrc
             .screenrc
