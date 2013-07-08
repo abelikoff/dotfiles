@@ -137,7 +137,7 @@ fi
 
 ignoreeof=0
 
-PS1="$(hostname | sed 's/.*\(....\)$/\1/'):\W\$ "
+PS1="$(hostname -s | sed 's/.*\(....\)$/\1/'):\W\$ "
 export PS1
 
 umask 022
