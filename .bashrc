@@ -137,7 +137,8 @@ fi
 
 ignoreeof=0
 
-PS1="$(hostname -s | sed 's/.*\(....\)$/\1/'):\[\033[1;33m\]\W\[\033[0m\]\$ "
+#PS1="$(hostname -s | sed 's/.*\(....\)$/\1/'):\[\033[1;33m\]\W\[\033[0m\]\$ "
+PS1="$(hostname -s | cut -c 1-4):\[\033[1;33m\]\W\[\033[0m\]\$ "
 export PS1
 
 umask 022
