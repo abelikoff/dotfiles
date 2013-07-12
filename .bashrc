@@ -150,3 +150,5 @@ GREP_COLOR="43;30"
 GREP_OPTIONS="--color=auto"
 export EDITOR="vim"
 export GREP_COLOR GREP_OPTIONS
+export P4DIFF=diffuse
+
