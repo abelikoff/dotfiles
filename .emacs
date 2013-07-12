@@ -269,25 +269,30 @@
 (put 'narrow-to-region 'disabled nil)
 (toggle-save-place-globally)
 
-(global-set-key [f8] 'next-error)
-(global-set-key [S-f8] 'previous-error)
+(global-set-key [M-down] 'next-error)
+(global-set-key [M-up] '(lambda () (interactive) (next-error -1)))
+
+
+;;; auto-complete
+
+;;(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
 
 
 ;;; C mode
 
-(setq-default c-default-style "c#")
+(setq-default c-default-style "bsd")
 (setq-default c-style-variables-are-local-p nil)
 (setq-default c-basic-offset 4)
 
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (setq-default c-basic-offset 4)
             (imenu-add-to-menubar "Functions")
             (font-lock-add-keywords
              nil
-             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
-
-(add-hook 'c-mode-common-hook 'untabify-buffer)
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))
+            (untabify-buffer)))
 
 
 ;;; CPerl mode
@@ -344,11 +349,10 @@
 (load "go-mode-load" t t t)
 ;;(require 'go-mode-load)
 
-(add-hook 'go-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil
-                  tab-width 4)))
-
+;; (add-hook 'go-mode-hook
+;;           (lambda ()
+;;             (setq indent-tabs-mode nil
+;;                   tab-width 4)))
 
 
 ;;; GDB
@@ -401,20 +405,20 @@
 
 ;;; org-mode
 
-(let ((dir "~/lib/elisp/org-mode/lisp"))
-  (cond ((file-exists-p (concat dir "/org-install.el"))
-         (add-to-list 'load-path (expand-file-name dir))
-         (require 'org-install)
-         (eval-after-load 'info
-           '(add-to-list 'Info-directory-list 
-                         (concat dir "/../info"))))))
+;; (let ((dir "~/lib/elisp/org-mode/lisp"))
+;;   (cond ((file-exists-p (concat dir "/org-install.el"))
+;;          (add-to-list 'load-path (expand-file-name dir))
+;;          (require 'org-install)
+;;          (eval-after-load 'info
+;;            '(add-to-list 'Info-directory-list 
+;;                          (concat dir "/../info"))))))
 
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;;(global-set-key "\C-cl" 'org-store-link)
+;;(global-set-key "\C-ca" 'org-agenda)
 
-(setq org-todo-keyword-faces
-      '(("TODO"  . (:foreground "Yellow" :weight bold))))
+;;(setq org-todo-keyword-faces
+;;      '(("TODO"  . (:foreground "Yellow" :weight bold))))
 
 
 
@@ -583,7 +587,7 @@
 
   (interactive "")
   (let ((null-device nil))
-    (grep "find . -type f | cut -c 3- | egrep -v '(~|\.o)$' | egrep -v '(^CVS/|/CVS/|^\.svn/|/\.svn/| )' | xargs egrep -n '(FIXME|TODO):' | egrep -v '^Binary file .* matches'")))
+    (grep "find . -type f | cut -c 3- | egrep -v '(~|\.o)$' | egrep -v '(^CVS/|/CVS/|^\.svn/|/\.svn/| )' | xargs egrep -n 'FIXME|TODO' | egrep -v '^Binary file .* matches'")))
 
 
 ;; Lisp mode setup
@@ -762,9 +766,7 @@
              '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)
                ("\\<\\(fixme *.*\\)" 1 font-lock-warning-face t)))))
 
-(setq
-    TeX-pdf-mode  t                     ; generate PDF
-)
+(setq TeX-pdf-mode t)                     ; generate PDF
 
 
 ;; shell script mode
@@ -936,9 +938,12 @@ up automatically"
 
 ;; startup
 
+(let ((custom-file (expand-file-name "~/.emacs.custom.el")))
+  (if (file-exists-p custom-file)
+      (load custom-file)))
+
 (if (file-exists-p "~/.diary")
     (diary))
-
 
 
 ;;; Local Variables:
