@@ -102,7 +102,7 @@
 ;;;(cond (nil
 (defun color-theme-sasha ()
   "Gray on black theme - made from Arjen theme"
-  
+
   (interactive)
   (color-theme-install
    '(color-theme-sasha
@@ -198,7 +198,7 @@
                                     :foreground "Black"))))
      (modeline-mousable ((t (:background "Gray60" :foreground "Black"))))
      (modeline-mousable-minor-mode ((t (:background "Gray60"
-                                        :foreground "Black"))))
+                                                    :foreground "Black"))))
      (pointer ((t (nil))))
      (primary-selection ((t (:background "blue"))))
      (red ((t (:foreground "red"))))
@@ -268,6 +268,7 @@
 (put 'eval-expression 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (toggle-save-place-globally)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-set-key [M-down] 'next-error)
 (global-set-key [M-up] '(lambda () (interactive) (next-error -1)))
@@ -410,7 +411,7 @@
 ;;          (add-to-list 'load-path (expand-file-name dir))
 ;;          (require 'org-install)
 ;;          (eval-after-load 'info
-;;            '(add-to-list 'Info-directory-list 
+;;            '(add-to-list 'Info-directory-list
 ;;                          (concat dir "/../info"))))))
 
 ;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -470,7 +471,7 @@
 
   (let ((pfx "/bbsrc/tools/tags/")
         (libs '("acclib" "appscrn")))
-    (setq tags-table-list 
+    (setq tags-table-list
           (append tags-table-list
                   (mapcar (lambda (e) (concat pfx e)) libs)))))
 
@@ -524,7 +525,7 @@
 
 
 ;;; Print setup
- 
+
 ;; (setq lpr-switches '("-Pduplex"))
 
 
@@ -614,23 +615,23 @@
                        ("\\.cl$" . lisp-mode))
                      auto-mode-alist))
 
-(setq lisp-mode-hook 
-      (lambda () 
-        (require 'ilisp)
-        (imenu-add-to-menubar "Functions")
-        (font-lock-add-keywords
-         nil
-         '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
+(add-hook 'lisp-mode-hook
+          (lambda ()
+            (require 'ilisp)
+            (imenu-add-to-menubar "Functions")
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
-(setq emacs-lisp-mode-hook 
-      (lambda () 
-        (imenu-add-to-menubar "Functions")
-        (local-set-key [f1] 'describe-function)
-        (local-set-key [S-f1] 'describe-variable)
-        (font-lock-add-keywords
-         nil
-         '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (imenu-add-to-menubar "Functions")
+            (local-set-key [f1] 'describe-function)
+            (local-set-key [S-f1] 'describe-variable)
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 (setq ilisp-*use-fsf-compliant-keybindings* t)
@@ -642,7 +643,13 @@
                        ("\\.stklos$" . scheme-mode))
                      auto-mode-alist))
 
-(setq scheme-mode-hook '(lambda () (require 'ilisp)))
+(add-hook 'scheme-mode-hook
+          (lambda ()
+            (require 'ilisp)
+            (imenu-add-to-menubar "Functions")
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 ;; (add-hook 'ilisp-load-hook
@@ -705,11 +712,11 @@
 
 ;; Scheme mode
 
-(setq scheme-program-name "scsh")
+;;(setq scheme-program-name "scsh")
 
-(setq cmuscheme-load-hook
-      '((lambda () (define-key inferior-scheme-mode-map "\C-c\C-t"
-                     'favorite-cmd))))
+;;(setq cmuscheme-load-hook
+;;      '((lambda () (define-key inferior-scheme-mode-map "\C-c\C-t"
+;;                     'favorite-cmd))))
 
 
 ;; TeX/LaTeX
@@ -746,10 +753,10 @@
             (define-abbrev text-mode-abbrev-table "ggf" "\\phi" nil)
             (define-abbrev text-mode-abbrev-table "ggr" "\\rho" nil)
             (define-abbrev text-mode-abbrev-table "ggs" "\\sigma" nil)
-            
+
             (mapcar
              (lambda (e)
-               (define-abbrev text-mode-abbrev-table (car e) 
+               (define-abbrev text-mode-abbrev-table (car e)
                  (format "\\begin{%s}\n\n\\end{%s}\n" (cdr e) (cdr e))
                  '(lambda ()
                     (insert-latex-env-abbrev))))
@@ -820,8 +827,8 @@
 (global-set-key "\C-cg" 'goto-line)
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'mail-mode-hook 'turn-on-auto-fill)
-(add-hook 'message-mode-hook 'turn-on-auto-fill)
+;;(add-hook 'mail-mode-hook 'turn-on-auto-fill)
+;;(add-hook 'message-mode-hook 'turn-on-auto-fill)
 ;(add-hook 'text-mode-hook 'turn-on-filladapt-mode)
 ;(add-hook 'mail-mode-hook 'turn-on-filladapt-mode)
 ;(add-hook 'tex-mode-hook 'turn-on-filladapt-mode)
@@ -854,7 +861,7 @@
 (defun auto-startup ()
   "Convenience function to be called by the first emacs, which is brought
 up automatically"
-  
+
   (interactive)
 ;;  (run-at-time 20 nil 'get-daily-comic "dilbert")
   (diary)
