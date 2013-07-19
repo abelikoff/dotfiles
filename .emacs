@@ -119,6 +119,7 @@
      (border-glyph ((t (nil))))
      (buffers-tab ((t (:background "black" :foreground "Gray80"))))
      (calendar-today-face ((t (:underline t))))
+     (column-marker-1 ((t (:background "Red" :foreground "White"))))
      (cperl-array-face ((t (:foreground "darkseagreen"))))
      (cperl-hash-face ((t (:foreground "darkseagreen"))))
      (cperl-nonoverridable-face ((t (:foreground "SkyBlue"))))
@@ -137,9 +138,10 @@
      (custom-variable-button-face ((t (:underline t :bold t))))
      (custom-variable-tag-face ((t (:underline t :foreground "light blue"))))
      (diary-face ((t (:foreground "IndianRed"))))
-     (diff-added-face ((t (:foreground "Green"))))
-     (diff-header-face ((t (:background "Gray" :foreground "Black"))))
-     (diff-removed-face ((t (:foreground "Red"))))
+     (diff-added ((t (:foreground "Green"))))
+     (diff-header ((t (:foreground "White"))))
+     (diff-file-header ((t (:background "RoyalBlue3" :foreground "Yellow"))))
+     (diff-removed ((t (:foreground "Red"))))
      (eshell-ls-archive-face ((t (:bold t :foreground "IndianRed"))))
      (eshell-ls-backup-face ((t (:foreground "Grey"))))
      (eshell-ls-clutter-face ((t (:foreground "DimGray"))))
@@ -222,7 +224,9 @@
      (woman-italic-face ((t (:foreground "beige"))))
      (woman-unknown-face ((t (:foreground "LightSalmon"))))
      (yellow ((t (:foreground "yellow"))))
-     (zmacs-region ((t (:background "snow" :foreground "blue")))))))
+     (zmacs-region ((t (:background "snow" :foreground "blue"))))
+     (fixme-face ((t (:background "Red" :foreground "White"))))
+     (todo-face ((t (:background "RoyalBlue3" :foreground "Yellow")))))))
 
 ;;;))
 
@@ -274,13 +278,6 @@
 (global-set-key [M-up] '(lambda () (interactive) (next-error -1)))
 
 
-;;; auto-complete
-
-;;(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-
-
 ;;; C mode
 
 (setq-default c-default-style "bsd")
@@ -290,10 +287,26 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             (imenu-add-to-menubar "Functions")
-            (font-lock-add-keywords
-             nil
-             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))
+            (font-lock-add-keywords nil
+                                    '(("\\<\\(FIXME\\):" 1 fixme-face prepend)
+                                      ("\\<\\(and\\|or\\|not\\)\\>" .
+                                       font-lock-keyword-face)))
+            ;; (font-lock-add-keywords
+            ;;  nil
+            ;;  ;;'(("\\<\\(FIXME:.*\\)" 1 fixme-face t)
+            ;;  '(("\bFIXME\b.*" fixme-face)
+            ;;    ;;("\\<\\(TODO:.*\\)" 1 todo-face t)
+            ;;    ;;("\\<\\(\bTODO\b.*\\)" 1 todo-face t)
+            ;;    ))
             (untabify-buffer)))
+
+
+
+;;; column marker
+
+(if (load "column-marker.el" t t t)
+    (add-hook 'find-file-hook
+              (lambda () (column-marker-1 80))))
 
 
 ;;; CPerl mode
@@ -397,12 +410,12 @@
 ;;(require 'js-comint)
 (setq inferior-js-program-command "node --interactive")
 (add-hook 'js2-mode-hook '(lambda ()
-			    (local-set-key "\C-x\C-e" 'js-send-last-sexp)
-			    (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
-			    (local-set-key "\C-cb" 'js-send-buffer)
-			    (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
-			    (local-set-key "\C-cl" 'js-load-file-and-go)
-			    ))
+                            (local-set-key "\C-x\C-e" 'js-send-last-sexp)
+                            (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
+                            (local-set-key "\C-cb" 'js-send-buffer)
+                            (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+                            (local-set-key "\C-cl" 'js-load-file-and-go)
+                            ))
 
 (setenv "NODE_NO_READLINE" "1")
 
