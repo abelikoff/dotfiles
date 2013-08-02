@@ -435,22 +435,48 @@
 
 ;;; org-mode
 
-;; (let ((dir "~/lib/elisp/org-mode/lisp"))
-;;   (cond ((file-exists-p (concat dir "/org-install.el"))
-;;          (add-to-list 'load-path (expand-file-name dir))
-;;          (require 'org-install)
-;;          (eval-after-load 'info
-;;            '(add-to-list 'Info-directory-list
-;;                          (concat dir "/../info"))))))
+(require 'org)
 
-;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 ;;(global-set-key "\C-cl" 'org-store-link)
 ;;(global-set-key "\C-ca" 'org-agenda)
 
 ;;(setq org-todo-keyword-faces
 ;;      '(("TODO"  . (:foreground "Yellow" :weight bold))))
 
+;;; support for go: links
 
+;;(org-add-link-type "go" 'org-golink-open)
+(org-add-link-type "go" (lambda (url)
+                          (browse-url (concat "http://go/" url))))
+
+
+(defvar org-journal-file "~/data/journal.org"
+  "Path to OrgMode journal file.")
+
+(defvar org-journal-date-format "%Y-%m-%d"
+  "Date format string for journal headings.")
+
+(defun org-journal-entry ()
+  "Create a new diary entry for today or append to an existing one."
+  (interactive)
+  (switch-to-buffer (find-file org-journal-file))
+  (widen)
+  (let ((today (format-time-string org-journal-date-format)))
+    (beginning-of-buffer)
+    ;;;(unless (org-goto-local-search-forward-headings today nil t)
+    (unless nil
+      ((lambda ()
+         (org-insert-heading)
+         (insert today)
+         (insert "\n\n  \n"))))
+    (beginning-of-buffer)
+    (org-show-entry)
+    (org-narrow-to-subtree)
+    (end-of-buffer)
+    (backward-char 2)
+    (unless (= (current-column) 2)
+      (insert "\n\n  "))))
 
 
 ;;; parenthesis matching
@@ -824,8 +850,8 @@
 
 ;; Browse URL
 
-(setq browse-url-browser-function #'browse-url-gnome-moz)
-
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
 
 ;; find file at point
 
