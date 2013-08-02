@@ -445,8 +445,6 @@
 ;;      '(("TODO"  . (:foreground "Yellow" :weight bold))))
 
 ;;; support for go: links
-
-;;(org-add-link-type "go" 'org-golink-open)
 (org-add-link-type "go" (lambda (url)
                           (browse-url (concat "http://go/" url))))
 
