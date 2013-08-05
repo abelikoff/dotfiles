@@ -272,7 +272,10 @@
 (put 'eval-expression 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (toggle-save-place-globally)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook
+          (lambda ()
+            (delete-trailing-whitespace)
+            (untabify (point-min) (point-max))))
 
 (global-set-key [M-down] 'next-error)
 (global-set-key [M-up] '(lambda () (interactive) (next-error -1)))
@@ -298,7 +301,7 @@
             ;;    ;;("\\<\\(TODO:.*\\)" 1 todo-face t)
             ;;    ;;("\\<\\(\bTODO\b.*\\)" 1 todo-face t)
             ;;    ))
-            (untabify-buffer)))
+            ))
 
 
 
@@ -574,7 +577,6 @@
 (autoload 'powershell-mode "powershell-mode"
   "Major mode for editing PowerShell scripts." t)
 (add-to-list 'auto-mode-alist '("\\.ps1$" . powershell-mode))
-(add-hook 'powershell-mode-hook 'untabify-buffer)
 
 
 ;;; Print setup
@@ -988,12 +990,6 @@ up automatically"
   (interactive "")
   (let ((voctest-test-direction '(1 . 0)))
     (voctest)))
-
-
-(defun untabify-buffer ()
-  (add-hook 'before-save-hook
-            (lambda ()
-              (untabify (point-min) (point-max)))))
 
 
 ;; startup
