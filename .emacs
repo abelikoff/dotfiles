@@ -20,6 +20,7 @@
                                       "~/Documents/lib/elisp"
                                       "~/Documents/lib/elisp/color-theme"
                                       "/opt/local/emacs/"
+                                      "/opt/go/misc/emacs"
                                       )))
                  load-path))
 
@@ -155,7 +156,7 @@
      (eshell-ls-symlink-face ((t (:foreground "White"))))
      (eshell-ls-unreadable-face ((t (:foreground "DimGray"))))
      (eshell-prompt-face ((t (:foreground "MediumAquamarine"))))
-;;     (fixme-face ((t (:bold t :foreground "White" :background "Red"))))
+     (fixme-face ((t (:background "Red" :foreground "White"))))
      (font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
      ;;(font-lock-comment-face ((t (:foreground "DarkCyan"))))
      (font-lock-comment-face ((t (:foreground "RoyalBlue3"))))
@@ -225,7 +226,6 @@
      (woman-unknown-face ((t (:foreground "LightSalmon"))))
      (yellow ((t (:foreground "yellow"))))
      (zmacs-region ((t (:background "snow" :foreground "blue"))))
-     (fixme-face ((t (:background "Red" :foreground "White"))))
      (todo-face ((t (:background "RoyalBlue3" :foreground "Yellow")))))))
 
 ;;;))
@@ -248,8 +248,8 @@
 
 (line-number-mode 1)
 (column-number-mode 1)
-;;(global-set-key "\r" 'reindent-then-newline-and-indent)
-(global-set-key "\r" 'newline-and-indent)
+(global-set-key "\r" 'newline-and-indent) ; not reindent-then-newline-and-indent
+(global-set-key "\C-cg" 'goto-line)
 
 (let ((dir (expand-file-name (if is-windows
                                  (concat (getenv "TEMP") "/emacs-backup/")
@@ -274,8 +274,8 @@
 (toggle-save-place-globally)
 (add-hook 'before-save-hook
           (lambda ()
-            (delete-trailing-whitespace)
-            (untabify (point-min) (point-max))))
+            (conditional-untabify)
+            (delete-trailing-whitespace)))
 
 (global-set-key [M-down] 'next-error)
 (global-set-key [M-up] '(lambda () (interactive) (next-error -1)))
@@ -337,7 +337,6 @@
 ;;; Diary/Appt
 
 (setq diary-file "~/.diary")
-
 (setq-default display-time-format "[%H:%M]")
 (add-hook 'diary-hook 'appt-make-list)
 (add-hook 'diary-display-hook 'fancy-diary-display)
@@ -359,17 +358,11 @@
 
 ;;; GO
 
-(let ((go-dir "/opt/go/misc/emacs"))
-  (if (file-directory-p go-dir)
-      (add-to-list 'load-path go-dir)))
-
 (load "go-mode-load" t t t)
-;;(require 'go-mode-load)
 
-;; (add-hook 'go-mode-hook
-;;           (lambda ()
-;;             (setq indent-tabs-mode nil
-;;                   tab-width 4)))
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'gofmt-before-save nil t)))
 
 
 ;;; GDB
@@ -485,7 +478,6 @@
 (require 'paren)
 (setq show-paren-style 'mixed)
 (show-paren-mode 1)
-
 (set-face-foreground 'show-paren-mismatch-face "White")
 (set-face-background 'show-paren-mismatch-face "Red")
 (set-face-background 'show-paren-match-face "Blue")
@@ -497,12 +489,13 @@
 
 ;;(require 'python-mode)
 
-;; (setq-default py-shell-name "ipython")
-;; (setq-default py-which-bufname "IPython")
+;;(setq-default py-shell-name "ipython")
+;;(setq-default py-which-bufname "IPython")
 ;; ; use the wx backend, for both mayavi and matplotlib
-;; (setq py-python-command-args
-;;       '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
-;; (setq py-force-py-shell-name-p t)
+;;(setq py-force-py-shell-name-p t)
+
+
+;;(require 'ipython)
 
 ;; ; switch to the interpreter after executing code
 ;; (setq py-shell-switch-buffers-on-execute-p t)
@@ -549,12 +542,6 @@
 ;; Shift-F7
 ;;(global-set-key (if emacs-is-xemacs [(shift f5)] [S-f17]) 'russify-word)
 ;;(global-set-key [f8] 'russian-insertion-mode)
-
-
-;;; Mailcrypt
-
-;(load-library "mailcrypt")
-;(mc-setversion "gpg")
 
 
 ;;; Matlab
@@ -691,21 +678,6 @@
 
 (setq ilisp-*use-fsf-compliant-keybindings* t)
 
-(set-default 'auto-mode-alist
-             (append '(("\\.scm$" . scheme-mode)
-                       ("\\.ss$" . scheme-mode)
-                       ("\\.stk$" . scheme-mode)
-                       ("\\.stklos$" . scheme-mode))
-                     auto-mode-alist))
-
-(add-hook 'scheme-mode-hook
-          (lambda ()
-            (require 'ilisp)
-            (imenu-add-to-menubar "Functions")
-            (font-lock-add-keywords
-             nil
-             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
-
 
 ;; (add-hook 'ilisp-load-hook
 ;;           '(lambda ()
@@ -772,6 +744,25 @@
 ;;(setq cmuscheme-load-hook
 ;;      '((lambda () (define-key inferior-scheme-mode-map "\C-c\C-t"
 ;;                     'favorite-cmd))))
+
+(set-default 'auto-mode-alist
+             (append '(("\\.scm$" . scheme-mode)
+                       ("\\.stk$" . scheme-mode)
+                       ("\\.stklos$" . scheme-mode))
+                     auto-mode-alist))
+
+
+;; (add-to-list 'auto-mode-alist
+;;              (mapcar (lambda (x) (cons x scheme-mode))
+;;                      '("\\.scm$" "\\.ss$" "\\.stk$" "\\.stklos$")))
+
+(add-hook 'scheme-mode-hook
+          (lambda ()
+            (require 'ilisp)
+            (imenu-add-to-menubar "Functions")
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 ;; TeX/LaTeX
@@ -853,25 +844,6 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
 
-;; find file at point
-
-;; (require 'ffap)
-;; (ffap-bindings)
-
-;; (setq ffap-require-prefix t
-;;       ffap-c-path (append '("/usr/include")
-;;                        ))
-;                         (mapcar (lambda (s) (concat
-;                                              "/home/aaron/app/var/src/"
-;                                              s))
-;                                 '("block-data" "containers" "cov-method" "db"
-;                                   "dg1-tsk" "drivers" "foreign"
-;                                   "global-headers" "makefiles" "mapping"
-;                                   "primitives" "slatec" "structures"
-;                                   "util"))))
-
-
-
 
 ;; Emacs server
 
@@ -879,8 +851,6 @@
 
 
 (global-set-key [f3] 'shell-other-window)
-(global-set-key "\C-cg" 'goto-line)
-
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;;(add-hook 'mail-mode-hook 'turn-on-auto-fill)
 ;;(add-hook 'message-mode-hook 'turn-on-auto-fill)
@@ -910,18 +880,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+(defun conditional-untabify ()
+  "Untabify (or not) based on the major mode."
+  (let ((modes-preserved '("Go"
+                           "Makefile")))
+    (unless (member mode-name modes-preserved)
+      (untabify (point-min) (point-max)))))
 
-;; auto-startup stuff
 
-(defun auto-startup ()
-  "Convenience function to be called by the first emacs, which is brought
-up automatically"
-
-  (interactive)
-;;  (run-at-time 20 nil 'get-daily-comic "dilbert")
-  (diary)
-  (gnus-other-frame)
-  )
+(defun untabify-buffer-upon-save ()
+  "Current buffer will be untabified prior to saving."
+  (add-hook 'before-save-hook
+            (lambda ()
+              (untabify (point-min) (point-max))) nil t))
 
 
 (defun eval-and-advance ()
