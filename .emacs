@@ -612,6 +612,7 @@
 
 ;; Compilation setup
 
+(setq-default compilation-scroll-output t)
 (global-set-key "\C-c\C-m" 'compile)
 (global-set-key "\C-cm" 'compile)
 
