@@ -1,0 +1,36 @@
+xterm*faceName:             Monospace:size=10
+xterm*vt100*geometry:       80x50
+xterm*loginShell:           true
+xterm*saveLines:            2000
+xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+xterm*termName:             xterm-color
+xterm*eightBitInput:        false
+
+! Zenburn
+
+xterm*background:           #3f3f3f
+xterm*foreground:           #dcdccc
+!black
+xterm*color0:               #353535
+xterm*color8:               #666666
+!red
+xterm*color1:               #AE4747
+xterm*color9:               #EE6363
+!green
+xterm*color2:               #556B2F
+xterm*color10:              #9ACD32
+!brown/yellow
+xterm*color3:               #DAA520
+xterm*color11:              #FFC125
+!blue
+xterm*color4:               #6F99B4
+xterm*color12:              #7C96B0
+!magenta
+xterm*color5:               #8B7B8B
+xterm*color13:              #D8BFD8
+!cyan
+xterm*color6:               #A7A15E
+xterm*color14:              #F0E68C
+!white
+xterm*color7:               #DDDDDD
+xterm*color15:              #FFFFFF
