@@ -13,6 +13,7 @@ CONF_FILES=".bash_aliases
             .vim
             .vimrc
             .wgetrc
+            .Xresources
             latex/mathmacros.sty"
 
 prog=${0##*/}
