@@ -343,8 +343,10 @@
 
 ;;; ESS
 
-;;(setq-default ess-continued-statement-offset 4)
-(setq-default ess-indent-level 4)
+(add-hook 'ess-mode-hook
+          (lambda ()
+            (setq ess-continued-statement-offset 4)
+            (setq ess-indent-level 4)))
 
 
 ;;; GO
@@ -958,7 +960,7 @@
 ;; startup
 
 (let ((custom-file (expand-file-name "~/.emacs.custom.el")))
-  (if (file-exists-p custom-file)
+  (if (and (not (getenv "NOCUSTOM")) (file-exists-p custom-file))
       (load custom-file)))
 
 (if (file-exists-p "~/.diary")
