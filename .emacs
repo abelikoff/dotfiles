@@ -605,7 +605,7 @@
 
 ;; Compilation setup
 
-(setq-default compilation-scroll-output t)
+(setq-default compilation-scroll-output 'first-error)
 (global-set-key "\C-c\C-m" 'compile)
 (global-set-key "\C-cm" 'compile)
 
