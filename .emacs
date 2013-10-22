@@ -20,6 +20,7 @@
                                       "~/Documents/lib/elisp"
                                       "~/Documents/lib/elisp/color-theme"
                                       "/opt/local/emacs/"
+                                      "/opt/go/misc/emacs"
                                       )))
                  load-path))
 
@@ -97,145 +98,135 @@
 
 (require 'color-theme)
 
-;;;(autoload 'zenburn "zenburn" "Load zenburn" t)
+;; (defun color-theme-sasha ()
+;;   "Gray on black theme - made from Arjen theme"
 
-;;;(cond (nil
-(defun color-theme-sasha ()
-  "Gray on black theme - made from Arjen theme"
+;;   (interactive)
+;;   (color-theme-install
+;;    '(color-theme-sasha
+;;      ((background-color . "black")
+;;       (background-mode . dark)
+;;       (border-color . "black")
+;;       (cursor-color . "OrangeRed")
+;;       (foreground-color . "Gray")
+;;       (mouse-color . "OrangeRed"))
+;;      (default ((t (:background "black" :foreground "Gray80"))))
+;;      (blue ((t (:foreground "blue"))))
+;;      (bold ((t (:bold t))))
+;;      (bold-italic ((t (:bold t))))
+;;      (border-glyph ((t (nil))))
+;;      (buffers-tab ((t (:background "black" :foreground "Gray80"))))
+;;      (calendar-today-face ((t (:underline t))))
+;;      (column-marker-1 ((t (:background "Red" :foreground "White"))))
+;;      (cperl-array-face ((t (:foreground "darkseagreen"))))
+;;      (cperl-hash-face ((t (:foreground "darkseagreen"))))
+;;      (cperl-nonoverridable-face ((t (:foreground "SkyBlue"))))
+;;      (custom-button-face ((t (nil))))
+;;      (custom-changed-face ((t (:background "blue" :foreground "white"))))
+;;      (custom-documentation-face ((t (nil))))
+;;      (custom-face-tag-face ((t (:underline t))))
+;;      (custom-group-tag-face ((t (:underline t :foreground "light blue"))))
+;;      (custom-group-tag-face-1 ((t (:underline t :foreground "pink"))))
+;;      (custom-invalid-face ((t (:background "red" :foreground "yellow"))))
+;;      (custom-modified-face ((t (:background "blue" :foreground "white"))))
+;;      (custom-rogue-face ((t (:background "black" :foreground "pink"))))
+;;      (custom-saved-face ((t (:underline t))))
+;;      (custom-set-face ((t (:background "white" :foreground "blue"))))
+;;      (custom-state-face ((t (:foreground "lime green"))))
+;;      (custom-variable-button-face ((t (:underline t :bold t))))
+;;      (custom-variable-tag-face ((t (:underline t :foreground "light blue"))))
+;;      (diary-face ((t (:foreground "IndianRed"))))
+;;      (diff-added ((t (:foreground "Green"))))
+;;      (diff-header ((t (:foreground "White"))))
+;;      (diff-file-header ((t (:background "RoyalBlue3" :foreground "Yellow"))))
+;;      (diff-removed ((t (:foreground "Red"))))
+;;      (eshell-ls-archive-face ((t (:bold t :foreground "IndianRed"))))
+;;      (eshell-ls-backup-face ((t (:foreground "Grey"))))
+;;      (eshell-ls-clutter-face ((t (:foreground "DimGray"))))
+;;      (eshell-ls-directory-face ((t (:bold t :foreground "MediumSlateBlue"))))
+;;      (eshell-ls-executable-face ((t (:foreground "Coral"))))
+;;      (eshell-ls-missing-face ((t (:foreground "black"))))
+;;      (eshell-ls-picture-face ((t (:foreground "Violet"))))
+;;      (eshell-ls-product-face ((t (:foreground "sandybrown"))))
+;;      (eshell-ls-readonly-face ((t (:foreground "Aquamarine"))))
+;;      (eshell-ls-special-face ((t (:foreground "Gold"))))
+;;      (eshell-ls-symlink-face ((t (:foreground "White"))))
+;;      (eshell-ls-unreadable-face ((t (:foreground "DimGray"))))
+;;      (eshell-prompt-face ((t (:foreground "MediumAquamarine"))))
+;;      (fixme-face ((t (:background "Red" :foreground "White"))))
+;;      (font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
+;;      ;;(font-lock-comment-face ((t (:foreground "DarkCyan"))))
+;;      (font-lock-comment-face ((t (:foreground "RoyalBlue3"))))
+;;      (font-lock-comment-delimiter-face ((t (:foreground "RoyalBlue3"))))
+;;      ;;(font-lock-constant-face ((t (:foreground "Green"))))
+;;      (font-lock-constant-face ((t (nil))))
+;;      (font-lock-doc-string-face ((t (:foreground "DarkOrange"))))
+;;      (font-lock-function-name-face ((t (:bold t :foreground "Magenta"))))
+;;      ;;(font-lock-keyword-face ((t (:foreground "PaleYellow"))))
+;;      ;;(font-lock-keyword-face ((t (:foreground "Yellow" :bold t))))
+;;      (font-lock-keyword-face ((t (:foreground "SeaGreen" :bold t))))
+;;      (font-lock-preprocessor-face ((t (:foreground "Yellow" :bold t))))
+;;      (font-lock-reference-face ((t (:foreground "SlateBlue"))))
+;;      ;;(font-lock-string-face ((t (:foreground "IndianRed"))))
+;;      (font-lock-string-face ((t (:foreground "Chocolate"))))
+;;      (font-lock-type-face ((t (nil))))
+;;      ;;(font-lock-variable-name-face ((t (nil))))
+;;      (font-lock-variable-name-face ((t (:foreground "PaleGreen"))))
+;;      (font-lock-warning-face ((t (:bold t :background "Red" :foreground "White"))))
+;;      (green ((t (:foreground "green"))))
+;;      (gui-button-face ((t (:background "grey75" :foreground "black"))))
+;;      (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
+;;      (highlight ((t (:background "darkolivegreen"))))
+;;      (highline-face ((t (:background "SeaGreen"))))
+;;      (holiday-face ((t (:background "DimGray"))))
+;;      (info-menu-5 ((t (:underline t))))
+;;      (info-node ((t (:underline t :bold t :foreground "DodgerBlue1"))))
+;;      (info-xref ((t (:bold t :foreground "Orange"))))
+;;      (isearch ((t (:background "blue"))))
+;;      (isearch-secondary ((t (:foreground "red3"))))
+;;      (italic ((t (nil))))
+;;      (left-margin ((t (nil))))
+;;      (linum ((t (:foreground "Gray40"))))
+;;      (list-mode-item-selected ((t (:background "gray68" :foreground "white"))))
+;; ;;      (modeline ((t (:background "Gray60"
+;; ;;                  :foreground "Black"
+;; ;;                  :box (:line-width 1 :style released-button)))))
+;;      (modeline ((t (:background "Gray60" :foreground "Black"))))
+;;      (mode-line ((t (:background "Gray60" :foreground "Black"))))
+;;      (mode-line-inactive ((t (:background "Gray60" :foreground "Black"))))
+;;      (modeline-buffer-id ((t (:bold t :background "Gray60"
+;;                                     :foreground "Black"))))
+;;      (modeline-mousable ((t (:background "Gray60" :foreground "Black"))))
+;;      (modeline-mousable-minor-mode ((t (:background "Gray60"
+;;                                                     :foreground "Black"))))
+;;      (pointer ((t (nil))))
+;;      (primary-selection ((t (:background "blue"))))
+;;      (red ((t (:foreground "red"))))
+;;      (region ((t (:background "blue"))))
+;;      (right-margin ((t (nil))))
+;;      (secondary-selection ((t (:background "darkslateblue"))))
+;;      (show-paren-match-face ((t (:background "Aquamarine" :foreground "SlateBlue"))))
+;;      (show-paren-mismatch-face ((t (:background "Red" :foreground "White"))))
+;;      (text-cursor ((t (:background "yellow" :foreground "black"))))
+;;      (toolbar ((t (nil))))
+;;      (underline ((nil (:underline nil))))
+;;      (vertical-divider ((t (nil))))
+;;      (widget ((t (nil))))
+;;      (widget-button-face ((t (:bold t))))
+;;      (widget-button-pressed-face ((t (:foreground "red"))))
+;;      (widget-documentation-face ((t (:foreground "lime green"))))
+;;      (widget-field-face ((t (:background "dim gray"))))
+;;      (widget-inactive-face ((t (:foreground "light gray"))))
+;;      (widget-single-line-field-face ((t (:background "dim gray"))))
+;;      (woman-bold-face ((t (:bold t))))
+;;      (woman-italic-face ((t (:foreground "beige"))))
+;;      (woman-unknown-face ((t (:foreground "LightSalmon"))))
+;;      (yellow ((t (:foreground "yellow"))))
+;;      (zmacs-region ((t (:background "snow" :foreground "blue"))))
+;;      (todo-face ((t (:background "RoyalBlue3" :foreground "Yellow")))))))
 
-  (interactive)
-  (color-theme-install
-   '(color-theme-sasha
-     ((background-color . "black")
-      (background-mode . dark)
-      (border-color . "black")
-      (cursor-color . "OrangeRed")
-      (foreground-color . "Gray")
-      (mouse-color . "OrangeRed"))
-     (default ((t (:background "black" :foreground "Gray80"))))
-     (blue ((t (:foreground "blue"))))
-     (bold ((t (:bold t))))
-     (bold-italic ((t (:bold t))))
-     (border-glyph ((t (nil))))
-     (buffers-tab ((t (:background "black" :foreground "Gray80"))))
-     (calendar-today-face ((t (:underline t))))
-     (column-marker-1 ((t (:background "Red" :foreground "White"))))
-     (cperl-array-face ((t (:foreground "darkseagreen"))))
-     (cperl-hash-face ((t (:foreground "darkseagreen"))))
-     (cperl-nonoverridable-face ((t (:foreground "SkyBlue"))))
-     (custom-button-face ((t (nil))))
-     (custom-changed-face ((t (:background "blue" :foreground "white"))))
-     (custom-documentation-face ((t (nil))))
-     (custom-face-tag-face ((t (:underline t))))
-     (custom-group-tag-face ((t (:underline t :foreground "light blue"))))
-     (custom-group-tag-face-1 ((t (:underline t :foreground "pink"))))
-     (custom-invalid-face ((t (:background "red" :foreground "yellow"))))
-     (custom-modified-face ((t (:background "blue" :foreground "white"))))
-     (custom-rogue-face ((t (:background "black" :foreground "pink"))))
-     (custom-saved-face ((t (:underline t))))
-     (custom-set-face ((t (:background "white" :foreground "blue"))))
-     (custom-state-face ((t (:foreground "lime green"))))
-     (custom-variable-button-face ((t (:underline t :bold t))))
-     (custom-variable-tag-face ((t (:underline t :foreground "light blue"))))
-     (diary-face ((t (:foreground "IndianRed"))))
-     (diff-added ((t (:foreground "Green"))))
-     (diff-header ((t (:foreground "White"))))
-     (diff-file-header ((t (:background "RoyalBlue3" :foreground "Yellow"))))
-     (diff-removed ((t (:foreground "Red"))))
-     (eshell-ls-archive-face ((t (:bold t :foreground "IndianRed"))))
-     (eshell-ls-backup-face ((t (:foreground "Grey"))))
-     (eshell-ls-clutter-face ((t (:foreground "DimGray"))))
-     (eshell-ls-directory-face ((t (:bold t :foreground "MediumSlateBlue"))))
-     (eshell-ls-executable-face ((t (:foreground "Coral"))))
-     (eshell-ls-missing-face ((t (:foreground "black"))))
-     (eshell-ls-picture-face ((t (:foreground "Violet"))))
-     (eshell-ls-product-face ((t (:foreground "sandybrown"))))
-     (eshell-ls-readonly-face ((t (:foreground "Aquamarine"))))
-     (eshell-ls-special-face ((t (:foreground "Gold"))))
-     (eshell-ls-symlink-face ((t (:foreground "White"))))
-     (eshell-ls-unreadable-face ((t (:foreground "DimGray"))))
-     (eshell-prompt-face ((t (:foreground "MediumAquamarine"))))
-;;     (fixme-face ((t (:bold t :foreground "White" :background "Red"))))
-     (font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
-     ;;(font-lock-comment-face ((t (:foreground "DarkCyan"))))
-     (font-lock-comment-face ((t (:foreground "RoyalBlue3"))))
-     (font-lock-comment-delimiter-face ((t (:foreground "RoyalBlue3"))))
-     ;;(font-lock-constant-face ((t (:foreground "Green"))))
-     (font-lock-constant-face ((t (nil))))
-     (font-lock-doc-string-face ((t (:foreground "DarkOrange"))))
-     (font-lock-function-name-face ((t (:bold t :foreground "Magenta"))))
-     ;;(font-lock-keyword-face ((t (:foreground "PaleYellow"))))
-     ;;(font-lock-keyword-face ((t (:foreground "Yellow" :bold t))))
-     (font-lock-keyword-face ((t (:foreground "SeaGreen" :bold t))))
-     (font-lock-preprocessor-face ((t (:foreground "Yellow" :bold t))))
-     (font-lock-reference-face ((t (:foreground "SlateBlue"))))
-     ;;(font-lock-string-face ((t (:foreground "IndianRed"))))
-     (font-lock-string-face ((t (:foreground "Chocolate"))))
-     (font-lock-type-face ((t (nil))))
-     ;;(font-lock-variable-name-face ((t (nil))))
-     (font-lock-variable-name-face ((t (:foreground "PaleGreen"))))
-     (font-lock-warning-face ((t (:bold t :background "Red" :foreground "White"))))
-     (green ((t (:foreground "green"))))
-     (gui-button-face ((t (:background "grey75" :foreground "black"))))
-     (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
-     (highlight ((t (:background "darkolivegreen"))))
-     (highline-face ((t (:background "SeaGreen"))))
-     (holiday-face ((t (:background "DimGray"))))
-     (info-menu-5 ((t (:underline t))))
-     (info-node ((t (:underline t :bold t :foreground "DodgerBlue1"))))
-     (info-xref ((t (:bold t :foreground "Orange"))))
-     (isearch ((t (:background "blue"))))
-     (isearch-secondary ((t (:foreground "red3"))))
-     (italic ((t (nil))))
-     (left-margin ((t (nil))))
-     (linum ((t (:foreground "Gray40"))))
-     (list-mode-item-selected ((t (:background "gray68" :foreground "white"))))
-;;      (modeline ((t (:background "Gray60"
-;;                  :foreground "Black"
-;;                  :box (:line-width 1 :style released-button)))))
-     (modeline ((t (:background "Gray60" :foreground "Black"))))
-     (mode-line ((t (:background "Gray60" :foreground "Black"))))
-     (mode-line-inactive ((t (:background "Gray60" :foreground "Black"))))
-     (modeline-buffer-id ((t (:bold t :background "Gray60"
-                                    :foreground "Black"))))
-     (modeline-mousable ((t (:background "Gray60" :foreground "Black"))))
-     (modeline-mousable-minor-mode ((t (:background "Gray60"
-                                                    :foreground "Black"))))
-     (pointer ((t (nil))))
-     (primary-selection ((t (:background "blue"))))
-     (red ((t (:foreground "red"))))
-     (region ((t (:background "blue"))))
-     (right-margin ((t (nil))))
-     (secondary-selection ((t (:background "darkslateblue"))))
-     (show-paren-match-face ((t (:background "Aquamarine" :foreground "SlateBlue"))))
-     (show-paren-mismatch-face ((t (:background "Red" :foreground "White"))))
-     (text-cursor ((t (:background "yellow" :foreground "black"))))
-     (toolbar ((t (nil))))
-     (underline ((nil (:underline nil))))
-     (vertical-divider ((t (nil))))
-     (widget ((t (nil))))
-     (widget-button-face ((t (:bold t))))
-     (widget-button-pressed-face ((t (:foreground "red"))))
-     (widget-documentation-face ((t (:foreground "lime green"))))
-     (widget-field-face ((t (:background "dim gray"))))
-     (widget-inactive-face ((t (:foreground "light gray"))))
-     (widget-single-line-field-face ((t (:background "dim gray"))))
-     (woman-bold-face ((t (:bold t))))
-     (woman-italic-face ((t (:foreground "beige"))))
-     (woman-unknown-face ((t (:foreground "LightSalmon"))))
-     (yellow ((t (:foreground "yellow"))))
-     (zmacs-region ((t (:background "snow" :foreground "blue"))))
-     (fixme-face ((t (:background "Red" :foreground "White"))))
-     (todo-face ((t (:background "RoyalBlue3" :foreground "Yellow")))))))
-
-;;;))
-
-
-
-(require 'color-theme)
-;;(color-theme-initialize)
-;;(color-theme-gray30)
-(color-theme-sasha)
+;;(color-theme-sasha)
+(load-theme 'zenburn)
 
 (add-hook 'window-setup-hook '(lambda () (set-cursor-color "red")))
 (add-hook 'after-make-frame-functions
@@ -248,8 +239,8 @@
 
 (line-number-mode 1)
 (column-number-mode 1)
-;;(global-set-key "\r" 'reindent-then-newline-and-indent)
-(global-set-key "\r" 'newline-and-indent)
+(global-set-key "\r" 'newline-and-indent) ; not reindent-then-newline-and-indent
+(global-set-key "\C-cg" 'goto-line)
 
 (let ((dir (expand-file-name (if is-windows
                                  (concat (getenv "TEMP") "/emacs-backup/")
@@ -272,7 +263,10 @@
 (put 'eval-expression 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (toggle-save-place-globally)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook
+          (lambda ()
+            (conditional-untabify)
+            (delete-trailing-whitespace)))
 
 (global-set-key [M-down] 'next-error)
 (global-set-key [M-up] '(lambda () (interactive) (next-error -1)))
@@ -298,7 +292,7 @@
             ;;    ;;("\\<\\(TODO:.*\\)" 1 todo-face t)
             ;;    ;;("\\<\\(\bTODO\b.*\\)" 1 todo-face t)
             ;;    ))
-            (untabify-buffer)))
+            ))
 
 
 
@@ -334,7 +328,6 @@
 ;;; Diary/Appt
 
 (setq diary-file "~/.diary")
-
 (setq-default display-time-format "[%H:%M]")
 (add-hook 'diary-hook 'appt-make-list)
 (add-hook 'diary-display-hook 'fancy-diary-display)
@@ -350,23 +343,19 @@
 
 ;;; ESS
 
-;;(setq-default ess-continued-statement-offset 4)
-(setq-default ess-indent-level 4)
+(add-hook 'ess-mode-hook
+          (lambda ()
+            (setq ess-continued-statement-offset 4)
+            (setq ess-indent-level 4)))
 
 
 ;;; GO
 
-(let ((go-dir "/opt/go/misc/emacs"))
-  (if (file-directory-p go-dir)
-      (add-to-list 'load-path go-dir)))
-
 (load "go-mode-load" t t t)
-;;(require 'go-mode-load)
 
-;; (add-hook 'go-mode-hook
-;;           (lambda ()
-;;             (setq indent-tabs-mode nil
-;;                   tab-width 4)))
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'gofmt-before-save nil t)))
 
 
 ;;; GDB
@@ -435,22 +424,46 @@
 
 ;;; org-mode
 
-;; (let ((dir "~/lib/elisp/org-mode/lisp"))
-;;   (cond ((file-exists-p (concat dir "/org-install.el"))
-;;          (add-to-list 'load-path (expand-file-name dir))
-;;          (require 'org-install)
-;;          (eval-after-load 'info
-;;            '(add-to-list 'Info-directory-list
-;;                          (concat dir "/../info"))))))
+(require 'org)
 
-;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 ;;(global-set-key "\C-cl" 'org-store-link)
 ;;(global-set-key "\C-ca" 'org-agenda)
 
 ;;(setq org-todo-keyword-faces
 ;;      '(("TODO"  . (:foreground "Yellow" :weight bold))))
 
+;;; support for go: links
+(org-add-link-type "go" (lambda (url)
+                          (browse-url (concat "http://go/" url))))
 
+
+(defvar org-journal-file "~/data/journal.org"
+  "Path to OrgMode journal file.")
+
+(defvar org-journal-date-format "%Y-%m-%d"
+  "Date format string for journal headings.")
+
+(defun org-journal-entry ()
+  "Create a new diary entry for today or append to an existing one."
+  (interactive)
+  (switch-to-buffer (find-file org-journal-file))
+  (widen)
+  (let ((today (format-time-string org-journal-date-format)))
+    (beginning-of-buffer)
+    ;;;(unless (org-goto-local-search-forward-headings today nil t)
+    (unless nil
+      ((lambda ()
+         (org-insert-heading)
+         (insert today)
+         (insert "\n\n  \n"))))
+    (beginning-of-buffer)
+    (org-show-entry)
+    (org-narrow-to-subtree)
+    (end-of-buffer)
+    (backward-char 2)
+    (unless (= (current-column) 2)
+      (insert "\n\n  "))))
 
 
 ;;; parenthesis matching
@@ -458,7 +471,6 @@
 (require 'paren)
 (setq show-paren-style 'mixed)
 (show-paren-mode 1)
-
 (set-face-foreground 'show-paren-mismatch-face "White")
 (set-face-background 'show-paren-mismatch-face "Red")
 (set-face-background 'show-paren-match-face "Blue")
@@ -470,12 +482,13 @@
 
 ;;(require 'python-mode)
 
-;; (setq-default py-shell-name "ipython")
-;; (setq-default py-which-bufname "IPython")
+;;(setq-default py-shell-name "ipython")
+;;(setq-default py-which-bufname "IPython")
 ;; ; use the wx backend, for both mayavi and matplotlib
-;; (setq py-python-command-args
-;;       '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
-;; (setq py-force-py-shell-name-p t)
+;;(setq py-force-py-shell-name-p t)
+
+
+;;(require 'ipython)
 
 ;; ; switch to the interpreter after executing code
 ;; (setq py-shell-switch-buffers-on-execute-p t)
@@ -524,12 +537,6 @@
 ;;(global-set-key [f8] 'russian-insertion-mode)
 
 
-;;; Mailcrypt
-
-;(load-library "mailcrypt")
-;(mc-setversion "gpg")
-
-
 ;;; Matlab
 
 (autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
@@ -550,7 +557,6 @@
 (autoload 'powershell-mode "powershell-mode"
   "Major mode for editing PowerShell scripts." t)
 (add-to-list 'auto-mode-alist '("\\.ps1$" . powershell-mode))
-(add-hook 'powershell-mode-hook 'untabify-buffer)
 
 
 ;;; Print setup
@@ -599,6 +605,7 @@
 
 ;; Compilation setup
 
+(setq-default compilation-scroll-output 'first-error)
 (global-set-key "\C-c\C-m" 'compile)
 (global-set-key "\C-cm" 'compile)
 
@@ -664,21 +671,6 @@
 
 
 (setq ilisp-*use-fsf-compliant-keybindings* t)
-
-(set-default 'auto-mode-alist
-             (append '(("\\.scm$" . scheme-mode)
-                       ("\\.ss$" . scheme-mode)
-                       ("\\.stk$" . scheme-mode)
-                       ("\\.stklos$" . scheme-mode))
-                     auto-mode-alist))
-
-(add-hook 'scheme-mode-hook
-          (lambda ()
-            (require 'ilisp)
-            (imenu-add-to-menubar "Functions")
-            (font-lock-add-keywords
-             nil
-             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 ;; (add-hook 'ilisp-load-hook
@@ -746,6 +738,25 @@
 ;;(setq cmuscheme-load-hook
 ;;      '((lambda () (define-key inferior-scheme-mode-map "\C-c\C-t"
 ;;                     'favorite-cmd))))
+
+(set-default 'auto-mode-alist
+             (append '(("\\.scm$" . scheme-mode)
+                       ("\\.stk$" . scheme-mode)
+                       ("\\.stklos$" . scheme-mode))
+                     auto-mode-alist))
+
+
+;; (add-to-list 'auto-mode-alist
+;;              (mapcar (lambda (x) (cons x scheme-mode))
+;;                      '("\\.scm$" "\\.ss$" "\\.stk$" "\\.stklos$")))
+
+(add-hook 'scheme-mode-hook
+          (lambda ()
+            (require 'ilisp)
+            (imenu-add-to-menubar "Functions")
+            (font-lock-add-keywords
+             nil
+             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
 
 
 ;; TeX/LaTeX
@@ -824,27 +835,8 @@
 
 ;; Browse URL
 
-(setq browse-url-browser-function #'browse-url-gnome-moz)
-
-
-;; find file at point
-
-;; (require 'ffap)
-;; (ffap-bindings)
-
-;; (setq ffap-require-prefix t
-;;       ffap-c-path (append '("/usr/include")
-;;                        ))
-;                         (mapcar (lambda (s) (concat
-;                                              "/home/aaron/app/var/src/"
-;                                              s))
-;                                 '("block-data" "containers" "cov-method" "db"
-;                                   "dg1-tsk" "drivers" "foreign"
-;                                   "global-headers" "makefiles" "mapping"
-;                                   "primitives" "slatec" "structures"
-;                                   "util"))))
-
-
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
 
 
 ;; Emacs server
@@ -853,8 +845,6 @@
 
 
 (global-set-key [f3] 'shell-other-window)
-(global-set-key "\C-cg" 'goto-line)
-
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;;(add-hook 'mail-mode-hook 'turn-on-auto-fill)
 ;;(add-hook 'message-mode-hook 'turn-on-auto-fill)
@@ -884,18 +874,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+(defun conditional-untabify ()
+  "Untabify (or not) based on the major mode."
+  (let ((modes-preserved '("Go"
+                           "Makefile")))
+    (unless (member mode-name modes-preserved)
+      (untabify (point-min) (point-max)))))
 
-;; auto-startup stuff
 
-(defun auto-startup ()
-  "Convenience function to be called by the first emacs, which is brought
-up automatically"
-
-  (interactive)
-;;  (run-at-time 20 nil 'get-daily-comic "dilbert")
-  (diary)
-  (gnus-other-frame)
-  )
+(defun untabify-buffer-upon-save ()
+  "Current buffer will be untabified prior to saving."
+  (add-hook 'before-save-hook
+            (lambda ()
+              (untabify (point-min) (point-max))) nil t))
 
 
 (defun eval-and-advance ()
@@ -966,16 +957,10 @@ up automatically"
     (voctest)))
 
 
-(defun untabify-buffer ()
-  (add-hook 'before-save-hook
-            (lambda ()
-              (untabify (point-min) (point-max)))))
-
-
 ;; startup
 
 (let ((custom-file (expand-file-name "~/.emacs.custom.el")))
-  (if (file-exists-p custom-file)
+  (if (and (not (getenv "NOCUSTOM")) (file-exists-p custom-file))
       (load custom-file)))
 
 (if (file-exists-p "~/.diary")
