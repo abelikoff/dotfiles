@@ -11,5 +11,6 @@ defmonitor on
 bind \\ screen vim ${HOME}/cool.links.txt
 
 #caption always "%3n %t%? @%u%?%? [%h]%?%=%l"
-hardstatus alwayslastline "%{Yb}%?%-w%?[%n-%t]%?%+w%?%=%c"
+#hardstatus alwayslastline "%{Yb}%?%-w%?[%n-%t]%?%+w%?%=%c"
+hardstatus alwayslastline "%{Kc}%?%-w%?[%n-%t]%?%+w%?%=%c"
 
