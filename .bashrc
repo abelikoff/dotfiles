@@ -125,6 +125,14 @@ if [ -d $HOME.rvm ]; then
 fi
 
 
+# Heroku
+
+if [ -d /usr/local/heroku ]; then
+    PATH=/usr/local/heroku/bin:$PATH
+    export PATH
+fi
+
+
 # TeX
 
 if [[ $TEXINPUTS != */home/* ]]; then
@@ -154,4 +162,3 @@ export GREP_COLOR GREP_OPTIONS
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
-
