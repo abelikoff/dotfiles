@@ -133,6 +133,13 @@ if [ -d /usr/local/heroku ]; then
 fi
 
 
+# OPAM
+
+if [ -d $HOME/.opam ]; then
+  . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+fi
+
+
 # TeX
 
 if [[ $TEXINPUTS != */home/* ]]; then
