@@ -2,14 +2,14 @@
 
 #  aliases
 
-# miscellaneous 
+# miscellaneous
 
 if [ "`whoami`" = root ]; then
     alias rm='rm -i'
 
 else
     if type rm | grep aliased > /dev/null; then
-	unalias rm
+        unalias rm
     fi
 fi
 
@@ -43,34 +43,52 @@ alias tf='tail -f'
 if [[ $PWD != */rpmbuild/* ]]; then
 
     function cdf {
-	typeset dir
+        typeset dir
 
-	dir=$(hfdir "$1")
+        dir=$(hfdir "$1")
 
-	if [[ -n $dir ]]; then
-	    echo $dir
-	#cd $HOME/${dir#*/}
-	    cd $dir
-	fi
+        if [[ -n $dir ]]; then
+            echo $dir
+        #cd $HOME/${dir#*/}
+            cd $dir
+        fi
+    }
+
+    # eternal history search
+    function eh {
+        local eh_file=$HOME/.bash_eternal_history
+
+        if [[ ! -f $eh_file ]]; then
+            echo "ERROR: no eternal history file ($eh_file)" >&2
+            return
+        fi
+
+        if [[ "$1" == "-v" ]]; then
+            egrep "$2" $eh_file | \
+              awk '{ $1 = $3 = $4 = $5 = ""; sub(home, "~", $2); $2 = "[" $2 "]"; print}' home=$HOME | \
+              sed 's/^ *//' | uniq
+        else
+            cut -d ' ' -f 9- $eh_file | egrep "$1" | sed 's/^ *//' | uniq
+        fi
     }
 
     function fbk {
-	typeset file
-	typeset rc
+        typeset file
+        typeset rc
 
-	rc=0
+        rc=0
 
-	for file in "$@"; do
-	    cp -a "$file" "$file.`date +%Y%m%d-%H%M`" || rc=1
-	done
+        for file in "$@"; do
+            cp -a "$file" "$file.`date +%Y%m%d-%H%M`" || rc=1
+        done
 
-	return $rc
+        return $rc
     }
 
     function lc {
-	for x in $@ ; do 
-	    mv $x `echo $x | tr '[:upper:]' '[:lower:]'`
-	done
+        for x in $@ ; do
+            mv $x `echo $x | tr '[:upper:]' '[:lower:]'`
+        done
     }
 
     function mkcd { mkdir "$1"; cd "$1" ; }
@@ -78,24 +96,24 @@ if [[ $PWD != */rpmbuild/* ]]; then
     function rpm-xtr { rpm2cpio $1 | cpio -iv --make-directories ; }
     function rpmgrep { rpm -qa | grep "$@" ; }
 
-    function setapp { 
-	if [[ -d $1 ]]; then
-	    export PATH=$1/bin:$PATH
-	    export LD_LIBRARY_PATH=$1/lib:$LD_LIBRARY_PATH
-	    export MANPATH=$1/man:$MANPATH
-	else
-	    echo "ERROR: no such directory: $1"
-	fi
+    function setapp {
+        if [[ -d $1 ]]; then
+            export PATH=$1/bin:$PATH
+            export LD_LIBRARY_PATH=$1/lib:$LD_LIBRARY_PATH
+            export MANPATH=$1/man:$MANPATH
+        else
+            echo "ERROR: no such directory: $1"
+        fi
     }
 
     function setappi {
-	setapp $HOME/apps/$1
+        setapp $HOME/apps/$1
     }
 
     function uc {
-	for x in $@ ; do 
-	    mv $x `echo $x | tr '[:lower:]' '[:upper:]'`
-	done
+        for x in $@ ; do
+            mv $x `echo $x | tr '[:lower:]' '[:upper:]'`
+        done
     }
 
     function vrz { unzip -p "$@" | recode2 -ak; }
@@ -104,33 +122,33 @@ if [[ $PWD != */rpmbuild/* ]]; then
     function xtermname { echo -en '\033]0;'$@'\007'; }
     function xtl { xterm -T "$1" -geometry 200x20 -e tail -f "$1"; }
 
-    function xtn { 
-	if [ "$1" != "" ]; then
-	    xtermname "`hostname`: $1"
-	else
-	    xtermname "`hostname`"
-	fi
+    function xtn {
+        if [ "$1" != "" ]; then
+            xtermname "`hostname`: $1"
+        else
+            xtermname "`hostname`"
+        fi
     }
 
     function ztv  {
-	typeset file
+        typeset file
 
-	for file in "$@"; do
-	    case "$file" in
-		*.bz2) bunzip2 -c < "$file" ;;
-		*.[Zz]) zcat "$file" ;;
+        for file in "$@"; do
+            case "$file" in
+                *.bz2) bunzip2 -c < "$file" ;;
+                *.[Zz]) zcat "$file" ;;
                 *) gunzip -c "$file" ;;
             esac | tar tvf -
-	done
+        done
     }
 
     function ztx  {
-	typeset file
+        typeset file
 
-	for file in "$@"; do
-	    case "$file" in
-		*.bz2) bunzip2 -c < "$file" ;;
-		*.[Zz]) zcat "$file" ;;
+        for file in "$@"; do
+            case "$file" in
+                *.bz2) bunzip2 -c < "$file" ;;
+                *.[Zz]) zcat "$file" ;;
                 *) gunzip -c "$file" ;;
             esac | tar xf -
         done
