@@ -133,6 +133,14 @@ if [ -d /usr/local/heroku ]; then
 fi
 
 
+# MacPorts
+
+if [ -x /usr/local/bin/port ]; then
+    PATH=/opt/local/bin:/opt/local/sbin:$PATH
+    export PATH
+fi
+
+
 # OPAM
 
 if [ -d $HOME/.opam ]; then
