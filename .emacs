@@ -424,6 +424,8 @@
 
 ;;; org-mode
 
+(defvar org-agenda-files '("~/org/projects"))
+
 (require 'org)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -434,8 +436,8 @@
 ;;      '(("TODO"  . (:foreground "Yellow" :weight bold))))
 
 ;;; support for go: links
-(org-add-link-type "go" (lambda (url)
-                          (browse-url (concat "http://go/" url))))
+;;(org-add-link-type "go" (lambda (url)
+;;                          (browse-url (concat "http://go/" url))))
 
 
 (defvar org-journal-file "~/data/journal.org"
