@@ -135,7 +135,7 @@ fi
 
 # MacPorts
 
-if [ -x /usr/local/bin/port ]; then
+if [ -x /opt/local/bin/port ]; then
     PATH=/opt/local/bin:/opt/local/sbin:$PATH
     export PATH
 fi
