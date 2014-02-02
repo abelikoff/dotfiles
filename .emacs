@@ -13,7 +13,7 @@
                             (mapcar #'expand-file-name
                                     '("C:\\tools\\elisp"
                                       "C:\\tools\\elisp\\color-theme-6.6.0"
-                                      "C:\\tools\\elisp\\ess-12.09\\lisp"
+                                      "C:\\tools\\elisp\\ess\\lisp"
                                       "~/lib/elisp/elc"
                                       "~/lib/elisp"
                                       "~/lib/elisp/color-theme"
