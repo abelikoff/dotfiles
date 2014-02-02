@@ -14,11 +14,15 @@
                                     '("C:\\tools\\elisp"
                                       "C:\\tools\\elisp\\color-theme-6.6.0"
                                       "C:\\tools\\elisp\\ess\\lisp"
+                                      "/cygdrive/c/tools/elisp"
+                                      "/cygdrive/c/tools/elisp/color-theme-6.6.0"
+                                      "/cygdrive/c/tools/elisp/ess/lisp"
                                       "~/lib/elisp/elc"
                                       "~/lib/elisp"
                                       "~/lib/elisp/color-theme"
                                       "~/Documents/lib/elisp"
                                       "~/Documents/lib/elisp/color-theme"
+                                      "~/Documents/lib/elisp/ess"
                                       "/opt/local/emacs/"
                                       "/opt/go/misc/emacs"
                                       )))
@@ -346,6 +350,7 @@
 
 ;;; ESS
 
+(require 'ess-site)
 (add-hook 'ess-mode-hook
           (lambda ()
             (setq ess-continued-statement-offset 4)
@@ -355,7 +360,6 @@
 ;;; GO
 
 (load "go-mode-load" t t t)
-
 (add-hook 'go-mode-hook
           (lambda ()
             (add-hook 'before-save-hook 'gofmt-before-save nil t)))
