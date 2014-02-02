@@ -80,9 +80,11 @@
         (font . ,my-default-font)
         (foreground-color . ,my-default-fg-color)))
 
-(tool-bar-mode -1)
-(tool-bar-mode 0)
-(menu-bar-mode 0)
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode -1)
+      (tool-bar-mode 0)
+      (menu-bar-mode 0)))
 
 ;; (set-background-color "rgbi:.325/.91/.52")   ;; Harvey's colors
 
@@ -226,7 +228,8 @@
 ;;      (todo-face ((t (:background "RoyalBlue3" :foreground "Yellow")))))))
 
 ;;(color-theme-sasha)
-(load-theme 'zenburn)
+(require 'zenburn)
+(zenburn)
 
 (add-hook 'window-setup-hook '(lambda () (set-cursor-color "red")))
 (add-hook 'after-make-frame-functions
