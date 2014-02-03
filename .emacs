@@ -232,8 +232,7 @@
 ;;      (todo-face ((t (:background "RoyalBlue3" :foreground "Yellow")))))))
 
 ;;(color-theme-sasha)
-(require 'zenburn)
-(zenburn)
+(load-theme 'zenburn)
 
 (add-hook 'window-setup-hook '(lambda () (set-cursor-color "red")))
 (add-hook 'after-make-frame-functions
