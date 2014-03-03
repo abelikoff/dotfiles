@@ -18,9 +18,9 @@ syntax on
 "colorscheme sasha
 "colorscheme darkgraymild
 "colorscheme bluegreen
-"colorscheme sasha4
+colorscheme sasha4
 "colorscheme milkyway
-colorscheme zenburn
+"colorscheme zenburn
 
 if has("gui_running")
    set lines=50
