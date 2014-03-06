@@ -418,7 +418,8 @@
 ;;; linum
 
 (setq-default linum-format "%4d  ")
-(require 'linum)
+(if (not (load "linum-off.el" t t t))
+    (require 'linum))
 (global-linum-mode 1)
 
 
