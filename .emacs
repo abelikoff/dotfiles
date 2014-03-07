@@ -78,7 +78,7 @@
 (setq default-frame-alist
       `((width . 90)
         (height . ,my-default-height)
-        (menu-bar-lines . 0)
+        ;;(menu-bar-lines . 0)
         (tool-bar-lines . 0)
         (vertical-scroll-bars . nil)
         (font . ,my-default-font)
@@ -88,7 +88,8 @@
     (progn
       (tool-bar-mode -1)
       (tool-bar-mode 0)
-      (menu-bar-mode 0)))
+      ;;(menu-bar-mode 0)
+      ))
 
 ;; (set-background-color "rgbi:.325/.91/.52")   ;; Harvey's colors
 
