@@ -433,7 +433,11 @@
 ;;; org-mode
 
 (defvar org-agenda-files '("~/org/projects"))
-
+(defvar org-agenda-prefix-format '((agenda . "  %-25:c%?-12t% s")
+                                   (timeline . "  % s")
+                                   (todo . "  %-12:c")
+                                   (tags . "  %-12:c")
+                                   (search . "  %-12:c")))
 (require 'org)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
