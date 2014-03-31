@@ -148,6 +148,13 @@ if [ -d $HOME/.opam ]; then
 fi
 
 
+# R
+
+if [ -d $HOME/lib/R ]; then
+  export R_LIBS_USER=$HOME/lib/R
+fi
+
+
 # TeX
 
 if [[ $TEXINPUTS != */home/* ]]; then
