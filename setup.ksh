@@ -22,17 +22,6 @@ prog=${0##*/}
 version=1.0
 
 
-# figure out scratch directory
-
-if [[ -z $TMPDIR ]]; then
-    if [[ -d /usr/tmp ]]; then
-	export TMPDIR=/usr/tmp
-    else
-	export TMPDIR=/tmp
-    fi
-fi
-
-
 function install_file {
     file="$1"                   # subpath under $vc_dir
     tgt_dir="$2"                # where to install the link
@@ -42,26 +31,36 @@ function install_file {
     src_file=$vc_dir/$file
     fname=$(basename $file)
 
+    if [[ ! -d $tgt_dir ]]; then
+        $pfx mkdir -p $tgt_dir
+
+        if [[ -n $pfx ]]; then
+            $pfx cd $tgt_dir
+            $pfx ln -s $src_file .
+            return
+        fi
+    fi
+
     cd $tgt_dir || return
 
     if [[ -L $fname ]]; then
-	old_src_file="$(readlink $fname)"
+        old_src_file="$(readlink $fname)"
 
-	if [[ $src_file == $old_src_file ]]; then
-	    verbose "NOTICE: $file is already set up correctly - skipping."
-	    return
-	fi
+        if [[ $src_file == $old_src_file ]]; then
+            verbose "NOTICE: $file is already set up correctly - skipping."
+            return
+        fi
     fi
 
     if [[ -e $fname ]]; then
-	if diff -w $fname $src_file > /dev/null; then
-	    print -u2 "NOTICE: $file is same as target - not backing up"
+        if diff -w $fname $src_file > /dev/null; then
+            print -u2 "NOTICE: $file is same as target - not backing up"
             $pfx rm -f $fname
-	else
+        else
             $pfx mkdir -p $backup_dir
             print -u2 "NOTICE: $file will be saved to $BACKUP_DIR"
-	    $pfx mv $fname $backup_dir/
-	fi
+            $pfx mv $fname $backup_dir/
+        fi
     fi
 
     verbose "$fname -> $src_file"
@@ -121,27 +120,27 @@ dry_run=1
 
 while getopts ":fhVv" opt ; do
     case $opt in
-	f) unset dry_run
-	   ;;
+        f) unset dry_run
+           ;;
 
-	h) usage
-	   exit 0
-	   ;;
+        h) usage
+           exit 0
+           ;;
 
-	V) print "$prog $version"
-	   exit 0
-	   ;;
+        V) print "$prog $version"
+           exit 0
+           ;;
 
-	v) do_verbose=1
-	   ;;
+        v) do_verbose=1
+           ;;
 
-	:) fatal "option '-$OPTARG' requires an argument"
- 	   ;;
+        :) fatal "option '-$OPTARG' requires an argument"
+           ;;
 
-	\?) error "unknown option: '-$OPTARG'"
+        \?) error "unknown option: '-$OPTARG'"
             usage
-	    exit 1
-	    ;;
+            exit 1
+            ;;
     esac
 done
 
@@ -160,6 +159,7 @@ if [[ $VC_TOP == "." ]]; then
 fi
 
 cd ~ || exit 1
+VC_TOP=${VC_TOP##./}            # remove leading ./
 VC_TOP=${VC_TOP##$(pwd)/}       # change to relative path
 BACKUP_DIR=~/CONFIG_BACKUP.$(date +"%Y%m%d-%H%M%S")
 
