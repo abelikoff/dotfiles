@@ -38,20 +38,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-
-# set term to more colors
-
-if [ "$TERM" = "xterm" ]; then
-    if [ "$COLORTERM" = "gnome-terminal" ]; then
-        TERM="gnome-256color"
-    else
-        TERM="xterm-256color"
-    fi
-
-    export TERM
-fi
-
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
