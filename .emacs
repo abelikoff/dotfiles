@@ -452,32 +452,39 @@
 ;;                          (browse-url (concat "http://go/" url))))
 
 
-(defvar org-journal-file "~/data/journal.org"
+(defvar org-journal-file "~/org/journal.org"
   "Path to OrgMode journal file.")
 
 (defvar org-journal-date-format "%Y-%m-%d"
   "Date format string for journal headings.")
 
-(defun org-journal-entry ()
+(defvar org-journal-time-format "%H:%M"
+  "Time format string for journal headings.")
+
+(defun add-journal-entry (entry)
   "Create a new diary entry for today or append to an existing one."
-  (interactive)
-  (switch-to-buffer (find-file org-journal-file))
-  (widen)
-  (let ((today (format-time-string org-journal-date-format)))
-    (beginning-of-buffer)
-    ;;;(unless (org-goto-local-search-forward-headings today nil t)
-    (unless nil
-      ((lambda ()
-         (org-insert-heading)
-         (insert today)
-         (insert "\n\n  \n"))))
-    (beginning-of-buffer)
-    (org-show-entry)
-    (org-narrow-to-subtree)
-    (end-of-buffer)
-    (backward-char 2)
-    (unless (= (current-column) 2)
-      (insert "\n\n  "))))
+  (interactive "sEntry: ")
+  (save-excursion
+    (set-buffer (find-file-noselect org-journal-file))
+    (widen)
+    (let ((today (format-time-string org-journal-date-format))
+          (current-time (format-time-string org-journal-time-format)))
+      (beginning-of-buffer)
+      (cond ((search-forward-regexp (concat "^\\* +" today) nil t)
+             (org-show-subtree)
+             (org-narrow-to-subtree)
+             (end-of-buffer)
+             (org-insert-heading))
+            (t (org-insert-heading)
+               (insert today)
+               (org-narrow-to-subtree)
+               (end-of-buffer)
+               (org-insert-subheading "1")))
+      (insert current-time)
+      (insert (concat " " entry "\n"))
+      (save-buffer))))
+
+(global-set-key "\C-cj" 'add-journal-entry)
 
 
 ;;; parenthesis matching
