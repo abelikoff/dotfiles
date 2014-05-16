@@ -110,14 +110,16 @@
 
   (interactive)
   (color-theme-install
-   '(color-theme-sasha
-     ((background-color . "black")
+   `(color-theme-sasha
+     (,(if window-system
+           '(background-color . "black"))
       (background-mode . dark)
       (border-color . "black")
       (cursor-color . "OrangeRed")
       (foreground-color . "Gray")
       (mouse-color . "OrangeRed"))
-     (default ((t (:background "black" :foreground "Gray80"))))
+     ,(if window-system
+          '(default ((t (:background "black" :foreground "Gray80")))))
      (blue ((t (:foreground "blue"))))
      (bold ((t (:bold t))))
      (bold-italic ((t (:bold t))))
