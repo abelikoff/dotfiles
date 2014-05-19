@@ -110,14 +110,16 @@
 
   (interactive)
   (color-theme-install
-   '(color-theme-sasha
-     ((background-color . "black")
+   `(color-theme-sasha
+     (,(if window-system
+           '(background-color . "black"))
       (background-mode . dark)
       (border-color . "black")
       (cursor-color . "OrangeRed")
       (foreground-color . "Gray")
       (mouse-color . "OrangeRed"))
-     (default ((t (:background "black" :foreground "Gray80"))))
+     ,(if window-system
+          '(default ((t (:background "black" :foreground "Gray80")))))
      (blue ((t (:foreground "blue"))))
      (bold ((t (:bold t))))
      (bold-italic ((t (:bold t))))
@@ -452,32 +454,43 @@
 ;;                          (browse-url (concat "http://go/" url))))
 
 
-(defvar org-journal-file "~/data/journal.org"
+(defvar org-journal-file "~/org/journal.org"
   "Path to OrgMode journal file.")
 
 (defvar org-journal-date-format "%Y-%m-%d"
   "Date format string for journal headings.")
 
-(defun org-journal-entry ()
+(defvar org-journal-time-format "%H:%M"
+  "Time format string for journal headings.")
+
+(defun add-journal-entry (entry)
   "Create a new diary entry for today or append to an existing one."
-  (interactive)
-  (switch-to-buffer (find-file org-journal-file))
-  (widen)
-  (let ((today (format-time-string org-journal-date-format)))
-    (beginning-of-buffer)
-    ;;;(unless (org-goto-local-search-forward-headings today nil t)
-    (unless nil
-      ((lambda ()
-         (org-insert-heading)
-         (insert today)
-         (insert "\n\n  \n"))))
-    (beginning-of-buffer)
-    (org-show-entry)
-    (org-narrow-to-subtree)
-    (end-of-buffer)
-    (backward-char 2)
-    (unless (= (current-column) 2)
-      (insert "\n\n  "))))
+  (interactive "sEntry: ")
+    (let ((today (format-time-string org-journal-date-format))
+          (current-time (format-time-string org-journal-time-format)))
+      (save-excursion
+        (set-buffer (find-file-noselect org-journal-file))
+        (widen)
+        (beginning-of-buffer)
+        (unless (search-forward-regexp (concat "^\\* +" today) nil t)
+          (progn (org-insert-heading)
+                 (insert today)))
+        (org-show-subtree)
+        (org-narrow-to-subtree)
+        (end-of-buffer)
+        (org-insert-heading)
+        (condition-case nil          ; promotion fails when at the top
+            (progn (org-do-promote)
+                   (org-do-promote)
+                   (org-do-promote)
+                   (org-do-promote))
+          (error nil))
+        (org-do-demote)
+        (insert current-time)
+        (insert (concat " " entry "\n"))
+        (save-buffer))))
+
+(global-set-key "\C-cj" 'add-journal-entry)
 
 
 ;;; parenthesis matching
