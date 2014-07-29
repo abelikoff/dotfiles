@@ -19,10 +19,8 @@
                                       "/cygdrive/c/tools/elisp/ess/lisp"
                                       "~/lib/elisp/elc"
                                       "~/lib/elisp"
+                                      "~/lib/elisp/ess/lisp"
                                       "~/lib/elisp/color-theme"
-                                      "~/Documents/lib/elisp"
-                                      "~/Documents/lib/elisp/color-theme"
-                                      "~/Documents/lib/elisp/ess"
                                       "/opt/local/emacs/"
                                       "/opt/go/misc/emacs"
                                       )))
@@ -53,7 +51,8 @@
 (defconst my-default-font
   (cond (is-windows "Consolas-11")
         (is-work-desktop "Droid Sans Mono-12")
-        (is-macintosh "Droid Sans Mono-10")
+        (is-macintosh "Monaco-12")
+;;        (is-macintosh "Droid Sans Mono-10")
         (t "Droid Sans Mono-9")))
 
 ;;; Other good fonts:
