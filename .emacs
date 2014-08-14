@@ -308,7 +308,10 @@
 
 (if (load "column-marker.el" t t t)
     (add-hook 'find-file-hook
-              (lambda () (column-marker-1 80))))
+              (lambda ()
+                (if (and (stringp buffer-file-name)
+                         (not (string-match "\\.\\(borg\\|gcl\\)$" buffer-file-name)))
+                    (column-marker-1 80)))))
 
 
 ;;; CPerl mode
