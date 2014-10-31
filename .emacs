@@ -50,13 +50,14 @@
 
 (defconst my-default-font
   (cond (is-windows "Consolas-11")
-        (is-work-desktop "Droid Sans Mono-12")
+        (is-work-desktop "Consolas-11")
         (is-macintosh "Monaco-12")
 ;;        (is-macintosh "Droid Sans Mono-10")
         (t "Droid Sans Mono-9")))
 
 ;;; Other good fonts:
 ;;;
+;;;  "Droid Sans Mono-12"
 ;;;  "Monospace-9"
 ;;;  "Monaco-12"
 ;;;  "Liberation Mono-9"
@@ -233,7 +234,82 @@
      (zmacs-region ((t (:background "snow" :foreground "blue"))))
      (todo-face ((t (:background "RoyalBlue3" :foreground "Yellow")))))))
 
-(color-theme-sasha)
+
+(defun color-theme-intellij-obsidian ()
+  "IntelliJ Idea Obsidian"
+
+  (interactive)
+  (color-theme-install
+   `(color-theme-sasha
+     (,(if window-system
+           '(background-color . "#293134"))
+      (background-mode . dark)
+      (border-color . "black")
+      (cursor-color . "OrangeRed")
+      (foreground-color . "Gray")
+      (mouse-color . "OrangeRed"))
+     ,(if window-system
+          '(default ((t (:background "#293134" :foreground "Gray80")))))
+     (blue ((t (:foreground "blue"))))
+     (bold ((t (:bold t))))
+     (bold-italic ((t (:bold t))))
+     (border-glyph ((t (nil))))
+     (diff-added ((t (:background "#294436"))))
+     (diff-changed ((t (:foreground "#385570"))))
+     (diff-removed ((t (:foreground "#484A4A"))))
+     (font-lock-comment-face ((t (:foreground "#7D8C93"))))
+     (font-lock-comment-delimiter-face ((t (:foreground "#7D8C93"))))
+     (font-lock-constant-face ((t (:foreground "#FFCD22"))))
+     (font-lock-function-name-face ((t (:bold t :foreground "#E8E2B7"))))
+     (font-lock-keyword-face ((t (:foreground "#93C763"))))
+     (font-lock-string-face ((t (:foreground "#EC7600"))))
+     (font-lock-variable-name-face ((t (:foreground "#E0E2E4"))))
+     (lazy-highlight ((t (:background "#616161")))))))
+
+
+(defun color-theme-vs-dark ()
+  "Visual Studio 2013"
+
+  (interactive)
+  (color-theme-install
+   `(color-theme-vs-dark
+     (,(if window-system
+           '(background-color . "#262524"))
+      (background-mode . dark)
+      (border-color . "#262524")
+      (cursor-color . "OrangeRed")
+      (foreground-color . "#DCDCDC")
+      (mouse-color . "OrangeRed"))
+     ,(if window-system
+          '(default ((t (:background "#262524" :foreground "#DCDCDC")))))
+     (blue ((t (:foreground "blue"))))
+     (bold ((t (:bold t))))
+     (bold-italic ((t (:bold t))))
+     (border-glyph ((t (nil))))
+     (column-marker-1 ((t (:background "Red" :foreground "White"))))
+     (fixme-face ((t (:background "Red" :foreground "White"))))
+     (font-lock-builtin-face ((t (:foreground "#569CD6"))))
+     (font-lock-comment-face ((t (:foreground "#4AA657"))))
+     (font-lock-comment-delimiter-face ((t (:foreground "#4AA657"))))
+     (font-lock-constant-face ((t (:foreground "#5BDBEC"))))
+     (font-lock-function-name-face ((t (nil))))
+     (font-lock-keyword-face ((t (:foreground "#569CD6"))))
+     (font-lock-preprocessor-face ((t (:foreground "Magenta"))))
+     (font-lock-string-face ((t (:foreground "#FCD682"))))
+     (font-lock-type-face ((t (:foreground "#5BDBEC"))))
+     (font-lock-variable-name-face ((t (:foreground "#DCDCDC"))))
+     (font-lock-warning-face ((t (:bold t :background "#963A46" :foreground "White"))))
+     (link ((t (:foreground "#F7B34A"))))
+     (linum ((t (:foreground "#55D1FC"))))
+     (primary-selection ((t (:background "#FF9933" :foreground "#FFFFFF"))))
+     (region ((t (:background "#335C85"))))
+     (show-paren-match-face ((t (:background "#83450E")))))))
+
+
+
+;;(color-theme-sasha)
+;;(color-theme-intellij-obsidian)
+(color-theme-vs-dark)
 ;;(load-theme 'zenburn)
 
 (add-hook 'window-setup-hook '(lambda () (set-cursor-color "red")))
