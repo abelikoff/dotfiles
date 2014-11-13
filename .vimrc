@@ -14,13 +14,9 @@ autocmd Syntax c call EnhanceCppSyntax()
 autocmd Syntax java call EnhanceCppSyntax()
 
 
-syntax on
-"colorscheme sasha
-"colorscheme darkgraymild
-"colorscheme bluegreen
-colorscheme sasha4
-"colorscheme milkyway
-"colorscheme zenburn
+syntax enable
+set background=dark
+colorscheme solarized
 
 if has("gui_running")
    set lines=50

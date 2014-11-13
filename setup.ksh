@@ -5,6 +5,7 @@
 
 CONF_FILES=".bash_aliases
             .bashrc
+            .dircolors
             .emacs
             .gitconfig
             .inputrc
