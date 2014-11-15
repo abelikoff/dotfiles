@@ -11,10 +11,7 @@
 (setq load-path (append
                  (my-filter 'file-directory-p
                             (mapcar #'expand-file-name
-                                    '("C:\\tools\\elisp"
-                                      "C:\\tools\\elisp\\color-theme-6.6.0"
-                                      "C:\\tools\\elisp\\ess\\lisp"
-                                      "/cygdrive/c/tools/elisp"
+                                    '("/cygdrive/c/tools/elisp"
                                       "/cygdrive/c/tools/elisp/color-theme-6.6.0"
                                       "/cygdrive/c/tools/elisp/ess/lisp"
                                       "~/lib/elisp/elc"
@@ -47,6 +44,17 @@
 (defconst is-macintosh
   (if (string-match "apple-darwin" system-configuration) t nil)
   "Non-nil when running on a Mac.")
+
+
+(if is-windows
+    (setq load-path (append
+                     (my-filter 'file-directory-p
+                                (mapcar #'expand-file-name
+                                        '("C:\\tools\\elisp"
+                                          "C:\\tools\\elisp\\color-theme-6.6.0"
+                                          "C:\\tools\\elisp\\ess\\lisp")))
+                     load-path)))
+
 
 (defconst my-default-font
   (cond (is-windows "Consolas-11")
@@ -304,7 +312,6 @@
 ;;      (primary-selection ((t (:background "#FF9933" :foreground "#FFFFFF"))))
 ;;      (region ((t (:background "#335C85"))))
 ;;      (show-paren-match-face ((t (:background "#83450E")))))))
-
 
 
 (require 'color-theme-solarized)
