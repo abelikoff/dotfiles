@@ -120,9 +120,18 @@ fi
 
 # paths
 
+# JDK
+
+if [ -d /opt/jdk ]; then
+    PATH=$PATH:/opt/jdk/bin
+    JAVA_HOME=/opt/jdk
+    export PATH JAVA_HOME
+fi
+
+
 # Ruby
 
-if [ -d $HOME.rvm ]; then
+if [ -d $HOME/.rvm ]; then
     PATH=$PATH:$HOME/.rvm/bin
     export PATH
 fi
@@ -131,7 +140,7 @@ fi
 # Heroku
 
 if [ -d /usr/local/heroku ]; then
-    PATH=/usr/local/heroku/bin:$PATH
+    PATH=$PATH:/usr/local/heroku/bin
     export PATH
 fi
 

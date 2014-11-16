@@ -1,5 +1,8 @@
-" $Id$
+" VIM setup
 
+" Pathogen
+execute pathogen#infect()
+filetype plugin indent on
 
 " Add highlighting for function definition in C++
 function! EnhanceCppSyntax()
@@ -17,6 +20,13 @@ autocmd Syntax java call EnhanceCppSyntax()
 syntax enable
 set background=dark
 colorscheme solarized
+hi statusLine cterm=NONE ctermfg=12 ctermbg=0
+
+" change status line color in insert mode
+if version >= 700
+  au InsertLeave * highlight StatusLine cterm=NONE ctermfg=12 ctermbg=0
+  au InsertEnter * highlight StatusLine cterm=NONE ctermfg=black ctermbg=3
+endif
 
 if has("gui_running")
    set lines=50
@@ -76,15 +86,14 @@ if has("autocmd")
 
 endif
 
-"set statusline=%f\ %2*%m\ %1*%h%r%=[%{&encoding}\ %{&fileformat}\ %{strlen(&ft)?&ft:'none'}\ %{getfperm(@%)}]\ 0x%B\ %12.(%c:%l/%L%)
 
 set foldmethod=indent
 set foldlevel=99
 
-"filetype off
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
+" Vim-GO
+filetype plugin on
+set number
+let g:go_disable_autoinstall = 0
 
-map <silent><f3> :NEXTCOLOR<cr>
-map <silent><f2> :PREVCOLOR<cr>
-
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+set laststatus=2
