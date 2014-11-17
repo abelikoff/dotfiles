@@ -80,9 +80,13 @@ if has("autocmd")
 
   " When editing a file, always jump to the last cursor position
   autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal g'\"" |
   \ endif
+
+  " ..but not for VC commit message files
+  autocmd BufReadPost COMMIT_EDITMSG
+  \ exe "normal! gg"
 
 endif
 
