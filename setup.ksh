@@ -13,6 +13,7 @@ CONF_FILES=".bash_aliases
             .profile
             .pylintrc
             .screenrc
+            .tmux.conf
             .vim
             .vimrc
             .wgetrc
