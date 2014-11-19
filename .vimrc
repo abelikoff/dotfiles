@@ -24,17 +24,25 @@ hi statusLine cterm=NONE ctermfg=12 ctermbg=0
 
 " change status line color in insert mode
 if version >= 700
-  au InsertLeave * highlight StatusLine cterm=NONE ctermfg=12 ctermbg=0
-  au InsertEnter * highlight StatusLine cterm=NONE ctermfg=black ctermbg=3
+    au InsertLeave * highlight StatusLine cterm=NONE ctermfg=12 ctermbg=0
+    au InsertEnter * highlight StatusLine cterm=NONE ctermfg=black ctermbg=3
 endif
 
 if has("gui_running")
-   set lines=50
-   set columns=80
-   set guifont=Lucida_Console:h10
+    set lines=50
+    set columns=80
+    "set guifont=Consolas:11
 
-   set guioptions-=T  "remove toolbar
-   set guioptions-=m  "remove menu
+    if has("gui_gtk2")
+        set guifont=Inconsolata\ 10
+    elseif has("gui_macvim")
+        set guifont=Menlo\ Regular:h14
+    elseif has("gui_win32")
+        set guifont=Consolas:h11
+    endif
+
+    set guioptions-=T  "remove toolbar
+    set guioptions-=m  "remove menu
 endif
 
 " other setup
@@ -59,6 +67,8 @@ set expandtab
 set number
 map Q gq
 
+set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+
 
 " allow switching of paste mode
 nnoremap <F2> :set invpaste paste?<CR>
@@ -75,18 +85,18 @@ hi Tab guibg=blue ctermbg=blue
 
 if has("autocmd")
 
-  " In text files, always limit the width of text to 78 characters
-  autocmd BufRead *.txt set tw=78
+    " In text files, always limit the width of text to 78 characters
+    autocmd BufRead *.txt set tw=78
 
-  " When editing a file, always jump to the last cursor position
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g'\"" |
-  \ endif
+    " When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal g'\"" |
+                \ endif
 
-  " ..but not for VC commit message files
-  autocmd BufReadPost COMMIT_EDITMSG
-  \ exe "normal! gg"
+    " ..but not for VC commit message files
+    autocmd BufReadPost COMMIT_EDITMSG
+                \ exe "normal! gg"
 
 endif
 
