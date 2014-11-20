@@ -48,22 +48,20 @@ endif
 " other setup
 set nocompatible        " Use Vim defaults (much better!)
 set bs=2                " allow backspacing over everything in insert mode
-set ai                  " always set autoindenting on
 set ic                  " case-insensitive search
 set hlsearch            " highlite search results
 set scs                 " revert to case-sensitive search on mixed case
 set viminfo='20,\"50    " read/write a .viminfo file, don't store more
                         " than 50 lines of registers
-set history=50          " keep 50 lines of command line history
+set history=100         " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
 set textwidth=80
 
 " indentation setup
-set cindent
-set tabstop=4
+set expandtab
 set softtabstop=4
 set shiftwidth=4
-set expandtab
+set autoindent
 set number
 map Q gq
 
