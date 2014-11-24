@@ -18,10 +18,27 @@ CONF_FILES=".bash_aliases
             .vimrc
             .wgetrc
             .Xresources
-            latex/mathmacros.sty"
+            lib/latex/mathmacros.sty
+            lib/elisp/color-theme-solarized.el
+            lib/elisp/monokai-theme.el"
 
 prog=${0##*/}
 version=1.0
+
+
+function run_command {
+    if [[ -n $dry_run ]]; then
+        echo WILL RUN: $@
+
+    elif [[ -n $do_prompt ]]; then
+        echo -n "Run command [" $@ "]? (y/N) "
+        read response
+
+        if [[ $response == "y" || $response == "Y" ]]; then
+            $@
+        fi
+    fi
+}
 
 
 function install_file {
@@ -34,11 +51,11 @@ function install_file {
     fname=$(basename $file)
 
     if [[ ! -d $tgt_dir ]]; then
-        $pfx mkdir -p $tgt_dir
+        run_command mkdir -p $tgt_dir
 
-        if [[ -n $pfx ]]; then
-            $pfx cd $tgt_dir
-            $pfx ln -s $src_file .
+        if [[ -n run_command ]]; then
+            run_command cd $tgt_dir
+            run_command ln -s $src_file .
             return
         fi
     fi
@@ -57,16 +74,16 @@ function install_file {
     if [[ -e $fname ]]; then
         if diff -w $fname $src_file > /dev/null; then
             print -u2 "NOTICE: $file is same as target - not backing up"
-            $pfx rm -f $fname
+            run_command rm -f $fname
         else
-            $pfx mkdir -p $backup_dir
+            run_command mkdir -p $backup_dir
             print -u2 "NOTICE: $file will be saved to $BACKUP_DIR"
-            $pfx mv $fname $backup_dir/
+            run_command mv $fname $backup_dir/
         fi
     fi
 
     verbose "$fname -> $src_file"
-    $pfx ln -s $src_file .
+    run_command ln -s $src_file .
 }
 
 
@@ -80,6 +97,7 @@ $prog sets up configuration files
 $prog supports the following options:
 
     -f                        - perform changes (default: dry run)
+    -i                        - prompt interactively for each change
 
     -v                        - verbose operation
     -V                        - display program version
@@ -117,16 +135,20 @@ function warning {
 
 # parse options
 
-unset do_verbose
+unset do_verbose do_prompt
 dry_run=1
 
-while getopts ":fhVv" opt ; do
+while getopts ":fhiVv" opt ; do
     case $opt in
         f) unset dry_run
            ;;
 
         h) usage
            exit 0
+           ;;
+
+        i) do_prompt=1
+           unset dry_run
            ;;
 
         V) print "$prog $version"
@@ -148,12 +170,6 @@ done
 
 shift $((OPTIND-1))
 
-if [[ -n $dry_run ]]; then
-  pfx="echo WILL RUN: "
-else
-  unset pfx
-fi
-
 VC_TOP=$(dirname $0)
 
 if [[ $VC_TOP == "." ]]; then
@@ -166,9 +182,10 @@ VC_TOP=${VC_TOP##$(pwd)/}       # change to relative path
 BACKUP_DIR=~/CONFIG_BACKUP.$(date +"%Y%m%d-%H%M%S")
 
 for file in $CONF_FILES; do
-    if [[ $file == latex/* ]]; then
-        install_dir=$HOME/lib/latex
-        vc_dir=../../$VC_TOP
+    if [[ $file == */* ]]; then     # subdir
+        install_dir=$HOME/$(dirname $file)
+        path_back=$(echo $(dirname $file) | sed 's|[^/][^/]*|..|g')
+        vc_dir=${path_back}/${VC_TOP}
     else
         install_dir=$HOME
         vc_dir=$VC_TOP
