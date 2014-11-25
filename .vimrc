@@ -19,13 +19,18 @@ autocmd Syntax java call EnhanceCppSyntax()
 
 syntax enable
 set background=dark
-colorscheme solarized
-hi statusLine cterm=NONE ctermfg=12 ctermbg=0
 
-" change status line color in insert mode
-if version >= 700
-    au InsertLeave * highlight StatusLine cterm=NONE ctermfg=12 ctermbg=0
-    au InsertEnter * highlight StatusLine cterm=NONE ctermfg=black ctermbg=3
+if filereadable($HOME . "/.theme-monokai")
+    colorscheme molokai
+else
+    colorscheme solarized
+    hi statusLine cterm=NONE ctermfg=12 ctermbg=0
+
+    " change status line color in insert mode
+    if version >= 700
+        au InsertLeave * highlight StatusLine cterm=NONE ctermfg=12 ctermbg=0
+        au InsertEnter * highlight StatusLine cterm=NONE ctermfg=black ctermbg=3
+    endif
 endif
 
 if has("gui_running")
