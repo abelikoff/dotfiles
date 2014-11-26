@@ -104,6 +104,7 @@ fi
 typeset -l theme
 theme=$1
 
+
 # switch default gnome terminal theme
 
 profile=$(gconftool-2  --recursive-list  "/apps/gnome-terminal/profiles" | \
@@ -119,6 +120,14 @@ default_profile=$(gconftool-2 --get "/apps/gnome-terminal/global/default_profile
 
 if [[ $profile != $default_profile ]]; then
     gconftool-2 --set "/apps/gnome-terminal/global/default_profile" --type string $profile
+fi
+
+
+# Cygwin terminal
+
+if [[ $(uname) == CYGWIN_NT* ]]; then
+    rm -f ~/.minttyrc
+    ln -s dotfiles/.minttyrc.$theme ~/.minttyrc
 fi
 
 rm ~/.theme-*
