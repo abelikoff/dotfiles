@@ -37,6 +37,8 @@ function run_command {
         if [[ $response == "y" || $response == "Y" ]]; then
             $@
         fi
+    else
+        $@
     fi
 }
 
