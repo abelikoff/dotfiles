@@ -179,7 +179,16 @@ fi
 
 ignoreeof=0
 
-PS1="\[\e[0;33m\]$(hostname -s | cut -c 1-4)\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\]\$ "
+__user=$(whoami)
+
+if [[ $__user != abel* ]]; then
+    PS1="\[\e[0;31m\]${__user}@\[\e[0m\]"
+else
+    unset PS1
+fi
+
+unset __user
+PS1="${PS1}\[\e[0;33m\]$(hostname -s | cut -c 1-4)\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\]\$ "
 export PS1
 
 umask 022
