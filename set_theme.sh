@@ -107,19 +107,24 @@ theme=$1
 
 # switch default gnome terminal theme
 
-profile=$(gconftool-2  --recursive-list  "/apps/gnome-terminal/profiles" | \
-    awk '$1 ~ /^\// {sub(/.*\//, "", $1); sub(/:$/, "", $1); profile = $1; } 
-         $1 == "visible_name" && tolower($3) == theme {print profile}' theme=$theme)
+if which gconftool-2 > /dev/null; then
+    profile=$(gconftool-2 \
+        --recursive-list  "/apps/gnome-terminal/profiles" | \
+        awk '$1 ~ /^\// {sub(/.*\//, "", $1); sub(/:$/, "", $1); profile = $1; } 
+             $1 == "visible_name" && tolower($3) == theme {print profile}' theme=$theme)
 
-if [[ -z $profile ]]; then
-    error "No gnome terminal profile for theme $theme"
-    exit 1
-fi
+    if [[ -z $profile ]]; then
+        error "No gnome terminal profile for theme $theme"
+        exit 1
+    fi
 
-default_profile=$(gconftool-2 --get "/apps/gnome-terminal/global/default_profile")
+    default_profile=$(gconftool-2 \
+        --get "/apps/gnome-terminal/global/default_profile")
 
-if [[ $profile != $default_profile ]]; then
-    gconftool-2 --set "/apps/gnome-terminal/global/default_profile" --type string $profile
+    if [[ $profile != $default_profile ]]; then
+        gconftool-2 --set "/apps/gnome-terminal/global/default_profile" \
+            --type string $profile
+    fi
 fi
 
 
