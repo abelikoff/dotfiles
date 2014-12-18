@@ -101,6 +101,9 @@ if has("autocmd")
     autocmd BufReadPost COMMIT_EDITMSG
                 \ exe "normal! gg"
 
+    autocmd BufWritePre * 
+                \ :%s/\s\+$//e
+
 endif
 
 
