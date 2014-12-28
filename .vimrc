@@ -101,6 +101,9 @@ if has("autocmd")
     autocmd BufReadPost COMMIT_EDITMSG
                 \ exe "normal! gg"
 
+    autocmd BufWritePre * 
+                \ :%s/\s\+$//e
+
 endif
 
 
@@ -114,3 +117,10 @@ let g:go_disable_autoinstall = 0
 
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set laststatus=2
+
+" source local tweaks
+let s:local_script = $HOME . "/.vimrc.local"
+if filereadable(s:local_script)
+    execute 'source' s:local_script
+endif
+
