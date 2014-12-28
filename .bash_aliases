@@ -34,6 +34,11 @@ alias svn_setexec="svn propset svn:executable 1"
 alias svn_setkw="svn propset svn:keywords 'Id URL Revision Date'"
 alias tf='tail -f'
 
+function xurls {
+    sed -e 's|>|>\n|g' -e 's|href=|\nhref=|gi' | grep -i href | \
+        sed -e 's|^href=.||gi' -e 's|[\"'"'"'].*||' | grep -i http
+}
+
 
 # this is a hack for RPM building. /usr/sbin/Check (invoked by rpmbuild) is
 # an sh script but it sources the environment and fails on bash/ksh function
