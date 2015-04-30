@@ -749,7 +749,8 @@
 
 ;; Emacs server
 
-;(server-start))
+;;(if (display-graphic-p)
+;;  (server-start))
 
 
 (global-set-key [f3] 'shell-other-window)
@@ -873,6 +874,11 @@
 
 (if (file-exists-p "~/.diary")
     (diary))
+
+(cond ((getenv "START_AGENDA")
+       (org-agenda-list)
+       (switch-to-buffer "*Org Agenda*")
+       (delete-other-windows)))
 
 
 ;;; Local Variables:
