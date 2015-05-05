@@ -25,7 +25,7 @@ alias latr='ls -latr'
 alias ll='ls -l'
 function loc() { locate -i -0 "$1" | xargs --null ls -sd ; }
 alias lrpm='rpm -qvlp'
-alias m='less -i -f -M'
+alias m='less -i -r -M'
 alias mv='mv -i'
 alias po='popd'
 alias pu='pushd'
