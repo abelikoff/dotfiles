@@ -14,7 +14,6 @@
                                     '("/cygdrive/c/tools/elisp"
                                       "/cygdrive/c/tools/elisp/color-theme-6.6.0"
                                       "/cygdrive/c/tools/elisp/ess/lisp"
-                                      "~/lib/elisp/elc"
                                       "~/lib/elisp"
                                       "~/lib/elisp/ess/lisp"
                                       "~/lib/elisp/color-theme"
@@ -54,6 +53,13 @@
                                           "C:\\tools\\elisp\\color-theme-6.6.0"
                                           "C:\\tools\\elisp\\ess\\lisp")))
                      load-path)))
+
+
+;; required for tramp on Mac
+
+(if is-macintosh
+    (put 'temporary-file-directory 'standard-value
+         '((file-name-as-directory "/tmp"))))
 
 
 (defconst my-default-font
@@ -863,6 +869,13 @@
   (interactive "")
   (let ((voctest-test-direction '(1 . 0)))
     (voctest)))
+
+
+(defun open-in-browser()
+  "Open current buffer in browser."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (browse-url (concat "file://" filename))))
 
 
 ;; startup
