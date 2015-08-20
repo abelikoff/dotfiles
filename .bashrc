@@ -22,11 +22,12 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 # eternal history
-export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S  "
+export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S "
 
 if [[ -z $PROMPT_COMMAND ]]; then
-  PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo $USER $PWD \
-                               "$(history 1)" >> ~/.bash_eternal_history'
+  #PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo $USER $PWD \
+  #                             "$(history 1)" >> ~/.bash_eternal_history'
+  PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo "$(hostname -s) $PWD $(history 1)" >> ~/.bash_eternal_history'
 fi
 
 
