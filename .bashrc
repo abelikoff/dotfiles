@@ -171,6 +171,8 @@ if [ -d $HOME/lib/R ]; then
   export R_LIBS_USER=$HOME/lib/R
 fi
 
+export R_HISTSIZE=5000
+
 
 # TeX
 

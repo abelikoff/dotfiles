@@ -12,6 +12,7 @@ CONF_FILES=".bash_aliases
             .ocamlinit
             .profile
             .pylintrc
+            .Rprofile
             .screenrc
             .tmux.conf
             .vim
