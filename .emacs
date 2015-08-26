@@ -377,7 +377,7 @@
         (insert (concat " " entry "\n"))
         (save-buffer))))
 
-(global-set-key "\C-cj" 'add-journal-entry)
+;;(global-set-key "\C-cj" 'add-journal-entry)
 
 
 ;;; parenthesis matching
