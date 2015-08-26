@@ -121,6 +121,13 @@ fi
 
 # paths
 
+# Anaconda
+
+if [ -d $HOME/anaconda/bin ]; then
+    PATH=$HOME/anaconda/bin:$PATH
+    export PATH
+fi
+
 # JDK
 
 if [ -d /opt/jdk ]; then
@@ -129,7 +136,6 @@ if [ -d /opt/jdk ]; then
     export PATH JAVA_HOME
 fi
 
-
 # Ruby
 
 if [ -d $HOME/.rvm ]; then
@@ -137,14 +143,12 @@ if [ -d $HOME/.rvm ]; then
     export PATH
 fi
 
-
 # Heroku
 
 if [ -d /usr/local/heroku ]; then
     PATH=$PATH:/usr/local/heroku/bin
     export PATH
 fi
-
 
 # MacPorts
 
