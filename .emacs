@@ -65,7 +65,8 @@
 (defconst my-default-font
   (cond (is-windows "Consolas-11")
         (is-work-desktop "Consolas-11")
-        (is-macintosh "Monaco-12")
+        ;(is-macintosh "Monaco-12")
+        (is-macintosh "Hack-12")
 ;;        (is-macintosh "Droid Sans Mono-10")
         (t "Droid Sans Mono-9")))
 
