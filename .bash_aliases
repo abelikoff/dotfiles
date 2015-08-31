@@ -29,6 +29,7 @@ alias m='less -i -r -M'
 alias mv='mv -i'
 alias po='popd'
 alias pu='pushd'
+alias R='R --no-save -q'
 alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
 alias svn_setexec="svn propset svn:executable 1"
 alias svn_setkw="svn propset svn:keywords 'Id URL Revision Date'"
