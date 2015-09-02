@@ -1,5 +1,8 @@
 ;; emacs configuration
 
+(require 'cl)
+
+
 ;;; paths
 
 (defun my-filter (condp lst)
