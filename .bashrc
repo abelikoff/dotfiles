@@ -128,6 +128,13 @@ if [ -d $HOME/anaconda/bin ]; then
     export PATH
 fi
 
+# Google cloud SDK
+
+if [ -d $HOME/devel/google-cloud-sdk ]; then
+    source '/Users/abelikoff/devel/google-cloud-sdk/path.bash.inc'
+    source '/Users/abelikoff/devel/google-cloud-sdk/completion.bash.inc'
+fi
+
 # JDK
 
 if [ -d /opt/jdk ]; then
