@@ -98,7 +98,7 @@
 
 
 (defconst my-default-height
-  (cond (is-macintosh 45)
+  (cond (is-macintosh 42)
         (is-work-desktop 70)
         (t 50)))
 
