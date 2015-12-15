@@ -74,7 +74,7 @@ if [[ $PWD != */rpmbuild/* ]]; then
               awk '{ $1 = $3 = $4 = $5 = ""; sub(home, "~", $2); $2 = "[" $2 "]"; print}' home=$HOME | \
               sed 's/^ *//' | uniq
         else
-            cut -d ' ' -f 9- $eh_file | egrep "$1" | sed 's/^ *//' | uniq
+            cut -d ' ' -f 8- $eh_file | egrep "$1" | sed 's/^ *//' | uniq
         fi
     }
 
