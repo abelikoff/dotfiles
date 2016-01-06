@@ -345,6 +345,9 @@
                                    (search . "  %-25:c")))
 (defvar org-agenda-start-on-weekday nil)
 (require 'org)
+(set-face-foreground 'org-scheduled-previously "OrangeRed")
+(set-face-foreground 'org-scheduled-today "Green")
+(set-face-foreground 'org-scheduled "Gray")
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 ;;(global-set-key "\C-cl" 'org-store-link)
