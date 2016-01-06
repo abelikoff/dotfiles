@@ -343,6 +343,7 @@
                                    (todo . "  %-25:c")
                                    (tags . "  %-25:c")
                                    (search . "  %-25:c")))
+(defvar org-agenda-start-on-weekday nil)
 (require 'org)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -767,6 +768,18 @@
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
+
+
+;; web mode
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 
 ;; Emacs server
