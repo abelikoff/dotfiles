@@ -12,3 +12,5 @@
 	email = abelikoff@gmail.com
 [github]
 	user = abelikoff
+[push]
+	default = simple
