@@ -157,10 +157,10 @@ if [ -d /usr/local/heroku ]; then
     export PATH
 fi
 
-# MacPorts
+# Homebrew
 
-if [ -x /opt/local/bin/port ]; then
-    PATH=/opt/local/bin:/opt/local/sbin:$PATH
+if [ -d $HOME/devel/homebrew ]; then
+    PATH=$HOME/devel/homebrew/bin:$PATH
     export PATH
 fi
 
