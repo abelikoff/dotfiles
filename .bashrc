@@ -11,24 +11,29 @@
 
 # history control
 
-# don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+shopt -s cmdhist
+HISTCONTROL=ignoreboth
+HISTSIZE=1000000000
+HISTFILESIZE=1000000000
+HISTIGNORE='ls:bg:fg:history:exit'
 
 # eternal history
-export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S "
+#export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S "
 
-if [[ -z $PROMPT_COMMAND ]]; then
-  #PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo $USER $PWD \
-  #                             "$(history 1)" >> ~/.bash_eternal_history'
-  PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo "$(hostname -s) $PWD $(history 1)" >> ~/.bash_eternal_history'
-fi
+#if [[ -z $zPROMPT_COMMAND ]]; then
+    #PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo $USER $PWD \
+    #                             "$(history 1)" >> ~/.bash_eternal_history'
+    #PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo "$(hostname -s) $PWD $(history 1)" >> ~/.bash_eternal_history'
+#fi
+
+HISTTIMEFORMAT='%F %T '
+PROMPT_COMMAND='history -a'
+
+
+# cd helpers
+
+shopt -s cdspell
 
 
 # check the window size after each command and, if necessary,
