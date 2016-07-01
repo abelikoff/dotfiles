@@ -2,7 +2,6 @@
 
 (require 'cl)
 
-
 ;;; paths
 
 (defun my-filter (condp lst)
@@ -18,8 +17,6 @@
                                       "/cygdrive/c/tools/elisp/color-theme-6.6.0"
                                       "/cygdrive/c/tools/elisp/ess/lisp"
                                       "~/lib/elisp"
-                                      "~/lib/elisp/ess/lisp"
-                                      "~/lib/elisp/color-theme"
                                       "/opt/local/emacs/"
                                       "/opt/go/misc/emacs"
                                       )))
@@ -27,7 +24,23 @@
 
 
 
-;;; general packages
+;;; load packages
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+(let ((packages '(scala-mode ess color-theme))
+      (refreshed nil))
+  (mapc (lambda (pkg)
+          (unless (package-installed-p pkg)
+            (unless refreshed
+              (package-refresh-contents)
+              (setq refreshed t))
+            (package-install pkg)))
+        packages))
+
 
 ;;(load "crypt++" t t t)
 
@@ -435,7 +448,8 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (set-variable 'py-indent-offset 4)
-            (set-variable 'indent-tabs-mode nil)))
+            (set-variable 'indent-tabs-mode nil)
+            (python-indent-guess-indent-offset)))
 ;;;            (define-key py-mode-map (kbd "RET") 'newline-and-indent)))
 
 
