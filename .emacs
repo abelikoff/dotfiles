@@ -34,7 +34,13 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-(let ((packages '(scala-mode ess color-theme web-mode))
+(let ((packages '(scala-mode
+                  ess
+                  color-theme
+                  web-mode
+                  zenburn-theme
+                  monokai-theme
+                  solarized-theme))
       (refreshed nil))
   (dolist (pkg packages)
     (unless (package-installed-p pkg)

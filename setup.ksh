@@ -19,9 +19,7 @@ CONF_FILES=".bash_aliases
             .vimrc
             .wgetrc
             .Xresources
-            lib/latex/mathmacros.sty
-            lib/elisp/color-theme-solarized.el
-            lib/elisp/monokai-theme.el"
+            lib/latex/mathmacros.sty"
 
 prog=${0##*/}
 version=1.0
