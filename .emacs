@@ -28,18 +28,20 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "https://stable.melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-(let ((packages '(scala-mode ess color-theme))
+(let ((packages '(scala-mode ess color-theme web-mode))
       (refreshed nil))
-  (mapc (lambda (pkg)
-          (unless (package-installed-p pkg)
-            (unless refreshed
-              (package-refresh-contents)
-              (setq refreshed t))
-            (package-install pkg)))
-        packages))
+  (dolist (pkg packages)
+    (unless (package-installed-p pkg)
+      (unless refreshed
+        (package-refresh-contents)
+        (setq refreshed t))
+      (package-install pkg))))
 
 
 ;;(load "crypt++" t t t)
