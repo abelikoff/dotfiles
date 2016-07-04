@@ -2,6 +2,22 @@
 
 (require 'cl)
 
+
+;;; figure out what system we are on
+
+(defconst is-work-desktop
+  (string-match "^sho.*e.com" system-name)
+  "Non-nil when running on work desktop.")
+
+(defconst is-windows
+  (if (string-match "mingw" system-configuration) t nil)
+  "Non-nil when running on Windows.")
+
+(defconst is-macintosh
+  (if (string-match "apple-darwin" system-configuration) t nil)
+  "Non-nil when running on a Mac.")
+
+
 ;;; paths
 
 (defun my-filter (condp lst)
@@ -13,10 +29,7 @@
 (setq load-path (append
                  (my-filter 'file-directory-p
                             (mapcar #'expand-file-name
-                                    '("/cygdrive/c/tools/elisp"
-                                      "/cygdrive/c/tools/elisp/color-theme-6.6.0"
-                                      "/cygdrive/c/tools/elisp/ess/lisp"
-                                      "~/lib/elisp"
+                                    '("~/lib/elisp"
                                       "/opt/local/emacs/"
                                       "/opt/go/misc/emacs"
                                       )))
@@ -28,19 +41,22 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://stable.melpa.org/packages/"))
+             (if is-windows
+                 ;; Emacs on Windows lacks TLS
+                 '("melpa" . "http://melpa.org/packages/")
+               '("melpa" . "https://melpa.org/packages/")))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-(let ((packages '(scala-mode
+(let ((packages '(color-theme
                   ess
-                  color-theme
-                  web-mode
-                  zenburn-theme
                   monokai-theme
-                  solarized-theme))
+                  scala-mode
+                  solarized-theme
+                  web-mode
+                  zenburn-theme))
       (refreshed nil))
   (dolist (pkg packages)
     (unless (package-installed-p pkg)
@@ -55,30 +71,6 @@
 
 ;;; X11 setup
 
-(defconst is-work-desktop
-;;;  (and (equal (string-match "sho" system-name) 0)
-  (string-match "^sho.*e.com" system-name)
-  "Non-nil when running on work desktop.")
-
-(defconst is-windows
-  (if (string-match "mingw-nt" system-configuration) t nil)
-  "Non-nil when running on Windows.")
-
-(defconst is-macintosh
-  (if (string-match "apple-darwin" system-configuration) t nil)
-  "Non-nil when running on a Mac.")
-
-
-(if is-windows
-    (setq load-path (append
-                     (my-filter 'file-directory-p
-                                (mapcar #'expand-file-name
-                                        '("C:\\tools\\elisp"
-                                          "C:\\tools\\elisp\\color-theme-6.6.0"
-                                          "C:\\tools\\elisp\\ess\\lisp")))
-                     load-path)))
-
-
 ;; required for tramp on Mac
 
 (if is-macintosh
@@ -87,12 +79,11 @@
 
 
 (defconst my-default-font
-  (cond (is-windows "Hack-11")
+  (cond (is-windows "Hack-9")
         ;;(is-windows "Consolas-11")
         (is-work-desktop "Consolas-11")
         (is-macintosh "Hack-12")
         (t "Droid Sans Mono-9")))
-
 
 (lexical-let ((current-index 0))
   (defun switch-font ()
@@ -103,7 +94,7 @@
            '(
              "DejaVu Sans Mono-10"
              "Droid Sans Mono-12"
-             "Hack-12"
+             "Hack-9"
              "Liberation Mono-9"
              "Monaco-12"
              "Monospace-9"
@@ -116,7 +107,6 @@
         (let ((font (nth current-index font-list)))
           (set-frame-font font)
           (message (concat "Font switched to " font)))))))
-
 
 (defconst my-default-height
   (cond (is-macintosh 42)
@@ -924,7 +914,6 @@
   (interactive "")
   (let ((voctest-test-direction '(1 . 0)))
     (voctest)))
-
 
 (defun open-in-browser()
   "Open current buffer in browser."
