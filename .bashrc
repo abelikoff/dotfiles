@@ -215,10 +215,8 @@ umask 022
 
 # useful settings
 
-GREP_COLOR="43;30"
-GREP_OPTIONS="--color=auto"
+export GREP_COLOR="43;30"
 export EDITOR="vim"
-export GREP_COLOR GREP_OPTIONS
 
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local

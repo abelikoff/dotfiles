@@ -19,6 +19,7 @@ alias cp='cp -i'
 alias e=emacs
 alias em='emacs -nw'
 alias ev='env | grep $@'
+alias grep='grep --color=auto'
 alias hn=hostname
 alias la='ls -a'
 alias latr='ls -latr'
