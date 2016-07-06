@@ -1,9 +1,7 @@
-;; emacs configuration
-
-(require 'cl)
-
+;;; emacs configuration
 
 ;;; figure out what system we are on
+;;; (need it for window sizing and font selection)
 
 (defconst is-work-desktop
   (string-match "^sho.*e.com" system-name)
@@ -51,7 +49,9 @@
 (package-initialize)
 
 (let ((packages '(color-theme
+                  column-marker
                   ess
+                  js2-mode
                   monokai-theme
                   scala-mode
                   solarized-theme
@@ -84,6 +84,8 @@
         (is-work-desktop "Consolas-11")
         (is-macintosh "Hack-12")
         (t "Droid Sans Mono-9")))
+
+(require 'cl)                           ; required for lexical-let
 
 (lexical-let ((current-index 0))
   (defun switch-font ()
@@ -218,34 +220,14 @@
 
 ;;; column marker
 
-(if (load "column-marker.el" t t t)
-    (add-hook 'find-file-hook
-              (lambda ()
-                (if (and (stringp buffer-file-name)
-                         (not (string-match "\\.\\(borg\\|gcl\\)$" buffer-file-name)))
-                    (column-marker-1 80)))))
-
-
-;;; CPerl mode
-
-(mapc
- (lambda (pair)
-   (if (eq (cdr pair) 'perl-mode)
-       (setcdr pair 'cperl-mode)))
- (append auto-mode-alist interpreter-mode-alist))
-
-(add-hook 'cperl-mode-hook
+(require 'column-marker)
+(set-face-background 'column-marker-1 "magenta")
+(set-face-foreground 'column-marker-1 "white")
+(add-hook 'find-file-hook
           (lambda ()
-            (local-set-key [f1] 'cperl-perldoc-at-point)
-            (font-lock-add-keywords
-             nil
-             '(("\\<\\(FIXME:.*\\)" 1 font-lock-warning-face t)))))
-
-
-(setq cperl-indent-level 4)
-(setq cperl-continued-statement-offset 4)
-(setq cperl-brace-offset 0)
-(setq cperl-label-offset -4)
+            (if (and (stringp buffer-file-name)
+                     (not (string-match "\\.\\(borg\\|gcl\\)$" buffer-file-name)))
+                (column-marker-1 80))))
 
 
 ;;; Diary/Appt
@@ -314,12 +296,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-
-
-(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . javascript-mode))
-
-;;(require 'js-comint)
 (setq inferior-js-program-command "node --interactive")
 (add-hook 'js2-mode-hook '(lambda ()
                             (local-set-key "\C-x\C-e" 'js-send-last-sexp)
