@@ -81,7 +81,7 @@
 (defconst my-default-font
   (cond (is-windows "Hack-9")
         ;;(is-windows "Consolas-11")
-        (is-work-desktop "Consolas-11")
+        (is-work-desktop "DejaVu Sans Mono-10")
         (is-macintosh "Hack-12")
         (t "Droid Sans Mono-9")))
 
@@ -93,15 +93,14 @@
 
     (interactive "")
     (let ((font-list
-           '(
+           '("Consolas-10"
              "DejaVu Sans Mono-10"
-             "Droid Sans Mono-12"
-             "Hack-9"
-             "Liberation Mono-9"
-             "Monaco-12"
-             "Monospace-9"
+             "Droid Sans Mono-10"
+             "Hack-10"
+             "Liberation Mono-10"
+             "Monaco-10"
+             "Monospace-10"
              "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1"
-             "-outline-Consolas-normal-r-normal-normal-12-97-96-96-c-*-iso8859-1"
              "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*"
              )))
       (progn
