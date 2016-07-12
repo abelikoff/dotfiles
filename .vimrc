@@ -3,12 +3,18 @@
 set nocompatible        " Use Vim defaults
 filetype off
 
-" Vundle plugins
+" Vundle setup
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" " let Vundle manage Vundle, required
+"call vundle#rc()
+call vundle#end()
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'sickill/vim-monokai'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'roosta/srcery'
+Plugin 'scwood/vim-hybrid'
 
 
 " Add highlighting for function definition in C++
@@ -28,7 +34,7 @@ syntax enable
 set background=dark
 
 if filereadable($HOME . "/.theme-monokai")
-    colorscheme molokai
+    colorscheme hybrid
 else
     colorscheme solarized
     hi statusLine cterm=NONE ctermfg=12 ctermbg=0
