@@ -11,10 +11,7 @@ call vundle#end()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'sickill/vim-monokai'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'roosta/srcery'
-Plugin 'scwood/vim-hybrid'
+Plugin 'flazz/vim-colorschemes'
 
 
 " Add highlighting for function definition in C++
