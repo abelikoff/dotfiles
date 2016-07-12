@@ -1,8 +1,15 @@
 " VIM setup
 
-" Pathogen
-execute pathogen#infect()
-filetype plugin indent on
+set nocompatible        " Use Vim defaults
+filetype off
+
+" Vundle plugins
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" " let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+
 
 " Add highlighting for function definition in C++
 function! EnhanceCppSyntax()
@@ -51,7 +58,6 @@ if has("gui_running")
 endif
 
 " other setup
-set nocompatible        " Use Vim defaults (much better!)
 set bs=2                " allow backspacing over everything in insert mode
 set ic                  " case-insensitive search
 set hlsearch            " highlite search results
@@ -101,7 +107,7 @@ if has("autocmd")
     autocmd BufReadPost COMMIT_EDITMSG
                 \ exe "normal! gg"
 
-    autocmd BufWritePre * 
+    autocmd BufWritePre *
                 \ :%s/\s\+$//e
 
 endif
@@ -109,6 +115,12 @@ endif
 
 set foldmethod=indent
 set foldlevel=99
+
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
 
 " Vim-GO
 filetype plugin on
