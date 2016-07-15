@@ -80,34 +80,98 @@
 
 (defconst my-default-font
   (cond (is-windows "Hack-9")
-        ;;(is-windows "Consolas-11")
-        (is-work-desktop "DejaVu Sans Mono-10")
+        (is-work-desktop "Hack-10")
         (is-macintosh "Hack-12")
         (t "Droid Sans Mono-9")))
 
 (require 'cl)                           ; required for lexical-let
 
-(lexical-let ((current-index 0))
+
+(lexical-let ((current-index 0)
+              (has-one-font-available nil))
   (defun switch-font ()
     "Rotate between reasonable fonts."
 
     (interactive "")
-    (let ((font-list
-           '("Consolas-10"
-             "DejaVu Sans Mono-10"
-             "Droid Sans Mono-10"
-             "Hack-10"
-             "Liberation Mono-10"
-             "Monaco-10"
-             "Monospace-10"
-             "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1"
-             "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*"
-             )))
+    (letrec ((font-list '("3270"
+                          "Anka/Coder"
+                          "Anonymous Pro"
+                          "Aurulent Sans Mono"
+                          "Average Mono"
+                          "BPmono"
+                          "Bitstream Vera Sans Mono"
+                          "CamingoCode"
+                          "Code New Roman"
+                          "Consolamono"
+                          "Consolas"
+                          "Cousine"
+                          "Cutive Mono"
+                          "DejaVu Mono"
+                          "DejaVu Sans Mono"
+                          "Droid Sans Mono"
+                          "Droid Sans Mono"
+                          "Effects Eighty"
+                          "Fantasque Sans Mono"
+                          "Fifteen"
+                          "Fira Code"
+                          "Fira Mono"
+                          "Fixedsys with Ligatures"
+                          "Fixedsys"
+                          "GNU Freefont"
+                          "GNU Unifont"
+                          "Generic Mono"
+                          "Hack"
+                          "Hasklig"
+                          "Hermit"
+                          "Inconsolata"
+                          "Inconsolata-g"
+                          "Input"
+                          "Iosevka"
+                          "Latin Modern Mono"
+                          "Lekton"
+                          "Liberation Mono"
+                          "Liberation Mono"
+                          "Luculent"
+                          "Luxi Mono"
+                          "M+"
+                          "Meslo"
+                          "Monaco"
+                          "Monofur"
+                          "Monoid"
+                          "Mononoki"
+                          "Monospace"
+                          "NotCourierSans"
+                          "Nova Mono"
+                          "Office Code Pro"
+                          "Oxygen Mono"
+                          "PT Mono"
+                          "Profont"
+                          "Proggy Clean"
+                          "Quinze"
+                          "Roboto Mono"
+                          "SK Modernist Mono"
+                          "Share Tech Mono"
+                          "Source Code Pro"
+                          "Sudo"
+                          "TeX Gyre Cursor"
+                          "Ubuntu Mono"
+                          "VT323"
+                          "Verily Serif Mono"
+                          "saxMono"
+                          "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1"
+                          "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*"
+                          ))
+             (valid-fonts (find-if (lambda (f) (find-font (font-spec :name f)))
+                                   font-list)))
       (progn
-        (setq current-index (mod (1+ current-index) (length font-list)))
-        (let ((font (nth current-index font-list)))
+        (message (format "%s" valid-fonts))
+        (setq current-index (mod (1+ current-index) (length valid-fonts)))
+        (letrec ((font (concat (nth current-index valid-fonts) "-10"))
+                 (font-full-name (concat font "-10"))
+                 (all-fonts (font-family-list)))
           (set-frame-font font)
           (message (concat "Font switched to " font)))))))
+
 
 (defconst my-default-height
   (cond (is-macintosh 42)
