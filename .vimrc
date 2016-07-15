@@ -71,6 +71,12 @@ set history=100         " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
 set textwidth=80
 
+" disable bleeping
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+    autocmd GUIEnter * set visualbell t_vb=
+endif
+
 " indentation setup
 set expandtab
 set softtabstop=4
