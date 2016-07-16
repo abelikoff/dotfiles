@@ -4,7 +4,12 @@ set nocompatible        " Use Vim defaults
 filetype off
 
 " Vundle setup
-set rtp+=~/.vim/bundle/Vundle.vim
+if has("gui_win32")
+    set rtp+=~/vimfiles/bundle/Vundle.vim
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+endif
+
 call vundle#begin()
 "call vundle#rc()
 call vundle#end()
@@ -53,7 +58,8 @@ if has("gui_running")
     elseif has("gui_macvim")
         set guifont=Menlo\ Regular:h14
     elseif has("gui_win32")
-        set guifont=Consolas:h11
+        set lines=50
+        set guifont=Consolas:h10
     endif
 
     set guioptions-=T  "remove toolbar
@@ -85,7 +91,9 @@ set autoindent
 set number
 map Q gq
 
-set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+scriptencoding utf-8
+set encoding=utf-8
+set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
 
 
 " allow switching of paste mode
