@@ -86,11 +86,14 @@
 
 (require 'cl)                           ; required for lexical-let
 
-
-(lexical-let ((current-index 0)
-              (has-one-font-available nil))
+(lexical-let ((current-index 0))
   (defun switch-font ()
-    "Rotate between reasonable fonts."
+    "Rotate between programming-friendly fonts.
+
+This function attempts to identify most of programming-friendly (mostly
+monospace) fonts in the system. Each subsequent run of it switches the current
+frame to the next available font allowing quick assessment of different fonts.
+"
 
     (interactive "")
     (letrec ((font-list '("3270"
@@ -161,14 +164,11 @@
                           "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1"
                           "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*"
                           ))
-             (valid-fonts (find-if (lambda (f) (find-font (font-spec :name f)))
-                                   font-list)))
+             (valid-fonts (cl-intersection font-list (font-family-list)
+                                           :test 'string=)))
       (progn
-        (message (format "%s" valid-fonts))
         (setq current-index (mod (1+ current-index) (length valid-fonts)))
-        (letrec ((font (concat (nth current-index valid-fonts) "-10"))
-                 (font-full-name (concat font "-10"))
-                 (all-fonts (font-family-list)))
+        (let ((font (nth current-index valid-fonts)))
           (set-frame-font font)
           (message (concat "Font switched to " font)))))))
 
