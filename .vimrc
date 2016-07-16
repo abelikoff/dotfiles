@@ -4,14 +4,18 @@ set nocompatible        " Use Vim defaults
 filetype off
 
 " Vundle setup
-if has("gui_win32")
+if has('win32') || has('win64')
     set rtp+=~/vimfiles/bundle/Vundle.vim
 else
     set rtp+=~/.vim/bundle/Vundle.vim
 endif
 
 call vundle#begin()
-"call vundle#rc()
+
+if has('win32') || has('win64')
+    call vundle#rc('$HOME/vimfiles/bundle/')
+endif
+
 call vundle#end()
 
 Plugin 'VundleVim/Vundle.vim'
