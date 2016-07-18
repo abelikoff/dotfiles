@@ -230,8 +230,10 @@ frame to the next available font allowing quick assessment of different fonts.
 (let ((dir (expand-file-name (if is-windows
                                  (concat (getenv "TEMP") "/emacs-backup/")
                                "~/tmp/emacs-backup/"))))
-  (if (file-exists-p dir)
-      (setq backup-directory-alist `((".*" . ,dir)))))
+  (progn
+    (unless (file-exists-p dir)
+      (make-directory dir t))
+    (setq backup-directory-alist `((".*" . ,dir)))))
 
 (setq-default inhibit-startup-message t
               initial-scratch-message nil
