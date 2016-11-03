@@ -4,9 +4,9 @@ let () =
   with Not_found -> ()
 ;;
 
-#use "topfind"
+(* use "topfind"
 #camlp4o
 #thread
 #require "core.top"
-#require "core.syntax"
+#require "core.syntax"*)
 
