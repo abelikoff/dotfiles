@@ -55,6 +55,7 @@
                   monokai-theme
                   scala-mode
                   solarized-theme
+                  tuareg
                   web-mode
                   zenburn-theme))
       (refreshed nil))
@@ -533,6 +534,16 @@ frame to the next available font allowing quick assessment of different fonts.
 (setq octave-comment-char ?%)
 
 
+;;; Ocaml
+
+(cond ((file-exists-p (expand-file-name "~/.opam"))
+       (setq opam-share (substring (shell-command-to-string
+                                    "opam config var share 2> /dev/null") 0 -1))
+       (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
+       (require 'ocp-indent)
+       (require 'merlin)))
+
+
 ;;; PHP mode
 
 (autoload 'php-mode "php-mode" "PHP Mode" t)
@@ -977,7 +988,7 @@ frame to the next available font allowing quick assessment of different fonts.
        (switch-to-buffer "*Org Agenda*")
        (delete-other-windows)))
 
-
 ;;; Local Variables:
 ;;;   mode: outline-minor
 ;;; End:
+
