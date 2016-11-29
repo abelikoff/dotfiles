@@ -9,6 +9,7 @@ CONF_FILES=".bash_aliases
             .emacs
             .gitconfig
             .inputrc
+            .i3
             .ocamlinit
             .profile
             .pylintrc
