@@ -216,7 +216,11 @@ umask 022
 # useful settings
 
 export GREP_COLOR="43;30"
-export EDITOR="vim"
+
+# use emacscliet
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -c"
+export VISUAL="emacsclient -c"
 
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local

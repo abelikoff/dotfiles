@@ -16,8 +16,8 @@ fi
 alias btd='btdownloadcurses.bittorrent'
 alias cln='rm *~'
 alias cp='cp -i'
-alias e=emacs
-alias em='emacs -nw'
+alias e='emacsclient -c'
+alias em='emacsclient -t'
 alias ev='env | grep $@'
 alias grep='grep --color=auto'
 alias gdw='git diff -w'
