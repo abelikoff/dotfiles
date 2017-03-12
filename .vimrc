@@ -59,15 +59,16 @@ if has("gui_running")
     set lines=50
     set columns=80
     "set guifont=Consolas:11
+    set guifont=Hack:h10
 
-    if has("gui_gtk2")
-        set guifont=Inconsolata\ 10
-    elseif has("gui_macvim")
-        set guifont=Menlo\ Regular:h14
-    elseif has("gui_win32")
-        set lines=50
-        set guifont=Consolas:h10
-    endif
+    "if has("gui_gtk2")
+    "    set guifont=Inconsolata\ 10
+    "elseif has("gui_macvim")
+    "    set guifont=Menlo\ Regular:h14
+    "elseif has("gui_win32")
+        "set lines=50
+        "set guifont=Consolas:h10
+    "endif
 
     set guioptions-=T  "remove toolbar
     set guioptions-=m  "remove menu
