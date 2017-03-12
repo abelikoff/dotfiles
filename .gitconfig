@@ -7,6 +7,8 @@
 	co = checkout
 	br = branch
 	st = status
+  	showtool = "!f() { git difftool $1^ $1; }; f"
+  	added = difftool --cached
 [user]
 	name = Alexander L. Belikoff
 	email = abelikoff@gmail.com
@@ -14,3 +16,12 @@
 	user = abelikoff
 [push]
 	default = simple
+[diff]
+  	tool = icdiff
+[difftool]
+  	prompt = false
+[difftool "icdiff"]
+  	#cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE
+  	cmd = icdiff --line-numbers $LOCAL $REMOTE
+[pager]
+  	difftool = true
