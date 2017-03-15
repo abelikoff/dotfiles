@@ -83,7 +83,7 @@
   (cond (is-windows "Hack-9")
         (is-work-desktop "Hack-10")
         (is-macintosh "Hack-12")
-        (t "Droid Sans Mono-9")))
+        (t "Hack-10")))
 
 (require 'cl)                           ; required for lexical-let
 
@@ -991,4 +991,3 @@ frame to the next available font allowing quick assessment of different fonts.
 ;;; Local Variables:
 ;;;   mode: outline-minor
 ;;; End:
-
