@@ -1,10 +1,9 @@
-#!/bin/ksh
+#!/bin/bash
 
 # set up configuration files
 
 
-CONF_FILES=".bash_aliases
-            .bashrc
+CONF_FILES=".bashrc
             .dircolors
             .emacs
             .gitconfig
@@ -15,11 +14,13 @@ CONF_FILES=".bash_aliases
             .pylintrc
             .Rprofile
             .screenrc
+            .shell_aliases
+            .shell_paths
             .tmux.conf
-            .vim
             .vimrc
             .wgetrc
             .Xresources
+            .zshrc
             lib/latex/mathmacros.sty"
 
 prog=${0##*/}
@@ -75,11 +76,11 @@ function install_file {
 
     if [[ -e $fname ]]; then
         if diff -w $fname $src_file > /dev/null; then
-            print -u2 "NOTICE: $file is same as target - not backing up"
+            echo "NOTICE: $file is same as target - not backing up" >&2
             run_command rm -f $fname
         else
             run_command mkdir -p $backup_dir
-            print -u2 "NOTICE: $file will be saved to $BACKUP_DIR"
+            echo "NOTICE: $file will be saved to $BACKUP_DIR" >&2
             run_command mv $fname $backup_dir/
         fi
     fi
@@ -90,7 +91,7 @@ function install_file {
 
 
 function usage {
-    print "
+    echo "
     Usage:  $prog  [options]
 
 $prog sets up configuration files
@@ -110,17 +111,17 @@ $prog supports the following options:
 
 
 function debug {
-    [[ -n $do_debug ]] && print "DEBUG: " $@
+    [[ -n $do_debug ]] && echo "DEBUG: " $@
 }
 
 
 function verbose {
-    [[ -n $do_verbose ]] && print $@
+    [[ -n $do_verbose ]] && echo $@
 }
 
 
 function error {
-    print -u2 "$prog: ERROR:" $@
+    echo "$prog: ERROR:" $@ >&2
 }
 
 
@@ -131,7 +132,7 @@ function fatal {
 
 
 function warning {
-    print -u2 "$prog: WARNING:" $@
+    echo "$prog: WARNING:" $@ >&2
 }
 
 
@@ -153,7 +154,7 @@ while getopts ":fhiVv" opt ; do
            unset dry_run
            ;;
 
-        V) print "$prog $version"
+        V) echo "$prog $version"
            exit 0
            ;;
 
@@ -194,4 +195,9 @@ for file in $CONF_FILES; do
     fi
 
     install_file $file $install_dir $vc_dir $BACKUP_DIR
+
+    if [[ $file == .vimrc && ! -d ~/.vim//bundle/Vundle.vim ]]; then
+        echo "For Vundle setup run: " \
+            "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+    fi
 done

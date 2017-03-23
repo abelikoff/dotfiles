@@ -9,11 +9,11 @@ Installation
 
 To preview changes:
 
-    <PATH_TO_DOTFILES>/setup.ksh
+    <PATH_TO_DOTFILES>/setup.sh
 
 To enact changes (old files will be preserved):
 
-    <PATH_TO_DOTFILES>/setup.ksh -f
+    <PATH_TO_DOTFILES>/setup.sh -f
 
 To switch theme (only works for some terminals, Vim, and Emacs):
 

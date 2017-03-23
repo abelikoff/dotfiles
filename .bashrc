@@ -115,84 +115,9 @@ fi
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-
-
-# paths
-
-# Anaconda
-
-if [ -d $HOME/anaconda/bin ]; then
-    PATH=$HOME/anaconda/bin:$PATH
-    export PATH
-fi
-
-# Google cloud SDK
-
-if [ -d $HOME/devel/google-cloud-sdk ]; then
-    source '/Users/abelikoff/devel/google-cloud-sdk/path.bash.inc'
-    source '/Users/abelikoff/devel/google-cloud-sdk/completion.bash.inc'
-fi
-
-# JDK
-
-if [ -d /opt/jdk ]; then
-    PATH=$PATH:/opt/jdk/bin
-    JAVA_HOME=/opt/jdk
-    export PATH JAVA_HOME
-fi
-
-# Ruby
-
-if [ -d $HOME/.rvm ]; then
-    PATH=$PATH:$HOME/.rvm/bin
-    export PATH
-fi
-
-# Heroku
-
-if [ -d /usr/local/heroku ]; then
-    PATH=$PATH:/usr/local/heroku/bin
-    export PATH
-fi
-
-# Homebrew
-
-if [ -d $HOME/devel/homebrew ]; then
-    PATH=$HOME/devel/homebrew/bin:$PATH
-    export PATH
-fi
-
-
-# OPAM
-
-if [ -d $HOME/.opam ]; then
-  . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-fi
-
-
-# R
-
-if [ -d $HOME/lib/R ]; then
-  export R_LIBS_USER=$HOME/lib/R
-fi
-
-export R_HISTSIZE=5000
-
-
-# TeX
-
-if [[ $TEXINPUTS != */home/* ]]; then
-    TEXINPUTS=".:$HOME/lib/latex:"
-    export TEXINPUTS
-fi
-
 
 # shell control
 
@@ -222,6 +147,7 @@ export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -c"
 export VISUAL="emacsclient -c"
 
-if [ -f ~/.bashrc.local ]; then
-    . ~/.bashrc.local
-fi
+for file in ~/.shell_aliases ~/.shell_paths ~/.zshrc.local; do
+    test -f $file && . $file || true
+done
+

@@ -1,0 +1,80 @@
+# path setup for shells
+
+# Anaconda
+
+if [ -d $HOME/anaconda/bin ]; then
+    PATH=$HOME/anaconda/bin:$PATH
+    export PATH
+fi
+
+# Google cloud SDK
+
+if [ -d $HOME/devel/google-cloud-sdk ]; then
+    source '/Users/abelikoff/devel/google-cloud-sdk/path.bash.inc'
+    source '/Users/abelikoff/devel/google-cloud-sdk/completion.bash.inc'
+fi
+
+# JDK
+
+if [ -d /opt/jdk ]; then
+    PATH=$PATH:/opt/jdk/bin
+    JAVA_HOME=/opt/jdk
+    export PATH JAVA_HOME
+fi
+
+# Ruby
+
+if [ -d $HOME/.rvm ]; then
+    PATH=$PATH:$HOME/.rvm/bin
+    export PATH
+fi
+
+# Heroku
+
+if [ -d /usr/local/heroku ]; then
+    PATH=$PATH:/usr/local/heroku/bin
+    export PATH
+fi
+
+# Homebrew
+
+if [ -d $HOME/devel/homebrew ]; then
+    PATH=$HOME/devel/homebrew/bin:$PATH
+    export PATH
+fi
+
+
+# OPAM
+
+if [ -d $HOME/.opam ]; then
+  . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+fi
+
+
+# R
+
+if [ -d $HOME/lib/R ]; then
+  export R_LIBS_USER=$HOME/lib/R
+fi
+
+export R_HISTSIZE=5000
+
+
+# TeX
+
+if [[ $TEXINPUTS != */home/* ]]; then
+    TEXINPUTS=".:$HOME/lib/latex:"
+    export TEXINPUTS
+fi
+
+
+if [ -n "$ZSH_VERSION" ]; then
+    if [ -f ~/.zshrc.local ]; then
+        . ~/.zshrc.local
+    fi
+elif [ -n "$BASH_VERSION" ]; then
+    if [ -f ~/.bashrc.local ]; then
+        . ~/.bashrc.local
+    fi
+fi
+
