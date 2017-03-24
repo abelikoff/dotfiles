@@ -11,11 +11,11 @@ fi
 
 if [ -d $HOME/devel/google-cloud-sdk ]; then
     if [ -n "$ZSH_VERSION" ]; then
-        source '/Users/abelikoff/devel/google-cloud-sdk/path.zsh.inc'
-        source '/Users/abelikoff/devel/google-cloud-sdk/completion.zsh.inc'
+        source $HOME/devel/google-cloud-sdk/path.zsh.inc
+        source $HOME/devel/google-cloud-sdk/completion.zsh.inc
     elif [ -n "$BASH_VERSION" ]; then
-        source '/Users/abelikoff/devel/google-cloud-sdk/path.bash.inc'
-        source '/Users/abelikoff/devel/google-cloud-sdk/completion.bash.inc'
+        source $HOME/devel/google-cloud-sdk/path.bash.inc
+        source $HOME/devel/google-cloud-sdk/completion.bash.inc
     fi
 fi
 
