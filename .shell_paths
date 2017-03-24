@@ -10,8 +10,13 @@ fi
 # Google cloud SDK
 
 if [ -d $HOME/devel/google-cloud-sdk ]; then
-    source '/Users/abelikoff/devel/google-cloud-sdk/path.bash.inc'
-    source '/Users/abelikoff/devel/google-cloud-sdk/completion.bash.inc'
+    if [ -n "$ZSH_VERSION" ]; then
+        source '/Users/abelikoff/devel/google-cloud-sdk/path.zsh.inc'
+        source '/Users/abelikoff/devel/google-cloud-sdk/completion.zsh.inc'
+    elif [ -n "$BASH_VERSION" ]; then
+        source '/Users/abelikoff/devel/google-cloud-sdk/path.bash.inc'
+        source '/Users/abelikoff/devel/google-cloud-sdk/completion.bash.inc'
+    fi
 fi
 
 # JDK
