@@ -54,7 +54,8 @@
                   js2-mode
                   monokai-theme
                   scala-mode
-                  solarized-theme
+                  ;;solarized-theme
+                  color-theme-solarized
                   tuareg
                   web-mode
                   zenburn-theme))
