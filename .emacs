@@ -176,7 +176,7 @@ frame to the next available font allowing quick assessment of different fonts.
 
 
 (defconst my-default-height
-  (cond (is-macintosh 42)
+  (cond (is-macintosh 55)
         (is-work-desktop 70)
         (t 50)))
 
