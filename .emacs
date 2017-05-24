@@ -56,6 +56,8 @@
                   scala-mode
                   ;;solarized-theme
                   color-theme-solarized
+                  ocp-indent
+                  merlin
                   tuareg
                   web-mode
                   zenburn-theme))
@@ -194,8 +196,8 @@ frame to the next available font allowing quick assessment of different fonts.
 
 (if (display-graphic-p)
     (progn
+      ;;(tool-bar-mode 0)
       (tool-bar-mode -1)
-      (tool-bar-mode 0)
       ;;(menu-bar-mode 0)
       ))
 
