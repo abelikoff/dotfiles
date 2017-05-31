@@ -77,9 +77,10 @@
 
 ;; required for tramp on Mac
 
-(if is-macintosh
-    (put 'temporary-file-directory 'standard-value
-         '((file-name-as-directory "/tmp"))))
+(cond (is-macintosh
+       (put 'temporary-file-directory 'standard-value
+            '((file-name-as-directory "/tmp")))
+       (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))))
 
 
 (defconst my-default-font
