@@ -39,27 +39,21 @@ autocmd Syntax c call EnhanceCppSyntax()
 autocmd Syntax java call EnhanceCppSyntax()
 
 
-syntax enable
+syntax on
+"let g:solarized_termcolors=256
+set t_Co=256
 set background=dark
 
 if filereadable($HOME . "/.theme-monokai")
     colorscheme hybrid
 else
     colorscheme solarized
-    hi statusLine cterm=NONE ctermfg=12 ctermbg=0
-
-    " change status line color in insert mode
-    if version >= 700
-        au InsertLeave * highlight StatusLine cterm=NONE ctermfg=12 ctermbg=0
-        au InsertEnter * highlight StatusLine cterm=NONE ctermfg=black ctermbg=3
-    endif
 endif
 
 if has("gui_running")
     set lines=50
     set columns=80
-    "set guifont=Consolas:11
-    set guifont=Hack:h10
+    set guifont=Hack\ 10
 
     "if has("gui_gtk2")
     "    set guifont=Inconsolata\ 10
@@ -69,6 +63,7 @@ if has("gui_running")
         "set lines=50
         "set guifont=Consolas:h10
     "endif
+    "set guifont=Dejavu\ Sans\ Mono\ 10
 
     set guioptions-=T  "remove toolbar
     set guioptions-=m  "remove menu
