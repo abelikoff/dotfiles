@@ -53,7 +53,12 @@ endif
 if has("gui_running")
     set lines=50
     set columns=80
-    set guifont=Hack\ 10
+
+    if has("gui_win32")
+        set guifont=Hack:h10
+    else
+        set guifont=Hack\ 10
+    endif
 
     "if has("gui_gtk2")
     "    set guifont=Inconsolata\ 10
