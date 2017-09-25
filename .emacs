@@ -50,8 +50,8 @@
 
 (let ((packages '(color-theme
                   column-marker
-                  ess
                   js2-mode
+                  ess
                   monokai-theme
                   scala-mode
                   ;;solarized-theme
@@ -63,11 +63,15 @@
                   zenburn-theme))
       (refreshed nil))
   (dolist (pkg packages)
+    ;; Emacs 24.3 cannot handle ESS
+    (unless (and (equal pkg 'ess)
+                 (= emacs-major-version 24)
+                 (< emacs-minor-version 4))
     (unless (package-installed-p pkg)
       (unless refreshed
         (package-refresh-contents)
         (setq refreshed t))
-      (package-install pkg))))
+      (package-install pkg)))))
 
 
 ;;(load "crypt++" t t t)
@@ -318,11 +322,14 @@ frame to the next available font allowing quick assessment of different fonts.
 
 ;;; ESS
 
-(require 'ess-site)
-(add-hook 'ess-mode-hook
-          (lambda ()
-            (setq ess-continued-statement-offset 4)
-            (setq ess-indent-level 4)))
+(cond ((or (> emacs-major-version 24)
+           (and (= emacs-major-version 24)
+                (> emacs-minor-version 3)))
+       (require 'ess-site)
+       (add-hook 'ess-mode-hook
+                 (lambda ()
+                   (setq ess-continued-statement-offset 4)
+                   (setq ess-indent-level 4)))))
 
 
 ;;; GO
