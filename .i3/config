@@ -178,6 +178,9 @@ bar {
 # set wallpaper
 exec --no-startup-id feh --bg-scale /usr/local/google/home/abelikoff/Pictures/oOP2Dm.jpg
 
+# turn Caps Lock into Control
+exec setxkbmap -option ctrl:nocaps
+
 # start emacs server
 exec --no-startup-id emacs --daemon
 
