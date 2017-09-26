@@ -176,7 +176,8 @@ bar {
 }
 
 # set wallpaper
-exec --no-startup-id feh --bg-scale /usr/local/google/home/abelikoff/Pictures/oOP2Dm.jpg
+#exec --no-startup-id feh --bg-scale /usr/local/google/home/abelikoff/Pictures/oOP2Dm.jpg
+exec --no-startup-id /home/abel/bin/wpgallery.sh
 
 # turn Caps Lock into Control
 exec setxkbmap -option ctrl:nocaps
