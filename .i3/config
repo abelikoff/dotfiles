@@ -180,7 +180,11 @@ bar {
 exec --no-startup-id /home/abel/bin/wpgallery.sh
 
 # turn Caps Lock into Control
-exec setxkbmap -option ctrl:nocaps
+exec "setxkbmap -option ctrl:nocaps"
+
+# keyboard layout
+exec "setxkbmap -layout us,ru"
+exec "setxkbmap -option 'grp:alt_shift_toggle'"
 
 # start emacs server
 exec --no-startup-id emacs --daemon
