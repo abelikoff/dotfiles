@@ -21,6 +21,7 @@ call vundle#end()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'tomasiser/vim-code-dark'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
@@ -41,11 +42,17 @@ autocmd Syntax java call EnhanceCppSyntax()
 
 syntax on
 "let g:solarized_termcolors=256
-set t_Co=256
-set background=dark
+"set t_Co=256
+"set background=dark
 
 if filereadable($HOME . "/.theme-monokai")
     colorscheme hybrid
+elseif filereadable($HOME . "/.theme-codedark")
+    colorscheme codedark
+    let g:airline_theme = 'codedark'
+elseif filereadable($HOME . "/.theme-onedark")
+    colorscheme onedark
+    let g:airline_theme = 'onedark'
 else
     colorscheme solarized
 endif
