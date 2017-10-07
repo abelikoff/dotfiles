@@ -50,6 +50,7 @@
 
 (let ((packages '(color-theme
                   column-marker
+                  dracula-theme
                   js2-mode
                   ess
                   monokai-theme
@@ -214,13 +215,15 @@ frame to the next available font allowing quick assessment of different fonts.
 (require 'font-lock)
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
+(set-frame-parameter nil 'background-mode 'dark)
 (require 'color-theme)
 
-(if (file-exists-p "~/.theme-monokai")
-    (require 'monokai-theme)
-  (progn
-    (require 'color-theme-solarized)
-    (color-theme-solarized-dark)))
+(cond ((file-exists-p "~/.theme-monokai")
+       (load-theme 'monokai t))
+      ((file-exists-p "~/.theme-dracula")
+       (load-theme 'dracula t))
+      (t
+       (load-theme 'solarized t)))
 
 (add-hook 'window-setup-hook '(lambda () (set-cursor-color "red")))
 (add-hook 'after-make-frame-functions
@@ -985,11 +988,17 @@ frame to the next available font allowing quick assessment of different fonts.
     (browse-url (concat "file://" filename))))
 
 
-;; startup
+;; this is for home/work related *manual* customizations
 
-(let ((custom-file (expand-file-name "~/.emacs.custom.el")))
-  (if (and (not (getenv "NOCUSTOM")) (file-exists-p custom-file))
-      (load custom-file)))
+(let ((local-custom-file (expand-file-name "~/.emacs.custom.el")))
+  (if (and (not (getenv "NOCUSTOM")) (file-exists-p local-custom-file))
+      (load local-custom-file)))
+
+;; this is for emacs-managed *automatic* customizations
+
+(setq custom-file (expand-file-name "~/.custom.el"))
+(if (file-exists-p custom-file)
+    (load custom-file))
 
 (if (file-exists-p "~/.diary")
     (diary))
