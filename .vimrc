@@ -19,6 +19,7 @@ endif
 call vundle#end()
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'dracula/vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tomasiser/vim-code-dark'
@@ -47,6 +48,9 @@ syntax on
 
 if filereadable($HOME . "/.theme-monokai")
     colorscheme hybrid
+elseif filereadable($HOME . "/.theme-dracula")
+    colorscheme dracula
+    let g:airline_theme = 'dracula'
 elseif filereadable($HOME . "/.theme-codedark")
     colorscheme codedark
     let g:airline_theme = 'codedark'
