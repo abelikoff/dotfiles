@@ -20,6 +20,7 @@ CONF_FILES=".bashrc
             .tmux.conf
             .vimrc
             .wgetrc
+            .xscreensaver
             .Xresources
             .zshrc
             lib/latex/mathmacros.sty"
