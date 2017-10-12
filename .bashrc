@@ -1,8 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
-#if [ -f /etc/bashrc ]; then
-#       . /etc/bashrc
-#fi
+if [[ -f /etc/bashrc ]]; then
+    . /etc/bashrc
+fi
 
 
 # only execute for interactive sessions
@@ -143,9 +143,12 @@ umask 022
 export GREP_COLOR="43;30"
 
 # use emacscliet
+#export ALTERNATE_EDITOR=""
+#export EDITOR="emacsclient -c"
+#export VISUAL="emacsclient -c"
 export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -c"
-export VISUAL="emacsclient -c"
+export EDITOR="vim"
+export VISUAL="vim"
 
 for file in ~/.shell_aliases ~/.shell_paths ~/.zshrc.local; do
     test -f $file && . $file || true

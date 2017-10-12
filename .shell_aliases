@@ -1,8 +1,6 @@
-# $Id$  -*- sh -*-
+# -*- sh -*-
 
-#  aliases
-
-# miscellaneous
+# shell aliases
 
 if [ "`whoami`" = root ]; then
     alias rm='rm -i'
@@ -36,6 +34,10 @@ alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-
 alias svn_setexec="svn propset svn:executable 1"
 alias svn_setkw="svn propset svn:keywords 'Id URL Revision Date'"
 alias tf='tail -f'
+
+if [[ -f /etc/redhat-release ]]; then
+    alias vi='vim'
+fi
 
 function xurls {
     sed -e 's|>|>\n|g' -e 's|href=|\nhref=|gi' | grep -i href | \
