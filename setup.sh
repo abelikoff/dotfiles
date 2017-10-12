@@ -18,6 +18,7 @@ CONF_FILES=".bashrc
             .shell_aliases
             .shell_paths
             .tmux.conf
+            .tmux.dracula.sh
             .vimrc
             .wgetrc
             .xscreensaver
