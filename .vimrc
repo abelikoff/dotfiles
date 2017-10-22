@@ -25,6 +25,8 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'Chiel92/vim-autoformat'
 let g:airline_powerline_fonts = 1
 
 
@@ -113,6 +115,10 @@ map Q gq
 scriptencoding utf-8
 set encoding=utf-8
 set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
+
+" mark columns beyond 80
+let &colorcolumn="80,".join(range(120,999),",")
+highlight ColorColumn ctermbg=235 guibg=#6272a4
 
 
 " allow switching of paste mode
