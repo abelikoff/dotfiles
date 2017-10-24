@@ -108,13 +108,14 @@ endif
 set expandtab
 set softtabstop=4
 set shiftwidth=4
-set autoindent
+set smartindent
 set number
 map Q gq
 
 scriptencoding utf-8
 set encoding=utf-8
-set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
+"set list listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
+set list listchars=trail:·,precedes:«,extends:»,tab:▸▸
 
 " mark columns beyond 80
 let &colorcolumn="80,".join(range(120,999),",")
