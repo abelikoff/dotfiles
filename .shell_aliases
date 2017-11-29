@@ -53,14 +53,17 @@ function xurls {
 if [[ $PWD != */rpmbuild/* ]]; then
 
     function cdf {
-        typeset dir
+        typeset fpath
 
-        dir=$(hfdir "$1")
+        fpath=$(find ~/devel -name "$1" | head -1)
 
-        if [[ -n $dir ]]; then
-            echo $dir
-        #cd $HOME/${dir#*/}
-            cd $dir
+        if [[ -f $fpath ]]; then
+            fpath=$(dirname $fpath)
+        fi
+
+        if [[ -d $fpath ]]; then
+            echo $fpath
+            cd $fpath
         fi
     }
 
