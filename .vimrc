@@ -118,7 +118,7 @@ set encoding=utf-8
 set list listchars=trail:·,precedes:«,extends:»,tab:▸▸
 
 " mark columns beyond 80
-let &colorcolumn="80,".join(range(120,999),",")
+let &colorcolumn=join(range(80,999),",")
 highlight ColorColumn ctermbg=235 guibg=#6272a4
 
 
