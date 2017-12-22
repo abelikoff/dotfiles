@@ -1,5 +1,10 @@
 # path setup for shells
 
+if [ -d $HOME/bin ]; then
+    PATH=$HOME/bin:$PATH
+    export PATH
+fi
+
 # Anaconda
 
 if [ -d $HOME/anaconda/bin ]; then
