@@ -10,23 +10,16 @@ fi
 [ -z "$PS1" ] && return
 
 # history control
-
 shopt -s histappend
 shopt -s cmdhist
 HISTCONTROL=ignoreboth
-HISTSIZE=1000000000
-HISTFILESIZE=1000000000
+# unlimited history
+HISTSIZE=
+HISTFILESIZE=
 HISTIGNORE='ls:bg:fg:history:exit'
-
-# eternal history
-export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S "
-
-if [[ -z $PROMPT_COMMAND ]]; then
-    export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo "$(hostname -s) $PWD $(history 1)" >> ~/.bash_eternal_history'
-fi
-
-HISTTIMEFORMAT='%F %T '
-#PROMPT_COMMAND='history -a'
+#HISTTIMEFORMAT='%F %T  '
+HISTTIMEFORMAT=$(echo -e "\033[0;34m %F %T\033[0;33m  ")
+PROMPT_COMMAND='history -a'
 
 
 # cd helpers
@@ -148,7 +141,7 @@ export ALTERNATE_EDITOR=""
 export EDITOR="vim"
 export VISUAL="vim"
 
-for file in ~/.shell_aliases ~/.shell_paths ~/.zshrc.local; do
+for file in ~/.shell_aliases ~/.shell_paths ~/.bashrc.local; do
     test -f $file && . $file || true
 done
 
