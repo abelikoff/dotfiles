@@ -19,16 +19,14 @@ HISTFILESIZE=1000000000
 HISTIGNORE='ls:bg:fg:history:exit'
 
 # eternal history
-#export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S "
+export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S "
 
-#if [[ -z $zPROMPT_COMMAND ]]; then
-    #PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo $USER $PWD \
-    #                             "$(history 1)" >> ~/.bash_eternal_history'
-    #PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo "$(hostname -s) $PWD $(history 1)" >> ~/.bash_eternal_history'
-#fi
+if [[ -z $PROMPT_COMMAND ]]; then
+    export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}"'echo "$(hostname -s) $PWD $(history 1)" >> ~/.bash_eternal_history'
+fi
 
 HISTTIMEFORMAT='%F %T '
-PROMPT_COMMAND='history -a'
+#PROMPT_COMMAND='history -a'
 
 
 # cd helpers
