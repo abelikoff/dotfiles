@@ -2,14 +2,12 @@
 
 if [ -d $HOME/bin ]; then
     PATH=$HOME/bin:$PATH
-    export PATH
 fi
 
 # Anaconda
 
 if [ -d $HOME/anaconda/bin ]; then
     PATH=$HOME/anaconda/bin:$PATH
-    export PATH
 fi
 
 # Google cloud SDK
@@ -24,33 +22,24 @@ if [ -d $HOME/devel/google-cloud-sdk ]; then
     fi
 fi
 
+# Flutter
+
+if [ -d $HOME/devel/flutter ]; then
+    PATH=$PATH:$HOME/devel/flutter/bin
+fi
+
 # JDK
 
 if [ -d /opt/jdk ]; then
     PATH=$PATH:/opt/jdk/bin
     JAVA_HOME=/opt/jdk
-    export PATH JAVA_HOME
-fi
-
-# Ruby
-
-if [ -d $HOME/.rvm ]; then
-    PATH=$PATH:$HOME/.rvm/bin
-    export PATH
-fi
-
-# Heroku
-
-if [ -d /usr/local/heroku ]; then
-    PATH=$PATH:/usr/local/heroku/bin
-    export PATH
+    export JAVA_HOME
 fi
 
 # Homebrew
 
 if [ -d $HOME/devel/homebrew ]; then
     PATH=$HOME/devel/homebrew/bin:$PATH
-    export PATH
 fi
 
 
@@ -95,3 +84,4 @@ elif [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+export PATH
