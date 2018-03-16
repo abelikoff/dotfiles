@@ -66,6 +66,14 @@ fi
 export R_HISTSIZE=5000
 
 
+# Rust
+
+if [ -d $HOME/.cargo ]; then
+    PATH=$PATH:$HOME/.cargo/bin
+fi
+
+
+#
 # TeX
 
 if [[ $TEXINPUTS != */home/* ]]; then
