@@ -142,6 +142,10 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+# Full screen screenshot
+bindsym Print exec scrot -e 'mv $f ~/Pictures/'
+# Select area for screenshot
+bindsym $mod+Print exec "sleep 0.2 ; scrot -s -e 'mv $f ~/Pictures/'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
