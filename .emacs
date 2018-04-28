@@ -49,7 +49,7 @@
 (package-initialize)
 
 (let ((packages '(color-theme
-                  column-marker
+                  column-enforce-mode
                   dracula-theme
                   js2-mode
                   ess
@@ -297,14 +297,13 @@ frame to the next available font allowing quick assessment of different fonts.
 
 ;;; column marker
 
-(require 'column-marker)
-(set-face-background 'column-marker-1 "magenta")
-(set-face-foreground 'column-marker-1 "white")
+(require 'column-enforce-mode)
+(set-face-foreground 'column-enforce-face "magenta")
 (add-hook 'find-file-hook
           (lambda ()
             (if (and (stringp buffer-file-name)
                      (not (string-match "\\.\\(borg\\|gcl\\)$" buffer-file-name)))
-                (column-marker-1 80))))
+                (column-enforce-mode))))
 
 
 ;;; Diary/Appt
