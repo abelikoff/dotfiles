@@ -44,23 +44,24 @@ autocmd Syntax java call EnhanceCppSyntax()
 
 
 syntax on
-"let g:solarized_termcolors=256
-"set t_Co=256
-"set background=dark
 
 if filereadable($HOME . "/.theme-monokai")
     colorscheme hybrid
 elseif filereadable($HOME . "/.theme-dracula")
     colorscheme dracula
-    let g:airline_theme = 'dracula'
+
+    if !has('win32') && !has('win64')
+        let g:airline_theme = 'dracula'
+    endif
 elseif filereadable($HOME . "/.theme-codedark")
     colorscheme codedark
     let g:airline_theme = 'codedark'
-elseif filereadable($HOME . "/.theme-onedark")
-    colorscheme onedark
-    let g:airline_theme = 'onedark'
-else
+else                                " default to solarized
+    "let g:solarized_termcolors=256
+    "set t_Co=256
+    set background=dark
     colorscheme solarized
+    let g:airline_theme = 'solarized'
 endif
 
 if has("gui_running")
