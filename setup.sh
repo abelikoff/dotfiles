@@ -20,7 +20,6 @@ CONF_FILES=".bashrc
             .tmux.conf
             .tmux.dracula.sh
             .vimrc
-            .wgetrc
             .xscreensaver
             .Xresources
             .zshrc

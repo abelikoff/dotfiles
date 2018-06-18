@@ -471,9 +471,9 @@ frame to the next available font allowing quick assessment of different fonts.
 (require 'paren)
 (setq show-paren-style 'mixed)
 (show-paren-mode 1)
-(set-face-foreground 'show-paren-mismatch-face "White")
-(set-face-background 'show-paren-mismatch-face "Red")
-(set-face-background 'show-paren-match-face "Blue")
+(set-face-foreground 'show-paren-mismatch "White")
+(set-face-background 'show-paren-mismatch "Red")
+(set-face-background 'show-paren-match "Blue")
 
 ;;(paren-set-mode 'blink-paren)
 
