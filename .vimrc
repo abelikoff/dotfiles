@@ -30,19 +30,6 @@ Plugin 'Chiel92/vim-autoformat'
 let g:airline_powerline_fonts = 1
 
 
-" Add highlighting for function definition in C++
-function! EnhanceCppSyntax()
-  syn match cppFuncDef "::\~\?\zs\h\w*\ze([^)]*\()\s*\(const\)\?\)\?$"
-  hi def link cppFuncDef Special
-endfunction
-
-autocmd Syntax cpp call EnhanceCppSyntax()
-autocmd Syntax cc call EnhanceCppSyntax()
-autocmd Syntax cxx call EnhanceCppSyntax()
-autocmd Syntax c call EnhanceCppSyntax()
-autocmd Syntax java call EnhanceCppSyntax()
-
-
 syntax on
 
 if filereadable($HOME . "/.theme-monokai")
@@ -74,18 +61,17 @@ if has("gui_running")
     set guifont=Hack\ 10
   endif
 
-  set guioptions-=T  "remove toolbar
-  set guioptions-=m  "remove menu
+  set guioptions-=T     " remove toolbar
+  set guioptions-=m     " remove menu
 endif
 
-" other setup
 set bs=2                " allow backspacing over everything in insert mode
 set ic                  " case-insensitive search
 set hlsearch            " highlite search results
 set scs                 " revert to case-sensitive search on mixed case
 set viminfo='20,\"50    " read/write a .viminfo file, don't store more
 " than 50 lines of registers
-set history=100         " keep 50 lines of command line history
+set history=100         " 100 lines of command line history
 set ruler               " show the cursor position all the time
 set textwidth=80
 
@@ -124,8 +110,6 @@ syntax match Tab /\t/
 hi Tab guibg=blue ctermbg=blue
 
 
-" Only do this part when compiled with support for autocommands
-
 if has("autocmd")
 
   " In text files, always limit the width of text to 78 characters
@@ -148,27 +132,29 @@ endif
 set foldmethod=indent
 set foldlevel=99
 
-
 " Autoformat
 
 let g:autoformat_retab = 1
 let g:autoformat_remove_trailing_spaces = 1
 
-
 " CtrlP
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-
 " Vim-GO
+
 filetype plugin on
 set number
 let g:go_disable_autoinstall = 0
+
+" status line
 
 set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set laststatus=2
 
 " source local tweaks
+
 let s:local_script = $HOME . "/.vimrc.local"
 if filereadable(s:local_script)
   execute 'source' s:local_script
