@@ -5,15 +5,15 @@ filetype off
 
 " Vundle setup
 if has('win32') || has('win64')
-    set rtp+=~/vimfiles/bundle/Vundle.vim
+  set rtp+=~/vimfiles/bundle/Vundle.vim
 else
-    set rtp+=~/.vim/bundle/Vundle.vim
+  set rtp+=~/.vim/bundle/Vundle.vim
 endif
 
 call vundle#begin()
 
 if has('win32') || has('win64')
-    call vundle#rc('$HOME/vimfiles/bundle/')
+  call vundle#rc('$HOME/vimfiles/bundle/')
 endif
 
 call vundle#end()
@@ -46,46 +46,36 @@ autocmd Syntax java call EnhanceCppSyntax()
 syntax on
 
 if filereadable($HOME . "/.theme-monokai")
-    colorscheme hybrid
+  colorscheme hybrid
 elseif filereadable($HOME . "/.theme-dracula")
-    colorscheme dracula
+  colorscheme dracula
 
-    if !has('win32') && !has('win64')
-        let g:airline_theme = 'dracula'
-    endif
+  if !has('win32') && !has('win64')
+    let g:airline_theme = 'dracula'
+  endif
 elseif filereadable($HOME . "/.theme-codedark")
-    colorscheme codedark
-    let g:airline_theme = 'codedark'
+  colorscheme codedark
+  let g:airline_theme = 'codedark'
 else                                " default to solarized
-    "let g:solarized_termcolors=256
-    "set t_Co=256
-    set background=dark
-    colorscheme solarized
-    let g:airline_theme = 'solarized'
+  "let g:solarized_termcolors=256
+  "set t_Co=256
+  set background=dark
+  colorscheme solarized
+  let g:airline_theme = 'solarized'
 endif
 
 if has("gui_running")
-    set lines=50
-    set columns=80
+  set lines=50
+  set columns=80
 
-    if has("gui_win32")
-        set guifont=Hack:h10
-    else
-        set guifont=Hack\ 10
-    endif
+  if has("gui_win32")
+    set guifont=Hack:h10
+  else
+    set guifont=Hack\ 10
+  endif
 
-    "if has("gui_gtk2")
-    "    set guifont=Inconsolata\ 10
-    "elseif has("gui_macvim")
-    "    set guifont=Menlo\ Regular:h14
-    "elseif has("gui_win32")
-        "set lines=50
-        "set guifont=Consolas:h10
-    "endif
-    "set guifont=Dejavu\ Sans\ Mono\ 10
-
-    set guioptions-=T  "remove toolbar
-    set guioptions-=m  "remove menu
+  set guioptions-=T  "remove toolbar
+  set guioptions-=m  "remove menu
 endif
 
 " other setup
@@ -94,7 +84,7 @@ set ic                  " case-insensitive search
 set hlsearch            " highlite search results
 set scs                 " revert to case-sensitive search on mixed case
 set viminfo='20,\"50    " read/write a .viminfo file, don't store more
-                        " than 50 lines of registers
+" than 50 lines of registers
 set history=100         " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
 set textwidth=80
@@ -102,7 +92,7 @@ set textwidth=80
 " disable bleeping
 set noerrorbells visualbell t_vb=
 if has('autocmd')
-    autocmd GUIEnter * set visualbell t_vb=
+  autocmd GUIEnter * set visualbell t_vb=
 endif
 
 " indentation setup
@@ -138,27 +128,31 @@ hi Tab guibg=blue ctermbg=blue
 
 if has("autocmd")
 
-    " In text files, always limit the width of text to 78 characters
-    autocmd BufRead *.txt set tw=78
+  " In text files, always limit the width of text to 78 characters
+  autocmd BufRead *.txt set tw=78
 
-    " When editing a file, always jump to the last cursor position
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal g'\"" |
-                \ endif
+  " When editing a file, always jump to the last cursor position
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g'\"" |
+        \ endif
 
-    " ..but not for VC commit message files
-    autocmd BufReadPost COMMIT_EDITMSG
-                \ exe "normal! gg"
+  " ..but not for VC commit message files
+  autocmd BufReadPost COMMIT_EDITMSG
+        \ exe "normal! gg"
 
-    autocmd BufWritePre *
-                \ :%s/\s\+$//e
-
+  autocmd BufWrite * :Autoformat
 endif
 
 
 set foldmethod=indent
 set foldlevel=99
+
+
+" Autoformat
+
+let g:autoformat_retab = 1
+let g:autoformat_remove_trailing_spaces = 1
 
 
 " CtrlP
@@ -177,6 +171,6 @@ set laststatus=2
 " source local tweaks
 let s:local_script = $HOME . "/.vimrc.local"
 if filereadable(s:local_script)
-    execute 'source' s:local_script
+  execute 'source' s:local_script
 endif
 
