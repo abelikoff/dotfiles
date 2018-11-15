@@ -53,6 +53,7 @@
                   dracula-theme
                   js2-mode
                   ess
+                  markdown-mode
                   monokai-theme
                   scala-mode
                   ;;solarized-theme
