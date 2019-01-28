@@ -9,7 +9,7 @@ CONF_FILES=".bashrc
             .gitconfig
             .inputrc
             .i3
-            .i3status.conf
+            .i3blocks.conf
             .ocamlinit
             .profile
             .pylintrc
