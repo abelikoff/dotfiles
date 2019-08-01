@@ -40,8 +40,8 @@ fi
 
 # Homebrew
 
-if [ -d $HOME/devel/homebrew ]; then
-    PATH=$HOME/devel/homebrew/bin:$PATH
+if [ -d $HOME/devel/brew ]; then
+    PATH=$HOME/devel/brew/bin:$PATH
 fi
 
 
