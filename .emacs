@@ -1,5 +1,3 @@
-;;; emacs configuration
-
 ;;; figure out what system we are on
 ;;; (need it for window sizing and font selection)
 
@@ -43,23 +41,27 @@
                  ;; Emacs on Windows lacks TLS
                  '("melpa" . "http://melpa.org/packages/")
                '("melpa" . "https://melpa.org/packages/")))
+
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
 (package-initialize)
 
-(let ((packages '(color-theme
+(let ((packages '(
                   column-enforce-mode
                   dracula-theme
-                  js2-mode
+                  ;;elpy
                   ess
+                  flycheck
+                  js2-mode
                   markdown-mode
-                  monokai-theme
-                  scala-mode
-                  ;;solarized-theme
-                  color-theme-solarized
-                  ocp-indent
                   merlin
+                  monokai-theme
+                  ocp-indent
+                  powershell
+                  ;;scala-mode
+                  solarized-theme
                   tuareg
                   web-mode
                   zenburn-theme))
@@ -69,14 +71,11 @@
     (unless (and (equal pkg 'ess)
                  (= emacs-major-version 24)
                  (< emacs-minor-version 4))
-    (unless (package-installed-p pkg)
-      (unless refreshed
-        (package-refresh-contents)
-        (setq refreshed t))
-      (package-install pkg)))))
-
-
-;;(load "crypt++" t t t)
+      (unless (package-installed-p pkg)
+        (unless refreshed
+          (package-refresh-contents)
+          (setq refreshed t))
+        (package-install pkg)))))
 
 
 ;;; X11 setup
@@ -217,7 +216,7 @@ frame to the next available font allowing quick assessment of different fonts.
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 (set-frame-parameter nil 'background-mode 'dark)
-(require 'color-theme)
+;;(require 'color-theme)
 
 (cond ((file-exists-p "~/.theme-monokai")
        (load-theme 'monokai t))
@@ -377,13 +376,15 @@ frame to the next available font allowing quick assessment of different fonts.
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (setq inferior-js-program-command "node --interactive")
-(add-hook 'js2-mode-hook '(lambda ()
-                            (local-set-key "\C-x\C-e" 'js-send-last-sexp)
-                            (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
-                            (local-set-key "\C-cb" 'js-send-buffer)
-                            (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
-                            (local-set-key "\C-cl" 'js-load-file-and-go)
-                            ))
+(add-hook 'js2-mode-hook
+          '(lambda ()
+             (local-set-key "\C-x\C-e" 'js-send-last-sexp)
+             (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
+             (local-set-key "\C-cb" 'js-send-buffer)
+             (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+             (local-set-key "\C-cl" 'js-load-file-and-go)
+             (flycheck-mode)
+             ))
 
 (setenv "NODE_NO_READLINE" "1")
 
@@ -394,12 +395,6 @@ frame to the next available font allowing quick assessment of different fonts.
 (if (not (load "linum-off.el" t t t))
     (require 'linum))
 (global-linum-mode 1)
-
-
-;;; man/woman
-
-(autoload 'woman "woman" "Load woman" t)
-(global-set-key [f1] 'man-word)
 
 
 ;;; org-mode
@@ -440,29 +435,29 @@ frame to the next available font allowing quick assessment of different fonts.
 (defun add-journal-entry (entry)
   "Create a new diary entry for today or append to an existing one."
   (interactive "sEntry: ")
-    (let ((today (format-time-string org-journal-date-format))
-          (current-time (format-time-string org-journal-time-format)))
-      (save-excursion
-        (set-buffer (find-file-noselect org-journal-file))
-        (widen)
-        (beginning-of-buffer)
-        (unless (search-forward-regexp (concat "^\\* +" today) nil t)
-          (progn (org-insert-heading)
-                 (insert today)))
-        (org-show-subtree)
-        (org-narrow-to-subtree)
-        (end-of-buffer)
-        (org-insert-heading)
-        (condition-case nil          ; promotion fails when at the top
-            (progn (org-do-promote)
-                   (org-do-promote)
-                   (org-do-promote)
-                   (org-do-promote))
-          (error nil))
-        (org-do-demote)
-        (insert current-time)
-        (insert (concat " " entry "\n"))
-        (save-buffer))))
+  (let ((today (format-time-string org-journal-date-format))
+        (current-time (format-time-string org-journal-time-format)))
+    (save-excursion
+      (set-buffer (find-file-noselect org-journal-file))
+      (widen)
+      (beginning-of-buffer)
+      (unless (search-forward-regexp (concat "^\\* +" today) nil t)
+        (progn (org-insert-heading)
+               (insert today)))
+      (org-show-subtree)
+      (org-narrow-to-subtree)
+      (end-of-buffer)
+      (org-insert-heading)
+      (condition-case nil          ; promotion fails when at the top
+          (progn (org-do-promote)
+                 (org-do-promote)
+                 (org-do-promote)
+                 (org-do-promote))
+        (error nil))
+      (org-do-demote)
+      (insert current-time)
+      (insert (concat " " entry "\n"))
+      (save-buffer))))
 
 ;;(global-set-key "\C-cj" 'add-journal-entry)
 
@@ -480,6 +475,8 @@ frame to the next available font allowing quick assessment of different fonts.
 
 
 ;;; python
+
+;;(elpy-enable)
 
 ;;(require 'python-mode)
 
@@ -503,22 +500,45 @@ frame to the next available font allowing quick assessment of different fonts.
           (lambda ()
             (set-variable 'py-indent-offset 4)
             (set-variable 'indent-tabs-mode nil)
-            (python-indent-guess-indent-offset)))
+            (python-indent-guess-indent-offset)
+            (flycheck-mode)))
 ;;;            (define-key py-mode-map (kbd "RET") 'newline-and-indent)))
 
 
 
-;; load tags
+(defun my-merge-imenu ()
+  (interactive)
+  (let ((mode-imenu (imenu-default-create-index-function))
+        (custom-imenu (imenu--generic-function imenu-generic-expression)))
+    (append mode-imenu custom-imenu)))
 
-(defun load-bbsrc-tags ()
-  (interactive "")
 
-  (let ((pfx "/bbsrc/tools/tags/")
-        (libs '("acclib" "appscrn")))
-    (setq tags-table-list
-          (append tags-table-list
-                  (mapcar (lambda (e) (concat pfx e)) libs)))))
+(defun my-python-hooks()
+  (interactive)
+  (setq tab-width 4
+        python-indent 4
+        python-shell-interpreter "ipython"
+        python-shell-interpreter-args "-i")
 
+  (if (string-match-p "rita" (or (buffer-file-name) ""))
+      (setq indent-tabs-mode t)
+    (setq indent-tabs-mode nil)
+    )
+
+  (add-to-list
+   'imenu-generic-expression
+   '("Sections" "^#### \\[ \\(.*\\) \\]$" 1))
+  (imenu-add-to-menubar "Position")
+  (setq imenu-create-index-function 'my-merge-imenu)
+
+  ;; pythom mode keybindings
+  (define-key python-mode-map (kbd "M-.") 'jedi:goto-definition)
+  (define-key python-mode-map (kbd "M-,") 'jedi:goto-definition-pop-marker)
+  (define-key python-mode-map (kbd "M-/") 'jedi:show-doc)
+  (define-key python-mode-map (kbd "M-?") 'helm-jedi-related-names)
+  ;; end python mode keybindings
+)
+(add-hook 'python-mode-hook 'my-python-hooks)
 
 
 ;;; Version control
@@ -528,8 +548,8 @@ frame to the next available font allowing quick assessment of different fonts.
 
 ;;; Cyrillic support
 
-;(require 'russian)
-;(require 'rusup)
+                                        ;(require 'russian)
+                                        ;(require 'rusup)
 
 ;;(global-set-key [f7] 'russify-region)
 ;; Control-F7
@@ -548,11 +568,12 @@ frame to the next available font allowing quick assessment of different fonts.
 (setq octave-comment-char ?%)
 
 
-;;; Ocaml
+;;; OCaml
 
 (cond ((file-exists-p (expand-file-name "~/.opam"))
-       (setq opam-share (substring (shell-command-to-string
-                                    "opam config var share 2> /dev/null") 0 -1))
+       (setq opam-share
+             (substring (shell-command-to-string
+                         "opam config var share 2> /dev/null") 0 -1))
        (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
        (require 'ocp-indent)
        (require 'merlin)))
@@ -561,6 +582,7 @@ frame to the next available font allowing quick assessment of different fonts.
 ;;; PHP mode
 
 (autoload 'php-mode "php-mode" "PHP Mode" t)
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 
 
 ;;; Powershell mode
@@ -641,11 +663,11 @@ frame to the next available font allowing quick assessment of different fonts.
 
 ;; Lisp mode setup
 
-; (add-hook 'ilisp-load-hook
-;   '(lambda ()
-;      (define-key global-map "\C-c1" 'ilisp-bury-output)
-;      (define-key global-map "\C-cv" 'ilisp-scroll-output)
-;      (define-key global-map "\C-cg" 'ilisp-grow-output)))
+                                        ; (add-hook 'ilisp-load-hook
+                                        ;   '(lambda ()
+                                        ;      (define-key global-map "\C-c1" 'ilisp-bury-output)
+                                        ;      (define-key global-map "\C-cv" 'ilisp-scroll-output)
+                                        ;      (define-key global-map "\C-cg" 'ilisp-grow-output)))
 
 
 (autoload 'run-ilisp   "ilisp" "Select a new inferior Lisp." t)
@@ -711,23 +733,23 @@ frame to the next available font allowing quick assessment of different fonts.
 ;;              ))
 
 
-; (setq inferior-lisp-program "lisp")
-; (define-key lisp-interaction-mode-map "\C-cd" 'lisp-send-defun)
-; (define-key lisp-interaction-mode-map "\C-cj" 'lisp-send-defun-and-go)
+                                        ; (setq inferior-lisp-program "lisp")
+                                        ; (define-key lisp-interaction-mode-map "\C-cd" 'lisp-send-defun)
+                                        ; (define-key lisp-interaction-mode-map "\C-cj" 'lisp-send-defun-and-go)
 
-; (defun my-lisp-family-setup ()
-;   (local-set-key [f1]   'clman-word)
-;   (local-set-key "\C-cd" 'lisp-send-defun)
-;   (local-set-key "\C-cj" 'lisp-send-defun-and-go))
+                                        ; (defun my-lisp-family-setup ()
+                                        ;   (local-set-key [f1]   'clman-word)
+                                        ;   (local-set-key "\C-cd" 'lisp-send-defun)
+                                        ;   (local-set-key "\C-cj" 'lisp-send-defun-and-go))
 
 
-; (add-hook 'lisp-mode-hook #'my-lisp-family-setup)
-; (add-hook 'inferior-lisp-mode-hook #'my-lisp-family-setup)
+                                        ; (add-hook 'lisp-mode-hook #'my-lisp-family-setup)
+                                        ; (add-hook 'inferior-lisp-mode-hook #'my-lisp-family-setup)
 
-; (add-hook 'emacs-lisp-mode-hook
-;         (function (lambda ()
-; ;;                  (local-set-key [f8] 'eval-and-advance)
-;                     )))
+                                        ; (add-hook 'emacs-lisp-mode-hook
+                                        ;         (function (lambda ()
+                                        ; ;;                  (local-set-key [f8] 'eval-and-advance)
+                                        ;                     )))
 
 
 ;; HyperSpec
@@ -776,8 +798,8 @@ frame to the next available font allowing quick assessment of different fonts.
 (load "auctex.el" t t t)
 (load "preview-latex.el" t t t)
 
-;(eval-after-load 'info
-;  '(add-to-list 'Info-directory-list "~/lib/elisp/auctex"))
+                                        ;(eval-after-load 'info
+                                        ;  '(add-to-list 'Info-directory-list "~/lib/elisp/auctex"))
 
 
 (defun insert-latex-env-abbrev ()
@@ -873,10 +895,10 @@ frame to the next available font allowing quick assessment of different fonts.
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;;(add-hook 'mail-mode-hook 'turn-on-auto-fill)
 ;;(add-hook 'message-mode-hook 'turn-on-auto-fill)
-;(add-hook 'text-mode-hook 'turn-on-filladapt-mode)
-;(add-hook 'mail-mode-hook 'turn-on-filladapt-mode)
-;(add-hook 'tex-mode-hook 'turn-on-filladapt-mode)
-;(add-hook 'latex-mode-hook 'turn-on-filladapt-mode)
+                                        ;(add-hook 'text-mode-hook 'turn-on-filladapt-mode)
+                                        ;(add-hook 'mail-mode-hook 'turn-on-filladapt-mode)
+                                        ;(add-hook 'tex-mode-hook 'turn-on-filladapt-mode)
+                                        ;(add-hook 'latex-mode-hook 'turn-on-filladapt-mode)
 
 (add-hook 'forms-mode-hooks
           (function (lambda ()
