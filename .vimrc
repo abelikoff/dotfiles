@@ -32,6 +32,15 @@ Plugin 'joshdick/onedark.vim'
 let g:airline_powerline_fonts = 1
 
 
+if !exists("g:os")
+  if has("win64") || has("win32") || has("win16")
+    let g:os = "Windows"
+  else
+    let g:os = substitute(system('uname'), '\n', '', '')
+  endif
+endif
+
+
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 " If you're using tmux version 2.2 or later, you can remove the outermost $TMUX
 " check and use tmux's 24-bit color support. see
@@ -64,8 +73,11 @@ elseif filereadable($HOME . "/.theme-codedark")
   colorscheme codedark
   let g:airline_theme = 'codedark'
 elseif filereadable($HOME . "/.theme-onedark")
+  if g:os != "Darwin"
+    let g:onedark_terminal_italics = 1
+  endif
+
   let g:airline_theme = 'onedark'
-  let g:onedark_terminal_italics = 1
   colorscheme onedark
 else                                " default to solarized
   "let g:solarized_termcolors=256
