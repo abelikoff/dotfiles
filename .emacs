@@ -49,6 +49,7 @@
 (package-initialize)
 
 (let ((packages '(
+                  atom-one-dark-theme
                   column-enforce-mode
                   dracula-theme
                   ;;elpy
@@ -92,7 +93,7 @@
   (cond (is-windows "Hack-9")
         (is-work-desktop "Hack-10")
         (is-macintosh "Hack-12")
-        (t "Hack-10")))
+        (t "Hack-11")))
 
 (require 'cl)                           ; required for lexical-let
 
@@ -222,6 +223,8 @@ frame to the next available font allowing quick assessment of different fonts.
        (load-theme 'monokai t))
       ((file-exists-p "~/.theme-dracula")
        (load-theme 'dracula t))
+      ((file-exists-p "~/.theme-onedark")
+       (load-theme 'atom-one-dark t))
       (t
        (load-theme 'solarized t)))
 
@@ -302,7 +305,7 @@ frame to the next available font allowing quick assessment of different fonts.
 (add-hook 'find-file-hook
           (lambda ()
             (if (and (stringp buffer-file-name)
-                     (not (string-match "\\.\\(borg\\|gcl\\)$" buffer-file-name)))
+                     (not (string-match "\\.\\(borg\\|gcl\\|html\\)$" buffer-file-name)))
                 (column-enforce-mode))))
 
 
