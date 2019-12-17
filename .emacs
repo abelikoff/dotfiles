@@ -56,6 +56,7 @@
                   ess
                   flycheck
                   js2-mode
+                  jedi
                   markdown-mode
                   merlin
                   monokai-theme
@@ -305,7 +306,8 @@ frame to the next available font allowing quick assessment of different fonts.
 (add-hook 'find-file-hook
           (lambda ()
             (if (and (stringp buffer-file-name)
-                     (not (string-match "\\.\\(borg\\|gcl\\|html\\)$" buffer-file-name)))
+                     (not (string-match "\\.\\(borg\\|gcl\\|html\\|go\\)$"
+                                        buffer-file-name)))
                 (column-enforce-mode))))
 
 
@@ -390,6 +392,12 @@ frame to the next available font allowing quick assessment of different fonts.
              ))
 
 (setenv "NODE_NO_READLINE" "1")
+
+
+;;; Jedi
+
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
 
 
 ;;; linum
@@ -537,8 +545,9 @@ frame to the next available font allowing quick assessment of different fonts.
   ;; pythom mode keybindings
   (define-key python-mode-map (kbd "M-.") 'jedi:goto-definition)
   (define-key python-mode-map (kbd "M-,") 'jedi:goto-definition-pop-marker)
-  (define-key python-mode-map (kbd "M-/") 'jedi:show-doc)
-  (define-key python-mode-map (kbd "M-?") 'helm-jedi-related-names)
+  ;;(define-key python-mode-map (kbd "M-/") 'jedi:show-doc)
+  ;;(define-key python-mode-map (kbd "M-?") 'helm-jedi-related-names)
+  (define-key python-mode-map (kbd "M-?") 'jedi:show-doc)
   ;; end python mode keybindings
 )
 (add-hook 'python-mode-hook 'my-python-hooks)
