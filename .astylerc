@@ -1,0 +1,7 @@
+--style=linux
+--indent=spaces=4
+--break-blocks
+--pad-comma
+--pad-oper
+--pad-first-paren-out
+--unpad-paren

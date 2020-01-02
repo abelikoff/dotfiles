@@ -3,7 +3,8 @@
 # set up configuration files
 
 
-CONF_FILES=".bashrc
+CONF_FILES=".astylerc
+            .bashrc
             .dircolors
             .emacs
             .gitconfig
