@@ -188,7 +188,7 @@ exec --no-startup-id $HOME/bin/wpgallery.sh
 exec --no-startup-id "setxkbmap -option ctrl:nocaps"
 
 # keyboard layout
-exec --no-startup-id "setxkbmap -option grp:switch,grp:rctrl_rshift_toggle,grp_led:scroll,compose:menu -layout 'us,ru' -variant ',phonetic_winkeys'"
+exec --no-startup-id "setxkbmap -option grp:switch,grp:rctrl_toggle,grp_led:scroll,compose:menu -layout 'us,ru' -variant ',phonetic_winkeys'"
 
 # start emacs server
 exec --no-startup-id emacs --daemon
