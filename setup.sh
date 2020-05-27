@@ -24,6 +24,7 @@ CONF_FILES=".astylerc
             .xscreensaver
             .Xresources
             .zshrc
+            .config/rofi/config
             lib/latex/mathmacros.sty"
 
 prog=${0##*/}
