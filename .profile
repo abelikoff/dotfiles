@@ -19,6 +19,15 @@ fi
 SSHAGENT=/usr/bin/ssh-agent
 
 if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+    echo Starting ssh agent
     eval `$SSHAGENT -s`
-    trap "kill $SSH_AGENT_PID" 0
+    #trap "kill $SSH_AGENT_PID" 0
 fi
+
+# Fix Lenovo touchpad
+
+if grep -i lenovo /sys/devices/virtual/dmi/id/sys_vendor > /dev/null 2>&1; then
+    xinput list-props 14 | grep "libinput Tapping Enabled.*351.*0$" > /dev/null && \
+        xinput set-prop 14 351 1
+fi
+
