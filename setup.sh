@@ -202,7 +202,6 @@ for file in $CONF_FILES; do
     install_file $file $install_dir $vc_dir $BACKUP_DIR
 
     if [[ $file == .vimrc && ! -d ~/.vim//bundle/Vundle.vim ]]; then
-        echo "For Vundle setup run: " \
-            "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+        run_command git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     fi
 done
