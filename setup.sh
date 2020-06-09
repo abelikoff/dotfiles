@@ -25,6 +25,7 @@ CONF_FILES=".astylerc
             .Xresources
             .zshrc
             .config/rofi/config
+            bin/i3_local_setup.sh
             lib/latex/mathmacros.sty"
 
 prog=${0##*/}
