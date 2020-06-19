@@ -2,6 +2,8 @@
 
 set nocompatible        " Use Vim defaults
 filetype off
+set modeline            " modeline detection
+set modelines=5
 
 " Vundle setup
 if has('win32') || has('win64')
@@ -28,6 +30,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'joshdick/onedark.vim'
+" This is curremtly broken on Catalina
+"Plugin 'zxqfl/tabnine-vim'
 
 let g:airline_powerline_fonts = 1
 
