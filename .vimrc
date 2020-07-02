@@ -2,6 +2,8 @@
 
 set nocompatible        " Use Vim defaults
 filetype off
+set undofile
+set undodir=~/.vim/undo
 
 " Vundle setup
 if has('win32') || has('win64')
