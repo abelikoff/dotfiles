@@ -30,6 +30,13 @@ if [ -d $HOME/devel/flutter ]; then
     PATH=$PATH:$HOME/devel/flutter/bin
 fi
 
+# Golang
+
+if [ -d $HOME/devel/go ]; then
+    export GOPATH=$HOME/devel/go
+    PATH=$PATH:$GOPATH/bin
+fi
+
 # JDK
 
 if [ -d /opt/jdk ]; then
@@ -41,7 +48,7 @@ fi
 # Homebrew
 
 if [ -d $HOME/devel/brew ]; then
-    PATH=$HOME/devel/brew/bin:$PATH
+    PATH=$HOME/devel/brew/opt/python/libexec/bin:$HOME/devel/brew/bin:$PATH
 fi
 
 
@@ -95,3 +102,5 @@ elif [ -n "$BASH_VERSION" ]; then
 fi
 
 export PATH
+
+# vi: ft=bash
