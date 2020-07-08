@@ -148,6 +148,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym Print exec scrot -e 'mv $f ~/Pictures/'
 # Select area for screenshot
 bindsym $mod+Print exec "sleep 0.2 ; scrot -s -e 'mv $f ~/Pictures/'"
+bindsym Shift+Print exec flameshot gui
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -187,7 +188,7 @@ bar {
 exec --no-startup-id $HOME/bin/wpgallery.sh
 
 # turn Caps Lock into Control
-exec --no-startup-id "setxkbmap -option ctrl:nocaps"
+#exec --no-startup-id "setxkbmap -option ctrl:nocaps"
 
 # keyboard layout
 exec --no-startup-id "setxkbmap -option grp:switch,grp:rctrl_toggle,grp_led:scroll,compose:menu -layout 'us,ru' -variant ',phonetic_mac'"
