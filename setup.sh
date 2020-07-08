@@ -10,6 +10,7 @@ CONF_FILES=".astylerc
             .gitconfig
             .inputrc
             .i3
+            .i3-workspace
             .i3blocks.conf
             .ocamlinit
             .profile

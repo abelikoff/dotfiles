@@ -1,0 +1,41 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1401,
+       "width": 1276,
+       "x": 12,
+       "y": 28
+    },
+    "name": "Gmail",
+    "percent": 0.5,
+    "swallows": [
+       {
+           "class": "^Google\\-chrome$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1401,
+       "width": 1276,
+       "x": 1292,
+       "y": 28
+    },
+    "name": "Chrome",
+    "percent": 0.5,
+    "swallows": [
+       {
+           "class": "^Google\\-chrome$"
+       }
+    ],
+    "type": "con"
+}
+
