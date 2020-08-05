@@ -64,8 +64,9 @@
                   merlin
                   monokai-theme
                   ocp-indent
+                  org-bullets
                   powershell
-                  ;;scala-mode
+                  real-auto-save
                   solarized-theme
                   tuareg
                   web-mode
@@ -93,10 +94,14 @@
        (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))))
 
 
+;; (defconst my-default-font
+;;   (cond (is-windows "Hack-9")
+;;         (is-work-desktop "Hack-10")
+;;         (is-macintosh "Hack-12")
+;;         (t "Hack-9")))
+
 (defconst my-default-font
-  (cond (is-windows "Hack-9")
-        (is-work-desktop "Hack-10")
-        (is-macintosh "Hack-12")
+  (cond ((> (x-display-pixel-width) 2000) "Hack-9")
         (t "Hack-11")))
 
 (require 'cl)                           ; required for lexical-let
@@ -277,6 +282,9 @@ frame to the next available font allowing quick assessment of different fonts.
 (global-set-key [M-down] 'next-error)
 (global-set-key [M-up] '(lambda () (interactive) (next-error -1)))
 
+(require 'real-auto-save)
+(setq real-auto-save-interval 60)
+
 
 ;;; C mode
 
@@ -424,7 +432,7 @@ frame to the next available font allowing quick assessment of different fonts.
 
 ;;; org-mode
 
-(defvar org-agenda-files '("~/org/projects"))
+(defvar org-agenda-files '("~/org"))
 (defvar org-agenda-prefix-format '((agenda . "  %-25:c%?-12t% s")
                                    (timeline . "  % s")
                                    (todo . "  %-25:c")
@@ -432,13 +440,23 @@ frame to the next available font allowing quick assessment of different fonts.
                                    (search . "  %-25:c")))
 (defvar org-agenda-start-on-weekday nil)
 (require 'org)
+(require 'org-bullets)
+(setq org-bullets-bullet-list
+        '("◉" "○" "⚫" "◎" "►" "◇"))
+(set-face-font 'org-level-1 "Hack-12")
 (set-face-foreground 'org-scheduled-previously "OrangeRed")
 (set-face-foreground 'org-scheduled-today "Green")
 (set-face-foreground 'org-scheduled "Gray")
-
+(setq org-tag-alist '(("@focus" . ?f) ("@waiting" . ?w) ("@research" . ?r)
+                      ("@meet" . ?m) ("@next" . ?n) ("@organize" . ?o)))
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;;(global-set-key "\C-cl" 'org-store-link)
-;;(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+;;(global-set-key "\C-cb" 'org-iswitchb)
+(add-hook 'org-mode-hook (lambda ()
+                           (real-auto-save-mode)
+                           (org-bullets-mode 1)))
 
 ;;(setq org-todo-keyword-faces
 ;;      '(("TODO"  . (:foreground "Yellow" :weight bold))))
