@@ -101,7 +101,7 @@
 ;;         (t "Hack-9")))
 
 (defconst my-default-font
-  (cond ((> (x-display-pixel-width) 2000) "Hack-9")
+  (cond ((and window-system (> (x-display-pixel-width) 2000)) "Hack-9")
         (t "Hack-11")))
 
 (require 'cl)                           ; required for lexical-let
