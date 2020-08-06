@@ -1,6 +1,14 @@
+gnu-emacs: yes
+markup: yes
+quiet: yes
 char-encoding: utf8
+drop-empty-elements: no
+drop-empty-paras: no
+merge-divs: no
+merge-spans: no
 indent: auto
 indent-spaces: 4
-wrap: 120
-quiet: yes
+vertical-space: yes
+wrap: 95
 tidy-mark: no
+
