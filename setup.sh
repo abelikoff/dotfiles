@@ -19,6 +19,7 @@ CONF_FILES=".astylerc
             .screenrc
             .shell_aliases
             .shell_paths
+            .tidyrc
             .tmux.conf
             .tmux.dracula.sh
             .vimrc

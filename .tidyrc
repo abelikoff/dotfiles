@@ -1,0 +1,6 @@
+char-encoding: utf8
+indent: auto
+indent-spaces: 4
+wrap: 120
+quiet: yes
+tidy-mark: no
