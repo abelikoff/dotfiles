@@ -55,6 +55,7 @@
                   ;;elpy
                   ess
                   flycheck
+                  format-all
                   go-mode
                   go-autocomplete
                   go-guru
@@ -101,8 +102,8 @@
 ;;         (t "Hack-9")))
 
 (defconst my-default-font
-  (cond ((and window-system (> (x-display-pixel-width) 2000)) "Hack-9")
-        (t "Hack-11")))
+  (cond ((and window-system (< (x-display-pixel-width) 2000)) "Hack-11")
+        (t "Hack-9")))
 
 (require 'cl)                           ; required for lexical-let
 
@@ -248,6 +249,7 @@ frame to the next available font allowing quick assessment of different fonts.
 
 (line-number-mode 1)
 (column-number-mode 1)
+(global-prettify-symbols-mode +1)
 (global-set-key "\r" 'newline-and-indent) ; not reindent-then-newline-and-indent
 (global-set-key "\C-cg" 'goto-line)
 
@@ -456,7 +458,16 @@ frame to the next available font allowing quick assessment of different fonts.
 ;;(global-set-key "\C-cb" 'org-iswitchb)
 (add-hook 'org-mode-hook (lambda ()
                            (real-auto-save-mode)
-                           (org-bullets-mode 1)))
+                           (org-bullets-mode 1)
+                           (setq prettify-symbols-alist '(("->" . ?→)
+                                                          ("=>" . ?⇒)
+                                                          ("!=" . ?≠)
+                                                          ("==" . ?≡)
+                                                          ("<=" . ?≤)
+                                                          (">=" . ?≥)
+                                                          ("[ ]" . "☐")
+                                                          ("[X]" . "☑" )
+                                                          ("[-]" . "❍" )))))
 
 ;;(setq org-todo-keyword-faces
 ;;      '(("TODO"  . (:foreground "Yellow" :weight bold))))
@@ -465,6 +476,15 @@ frame to the next available font allowing quick assessment of different fonts.
 ;;(org-add-link-type "go" (lambda (url)
 ;;                          (browse-url (concat "http://go/" url))))
 
+(defface org-checkbox-done-text
+  '((t (:foreground "#71696A" :strike-through t)))
+  "Face for the text part of a checked org-mode checkbox.")
+
+(font-lock-add-keywords
+ 'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)"
+    1 'org-checkbox-done-text prepend))
+ 'append)
 
 (defvar org-journal-file "~/org/journal.org"
   "Path to OrgMode journal file.")
@@ -544,7 +564,23 @@ frame to the next available font allowing quick assessment of different fonts.
             (set-variable 'py-indent-offset 4)
             (set-variable 'indent-tabs-mode nil)
             (python-indent-guess-indent-offset)
-            (flycheck-mode)))
+            (flycheck-mode)
+            (setq prettify-symbols-alist '(("lambda" . ?λ)
+                                           ("->" . ?→)
+                                           ("->>" . ?↠)
+                                           ("=>" . ?⇒)
+                                           ("map" . ?↦)
+                                           ("!=" . ?≠)
+                                           ("==" . ?≡)
+                                           ("<=" . ?≤)
+                                           (">=" . ?≥)
+                                           ("<=<" . ?↢)
+                                           (">=>" . ?↣)
+                                           ("&&" . ?∧)
+                                           ("||" . ?∨)
+                                           ("not" . ?¬)))))
+
+
 ;;;            (define-key py-mode-map (kbd "RET") 'newline-and-indent)))
 
 
@@ -927,6 +963,9 @@ frame to the next available font allowing quick assessment of different fonts.
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;;(add-hook 'web-mode-hook (lambda ()
+;;                          (format-all-mode 1)))
 
 
 ;; Emacs server
