@@ -55,12 +55,15 @@
                   ;;elpy
                   ess
                   flycheck
+                  flymake-go
                   format-all
                   go-mode
                   go-autocomplete
+                  go-eldoc
                   go-guru
                   js2-mode
                   jedi
+                  lsp-mode
                   markdown-mode
                   merlin
                   monokai-theme
@@ -70,7 +73,10 @@
                   real-auto-save
                   solarized-theme
                   tuareg
+                  use-package
                   web-mode
+                  yasnippet
+                  yasnippet-snippets
                   zenburn-theme))
       (refreshed nil))
   (dolist (pkg packages)
@@ -352,7 +358,7 @@ frame to the next available font allowing quick assessment of different fonts.
                    (setq ess-indent-level 4)))))
 
 
-;;; GO
+;;; Golang
 
 ;;(load "go-mode-load" t t t)
 (require 'go-mode)
@@ -360,16 +366,50 @@ frame to the next available font allowing quick assessment of different fonts.
 (require 'auto-complete-config)
 (require 'go-guru)
 (ac-config-default)
-(add-hook 'go-mode-hook
-          (lambda ()
-            (setq gofmt-command "goimports")
-            (if (not (string-match "go" compile-command))
-                (set (make-local-variable 'compile-command)
-                     "go build -v && go test -v && go vet"))
-            (local-set-key (kbd "M-.") 'godef-jump)
-            (local-set-key (kbd "M-*") 'pop-tag-mark)
-            (add-hook 'before-save-hook 'gofmt-before-save nil t)))
+(require 'flymake-go)
 
+(setq gofmt-command "goimports")
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (local-set-key (kbd "M-.") 'godef-jump)
+                          (local-set-key (kbd "M-*") 'pop-tag-mark)
+                          (go-eldoc-setup)
+                          (if (not (string-match "go" compile-command))
+                              (set (make-local-variable 'compile-command)
+                                   "go build -v && go test -v && go vet"))
+                          (add-hook 'before-save-hook 'gofmt-before-save)))
+
+
+(use-package lsp-mode
+             :ensure t
+             :commands (lsp lsp-deferred)
+             :hook (go-mode . lsp-deferred))
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; Optional - provides fancier overlays.
+(use-package lsp-ui
+             :ensure t
+             :commands lsp-ui-mode)
+
+;; Company mode is a standard completion package that works well with lsp-mode.
+(use-package company
+             :ensure t
+             :config
+             ;; Optionally enable completion-as-you-type behavior.
+             (setq company-idle-delay 0)
+             (setq company-minimum-prefix-length 1))
+
+;; Optional - provides snippet support.
+(use-package yasnippet
+             :ensure t
+             :commands yas-minor-mode
+             :hook (go-mode . yas-minor-mode))
 
 ;;; GDB
 
@@ -967,6 +1007,11 @@ frame to the next available font allowing quick assessment of different fonts.
 ;;(add-hook 'web-mode-hook (lambda ()
 ;;                          (format-all-mode 1)))
 
+
+;; Yasnippet
+
+(require 'yasnippet)
+(yas-global-mode 1)
 
 ;; Emacs server
 
