@@ -29,6 +29,7 @@ CONF_FILES=".astylerc
             .config/rofi/config
             bin/i3_local_setup.sh
             bin/i3_setxkb.sh
+            bin/toggle_touchpad
             lib/latex/mathmacros.sty"
 
 prog=${0##*/}
