@@ -1,0 +1,162 @@
+#!/bin/bash
+
+# Toggle touchpad
+
+
+readonly PROG=${0##*/}
+readonly PROG_VERSION=0.1       # program version
+
+shopt -s failglob               # fail upon non-matched globs
+set -Euo pipefail              # paranoid mode (terminate on errors,
+                                # pipe failures, unset variables)
+
+if [[ -t 2 ]]; then
+    ANSI_ERR="[91m"
+    ANSI_WARN="[93m"
+    ANSI_NOTICE="[92m"
+    ANSI_OFF="[0m"
+else
+    ANSI_ERR=""
+    ANSI_WARN=""
+    ANSI_NOTICE=""
+    ANSI_OFF=""
+fi
+
+readonly ANSI_ERR ANSI_WARN ANSI_NOTICE ANSI_OFF
+
+
+usage() {
+    echo "
+    Usage:  ${PROG}  [options]  [on | off | toggle]
+
+${PROG} toggles touchpad on and off.
+
+
+${PROG} supports the following options:
+
+    -v                        - verbose operation
+    -V                        - display program version
+    -h                        - display this message
+
+"
+}
+
+
+verbose() {
+    [[ -n $VERBOSE_MODE ]] && echo $@
+}
+
+
+error() {
+    echo -e "${ANSI_ERR}${PROG}: ERROR:" $@ "${ANSI_OFF}" >&2
+}
+
+
+fatal() {
+    error $@
+    exit 1
+}
+
+
+warning() {
+    echo -e "${ANSI_WARN}${PROG}: WARNING:" $@ "${ANSI_OFF}" >&2
+}
+
+
+notice() {
+    echo -e "${ANSI_NOTICE}${PROG}: NOTICE:" $@ "${ANSI_OFF}" >&2
+}
+
+
+# parse options
+
+unset VERBOSE_MODE
+
+while getopts ":hVv" opt; do
+    case $opt in
+        h)
+            usage
+            exit 0
+            ;;
+
+        V)
+            echo "${PROG} version ${PROG_VERSION}"
+            exit 0
+            ;;
+
+        v)
+            VERBOSE_MODE=1
+            ;;
+
+        :)
+            fatal "option '-${OPTARG}' requires an argument"
+            ;;
+
+        \?)
+            fatal "unknown option: '-${OPTARG}'"
+            ;;
+    esac
+done
+
+readonly VERBOSE_MODE
+
+shift $((OPTIND-1))
+
+if [[ $# -ne 1 ]]; then
+    usage
+    exit 1
+fi
+
+device_id=$(xinput | sed -n 's/.*ELAN.*Touchpad.*id=\([0-9][0-9]*\).*/\1/p')
+
+if [[ $? -ne 0 || -z $device_id ]]; then
+    fatal "Failed to identify the device"
+fi
+
+verbose "Device ID: $device_id"
+
+
+# get current mode
+
+current_mode=$(xinput list-props $device_id | \
+                   sed -n 's/^[ \t]*Device Enabled.*:[ \t]*\([0-9][0-9]*\).*/\1/p')
+
+if [[ $? -ne 0 || -z $current_mode ]]; then
+    fatal "Failed to get device mode from device $device_id"
+fi
+
+if [[ $current_mode != +(0|1) ]]; then
+    fatal "Unexpected value for device mode: '$current_mode'"
+    exit 1
+fi
+
+verbose "Current mode: $current_mode"
+
+case $1 in
+    on)
+        mode=1
+        ;;
+
+    off)
+        mode=0
+        ;;
+
+    toggle)
+        mode=$(echo $current_mode | tr '10' '01')
+        ;;
+
+    *)
+        usage
+        exit 1
+        ;;
+esac
+
+verbose "New mode: $mode"
+
+if [[ $mode == $current_mode ]]; then
+    exit 0
+fi
+
+xinput set-prop $device_id "Device Enabled" $mode
+
+exit 1
