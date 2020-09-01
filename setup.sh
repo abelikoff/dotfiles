@@ -209,3 +209,8 @@ for file in $CONF_FILES; do
         run_command git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     fi
 done
+
+if [[ ! -d ~/.tmux/plugins ]]; then
+    run_command git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    run_command tmux source ~/.tmux.conf
+fi
