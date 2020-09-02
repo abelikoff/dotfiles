@@ -75,6 +75,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+HISTORY_IGNORE="(ls|cd|pwd|exit|cd ..|vlc)"
+
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
