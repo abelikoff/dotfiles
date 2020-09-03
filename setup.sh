@@ -210,7 +210,14 @@ for file in $CONF_FILES; do
     fi
 done
 
+if [[ ! -d ~/.oh-my-zsh ]]; then
+    run_command sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+if [[ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
+    run_command git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+
 if [[ ! -d ~/.tmux/plugins ]]; then
     run_command git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    run_command tmux source ~/.tmux.conf
 fi
