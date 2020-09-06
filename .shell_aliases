@@ -124,6 +124,14 @@ if [[ $PWD != */rpmbuild/* ]]; then
         setapp $HOME/apps/$1
     }
 
+    function oo {
+        if [ $# -eq 0 ]; then
+            nohup xdg-open . &
+        else
+            nohup xdg-open "$@" &
+        fi
+    }
+
     function uc {
         for x in $@ ; do
             mv $x `echo $x | tr '[:lower:]' '[:upper:]'`
@@ -169,3 +177,5 @@ if [[ $PWD != */rpmbuild/* ]]; then
     }
 
 fi
+
+# vi: ft=bash
