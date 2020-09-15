@@ -482,10 +482,11 @@ frame to the next available font allowing quick assessment of different fonts.
                                    (search . "  %-25:c")))
 (defvar org-agenda-start-on-weekday nil)
 (require 'org)
+(require 'org-agenda)
 (require 'org-bullets)
 (setq org-bullets-bullet-list
         '("◉" "○" "⚫" "◎" "►" "◇"))
-(set-face-font 'org-level-1 "Hack-12")
+(set-face-font 'org-level-1 "Hack-11")
 (set-face-foreground 'org-scheduled-previously "OrangeRed")
 (set-face-foreground 'org-scheduled-today "Green")
 (set-face-foreground 'org-scheduled "Gray")
@@ -496,6 +497,12 @@ frame to the next available font allowing quick assessment of different fonts.
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 ;;(global-set-key "\C-cb" 'org-iswitchb)
+
+(add-to-list 'org-agenda-custom-commands
+             '("N" "Next actions" tags-todo "@next"
+               ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                (org-agenda-sorting-strategy '(priority-down)))))
+
 (add-hook 'org-mode-hook (lambda ()
                            (real-auto-save-mode)
                            (org-bullets-mode 1)
