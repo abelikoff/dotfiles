@@ -105,7 +105,7 @@ HISTORY_IGNORE="(ls|cd|pwd|exit|cd ..|vlc)"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-for file in ~/.shell_aliases ~/.shell_paths ~/.zshrc.local; do
+for file in ~/.shell_vars ~/.shell_aliases ~/.shell_paths ~/.zshrc.local; do
     test -f $file && . $file || true
 done
 
