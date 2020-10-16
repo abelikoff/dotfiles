@@ -107,9 +107,12 @@
 ;;         (is-macintosh "Hack-12")
 ;;         (t "Hack-9")))
 
-(defconst my-default-font
-  (cond ((and window-system (< (x-display-pixel-width) 2000)) "Hack-11")
-        (t "Hack-9")))
+;;(defconst my-default-font
+;;  (cond ((and window-system (< (x-display-pixel-width) 2000)) "Fira Code 11")
+;;        (t "Fira Code-11")))
+
+(defconst my-default-font "Fira Code-11")
+
 
 (require 'cl)                           ; required for lexical-let
 
