@@ -6,11 +6,13 @@ if [ -d $HOME/bin ]; then
     PATH=$HOME/bin:$PATH
 fi
 
-# Anaconda
+# 3rd party tools
 
-if [ -d $HOME/anaconda/bin ]; then
-    PATH=$HOME/anaconda/bin:$PATH
-fi
+for tool in anaconda flutter; do
+    if [ -d $HOME/tools/$tool ]; then
+        PATH=$PATH:$HOME/tools/$tool/bin
+    fi
+done
 
 # Google cloud SDK
 
@@ -22,12 +24,6 @@ if [ -d $HOME/devel/google-cloud-sdk ]; then
         source $HOME/devel/google-cloud-sdk/path.bash.inc
         source $HOME/devel/google-cloud-sdk/completion.bash.inc
     fi
-fi
-
-# Flutter
-
-if [ -d $HOME/devel/flutter ]; then
-    PATH=$PATH:$HOME/devel/flutter/bin
 fi
 
 # Golang
@@ -47,8 +43,8 @@ fi
 
 # Homebrew
 
-if [ -d $HOME/devel/brew ]; then
-    PATH=$HOME/devel/brew/opt/python/libexec/bin:$HOME/devel/brew/bin:$PATH
+if [ -d $HOME/tools/brew ]; then
+    PATH=$HOME/tools/brew/opt/python/libexec/bin:$HOME/tools/brew/bin:$PATH
 fi
 
 
