@@ -6,14 +6,6 @@ if [ -d $HOME/bin ]; then
     PATH=$HOME/bin:$PATH
 fi
 
-# 3rd party tools
-
-for tool in anaconda flutter; do
-    if [ -d $HOME/tools/$tool ]; then
-        PATH=$PATH:$HOME/tools/$tool/bin
-    fi
-done
-
 # Google cloud SDK
 
 if [ -d $HOME/devel/google-cloud-sdk ]; then
@@ -25,6 +17,15 @@ if [ -d $HOME/devel/google-cloud-sdk ]; then
         source $HOME/devel/google-cloud-sdk/completion.bash.inc
     fi
 fi
+
+# Flutter
+
+for dir in $HOME/snap/flutter/common/flutter $HOME/tools/flutter; do
+    if [ -d $dir ]; then
+        PATH=$PATH:$dir/bin
+        break
+    fi
+done
 
 # Golang
 
