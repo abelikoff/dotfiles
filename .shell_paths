@@ -20,7 +20,7 @@ fi
 
 # Flutter
 
-for dir in $HOME/snap/flutter/common/flutter $HOME/tools/flutter; do
+for dir in $HOME/tools/flutter $HOME/snap/flutter/common/flutter; do
     if [ -d $dir ]; then
         PATH=$PATH:$dir/bin
         break
