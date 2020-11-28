@@ -126,9 +126,9 @@ if [[ $PWD != */rpmbuild/* ]]; then
 
     function oo {
         if [ $# -eq 0 ]; then
-            nohup xdg-open . &
+            xdg-open . &
         else
-            nohup xdg-open "$@" &
+            xdg-open "$@" &
         fi
     }
 
