@@ -184,7 +184,7 @@ bar {
 exec --no-startup-id $HOME/bin/wpgallery.sh
 
 # keyboard layout
-exec --no-startup-id $HOME/bin/i3_setxkb.sh
+# exec --no-startup-id $HOME/bin/i3_setxkb.sh
 
 # start emacs server
 exec --no-startup-id emacs --daemon
