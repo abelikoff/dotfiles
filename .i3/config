@@ -126,15 +126,11 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Media control
 bindsym XF86AudioRaiseVolume  exec --no-startup-id $HOME/bin/auctl set-volume +5%
+bindsym XF86AudioRaiseVolume --release exec pkill -RTMIN+10 i3blocks
 bindsym XF86AudioLowerVolume  exec --no-startup-id $HOME/bin/auctl set-volume -5%
+bindsym XF86AudioLowerVolume --release exec pkill -RTMIN+10 i3blocks
 bindsym XF86AudioMute         exec --no-startup-id $HOME/bin/auctl toggle-mute
-#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+
-#bindsym XF86AudioRaiseVolume --release exec pkill -RTMIN+10 i3blocks
-#bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%-
-#bindsym XF86AudioLowerVolume --release exec pkill -RTMIN+10 i3blocks
-#bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
-#bindsym XF86AudioMute --release exec pkill -RTMIN+10 i3blocks
-
+bindsym XF86AudioMute --release exec pkill -RTMIN+10 i3blocks
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec sudo light -A 10 # increase screen brightness
