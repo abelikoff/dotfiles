@@ -27,7 +27,9 @@ fi
 # Fix Lenovo touchpad
 
 if grep -i lenovo /sys/devices/virtual/dmi/id/sys_vendor > /dev/null 2>&1; then
-    xinput list-props 14 | grep "libinput Tapping Enabled.*351.*0$" > /dev/null && \
-        xinput set-prop 14 351 1
-fi
+    prop=$(xinput list-props 14 | awk -F'[()]' '$1 ~ /libinput Tapping Enabled[ \t]*$/ && $3 ~ /0$/ {print $2}')
 
+    if [ -n $prop ]; then
+        xinput set-prop 14 $prop 1
+    fi
+fi
