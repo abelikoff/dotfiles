@@ -32,6 +32,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'joshdick/onedark.vim'
+Plugin 'fatih/vim-go'
 " This is curremtly broken on Catalina
 "Plugin 'zxqfl/tabnine-vim'
 
@@ -135,7 +136,8 @@ map Q gq
 scriptencoding utf-8
 set encoding=utf-8
 "set list listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
-set list listchars=trail:·,precedes:«,extends:»,tab:▸▸
+"set list listchars=trail:·,precedes:«,extends:»,tab:▸▸
+set list listchars=trail:·,precedes:«,extends:»,tab:▸·
 
 " mark columns beyond 80
 "let &colorcolumn=join(range(80,999),",")
@@ -191,6 +193,7 @@ let g:ctrlp_cmd = 'CtrlP'
 filetype plugin on
 set number
 let g:go_disable_autoinstall = 0
+autocmd Filetype go setlocal noet tabstop=8
 
 " status line
 
