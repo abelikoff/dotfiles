@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f $HOME/.default_audio_device ]; then
+    pactl set-default-sink "$(cat $HOME/.default_audio_device)"
+fi
+
 readonly ws_dir=$HOME/.i3-workspace
 
 if [ ! -d $ws_dir ]; then
