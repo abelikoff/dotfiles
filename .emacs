@@ -107,11 +107,11 @@
 ;;         (is-macintosh "Hack-12")
 ;;         (t "Hack-9")))
 
-(defconst my-default-font
-  (cond ((and window-system (> (x-display-pixel-width) 2500)) "Fira Code 10")
-        (t "Fira Code-11")))
+;;(defconst my-default-font
+;;  (cond ((and window-system (> (x-display-pixel-width) 2500)) "Fira Code 10")
+;;        (t "Fira Code-11")))
 
-;;(defconst my-default-font "Fira Code-11")
+(defconst my-default-font "Fira Code-11")
 
 
 (require 'cl)                           ; required for lexical-let
@@ -489,7 +489,7 @@ frame to the next available font allowing quick assessment of different fonts.
 (require 'org-bullets)
 (setq org-bullets-bullet-list
         '("◉" "○" "⚫" "◎" "►" "◇"))
-(set-face-font 'org-level-1 "Hack-11")
+(set-face-font 'org-level-1 "Fira Code-11")
 (set-face-foreground 'org-scheduled-previously "OrangeRed")
 (set-face-foreground 'org-scheduled-today "Green")
 (set-face-foreground 'org-scheduled "Gray")
