@@ -17,6 +17,7 @@ alias cp='cp -i'
 alias e='emacsclient -c'
 alias et='emacsclient -t'
 alias ev='env | grep $@'
+alias fdd='find_dups -c "`pwd`/"'
 alias grep='grep --color=auto'
 alias gdw='git diff -w'
 alias hn=hostname
