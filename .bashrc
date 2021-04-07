@@ -131,6 +131,7 @@ umask 022
 
 # useful settings
 
+export GREP_OPTIONS=--color
 export GREP_COLOR="43;30"
 
 # use emacscliet
@@ -144,4 +145,3 @@ export VISUAL="vim"
 for file in ~/.shell_vars ~/.shell_aliases ~/.shell_paths ~/.bashrc.local; do
     test -f $file && . $file || true
 done
-

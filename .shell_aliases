@@ -11,14 +11,13 @@ else
     fi
 fi
 
-alias btd='btdownloadcurses.bittorrent'
+#alias btd='btdownloadcurses.bittorrent'
 alias cln='rm *~'
 alias cp='cp -i'
 alias e='emacsclient -c'
 alias et='emacsclient -t'
 alias ev='env | grep $@'
 alias fdd='find_dups -c "`pwd`/"'
-alias grep='grep --color=auto'
 alias gdw='git diff -w'
 alias hn=hostname
 alias la='ls -a'
@@ -33,8 +32,8 @@ alias po='popd'
 alias pu='pushd'
 alias R='R --no-save -q'
 alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
-alias svn_setexec="svn propset svn:executable 1"
-alias svn_setkw="svn propset svn:keywords 'Id URL Revision Date'"
+#alias svn_setexec="svn propset svn:executable 1"
+#alias svn_setkw="svn propset svn:keywords 'Id URL Revision Date'"
 alias tf='tail -f'
 
 if [[ -f /etc/redhat-release ]]; then
