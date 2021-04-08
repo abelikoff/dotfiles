@@ -131,7 +131,6 @@ umask 022
 
 # useful settings
 
-export GREP_OPTIONS=--color
 export GREP_COLOR="43;30"
 
 # use emacscliet

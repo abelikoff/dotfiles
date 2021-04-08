@@ -19,6 +19,7 @@ alias et='emacsclient -t'
 alias ev='env | grep $@'
 alias fdd='find_dups -c "`pwd`/"'
 alias gdw='git diff -w'
+alias grep='grep --color'
 alias hn=hostname
 alias la='ls -a'
 alias latr='ls -latr'
