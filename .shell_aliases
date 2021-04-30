@@ -17,6 +17,11 @@ alias cp='cp -i'
 alias e='emacsclient -c'
 alias et='emacsclient -t'
 alias ev='env | grep $@'
+
+if [ $(uname) = Darwin ]; then
+    alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+fi
+
 alias fdd='find_dups -c "`pwd`/"'
 alias gdw='git diff -w'
 alias grep='grep --color'

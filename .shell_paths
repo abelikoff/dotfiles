@@ -54,8 +54,8 @@ fi
 
 # Golang
 
-if [ -d $HOME/devel/go ]; then
-    export GOPATH=$HOME/devel/go
+if [ -d $HOME/tools/go ]; then
+    export GOPATH=$HOME/tools/go
     PATH=$PATH:$GOPATH/bin
 fi
 
