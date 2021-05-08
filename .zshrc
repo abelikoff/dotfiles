@@ -76,6 +76,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 HISTORY_IGNORE="(ls|cd|pwd|exit|cd ..|vlc)"
+setopt HIST_IGNORE_SPACE
 
 
 # export MANPATH="/usr/local/man:$MANPATH"

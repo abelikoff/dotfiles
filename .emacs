@@ -107,11 +107,11 @@
 ;;         (is-macintosh "Hack-12")
 ;;         (t "Hack-9")))
 
-;;(defconst my-default-font
-;;  (cond ((and window-system (> (x-display-pixel-width) 2500)) "Fira Code 10")
-;;        (t "Fira Code-11")))
+(defconst my-default-font
+  (cond ((and window-system (> (x-display-pixel-width) 2500)) "Fira Code 10")
+        (t "Fira Code-11")))
 
-(defconst my-default-font "Fira Code-11")
+;; (defconst my-default-font "Fira Code-11")
 
 
 (require 'cl)                           ; required for lexical-let
@@ -366,14 +366,12 @@ frame to the next available font allowing quick assessment of different fonts.
 ;;(load "go-mode-load" t t t)
 (require 'go-mode)
 (require 'go-autocomplete)
-(require 'auto-complete-config)
 (require 'go-guru)
-(ac-config-default)
-(require 'flymake-go)
+;;(require 'flymake-go)
 
 (setq gofmt-command "goimports")
 (add-hook 'go-mode-hook (lambda ()
-                          (set (make-local-variable 'company-backends) '(company-go))
+                          ;;(set (make-local-variable 'company-backends) '(company-go))
                           (local-set-key (kbd "M-.") 'godef-jump)
                           (local-set-key (kbd "M-*") 'pop-tag-mark)
                           (go-eldoc-setup)
