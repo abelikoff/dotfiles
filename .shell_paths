@@ -54,6 +54,10 @@ fi
 
 # Golang
 
+if [ -d /usr/local/go ]; then
+    PATH=$PATH:/usr/local/go/bin
+fi
+
 if [ -d $HOME/tools/go ]; then
     export GOPATH=$HOME/tools/go
     PATH=$PATH:$GOPATH/bin
