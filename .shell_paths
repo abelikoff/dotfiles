@@ -55,7 +55,7 @@ fi
 # Golang
 
 if [ -d /usr/local/go ]; then
-    PATH=$PATH:/usr/local/go/bin
+    PATH=/usr/local/go/bin:$PATH
 fi
 
 if [ -d $HOME/tools/go ]; then
