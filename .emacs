@@ -242,6 +242,8 @@ frame to the next available font allowing quick assessment of different fonts.
        (load-theme 'monokai t))
       ((file-exists-p "~/.theme-dracula")
        (load-theme 'dracula t))
+      ((file-exists-p "~/.theme-zenburn")
+       (load-theme 'zenburn t))
       ((file-exists-p "~/.theme-onedark")
        (load-theme 'atom-one-dark t))
       (t

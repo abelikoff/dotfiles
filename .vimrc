@@ -76,6 +76,9 @@ elseif filereadable($HOME . "/.theme-dracula")
   if !has('win32') && !has('win64')
     let g:airline_theme = 'dracula'
   endif
+elseif filereadable($HOME . "/.theme-zenburn")
+  colorscheme zenburn
+  let g:airline_theme = 'zenburn'
 elseif filereadable($HOME . "/.theme-codedark")
   colorscheme codedark
   let g:airline_theme = 'codedark'
