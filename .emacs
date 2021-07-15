@@ -247,7 +247,7 @@ frame to the next available font allowing quick assessment of different fonts.
       ((file-exists-p "~/.theme-onedark")
        (load-theme 'atom-one-dark t))
       (t
-       (load-theme 'solarized t)))
+       (load-theme 'solarized-dark t)))
 
 (add-hook 'window-setup-hook '(lambda () (set-cursor-color "red")))
 (add-hook 'after-make-frame-functions

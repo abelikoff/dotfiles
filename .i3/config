@@ -182,17 +182,14 @@ bar {
 # set wallpaper
 exec --no-startup-id $HOME/bin/wpgallery.sh
 
-# keyboard layout
-# exec --no-startup-id $HOME/bin/i3_setxkb.sh
-
 # start emacs server
 exec --no-startup-id emacs --daemon
 
 # start apps
-exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/x-terminal-emulator"
-exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/x-terminal-emulator"
-exec --no-startup-id i3-msg "workspace 2; exec /usr/bin/x-www-browser --new-window http://mail.google.com"
-exec --no-startup-id i3-msg "workspace 2; exec /usr/bin/x-www-browser --new-window http://keep.google.com"
+#exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/x-terminal-emulator"
+#exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/x-terminal-emulator"
+#exec --no-startup-id i3-msg "workspace 2; exec /usr/bin/x-www-browser --new-window http://mail.google.com"
+#exec --no-startup-id i3-msg "workspace 2; exec /usr/bin/x-www-browser --new-window http://keep.google.com"
 
 # machine-specific setup
-#exec --no-startup-id $HOME/bin/i3_local_setup.sh
+exec --no-startup-id $HOME/bin/i3_local_setup.sh

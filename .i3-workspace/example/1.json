@@ -1,6 +1,6 @@
 // vim:ts=4:sw=4:et
 {
-    // splith split container with 1 children
+    // splith split container with 2 children
     "border": "normal",
     "floating": "auto_off",
     "layout": "splith",
@@ -8,11 +8,31 @@
     "type": "con",
     "nodes": [
         {
-            // splith split container with 3 children
+            "border": "normal",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 857,
+               "width": 734,
+               "x": 0,
+               "y": 0
+            },
+            "name": "Terminal 1",
+            "percent": 0.5,
+            "swallows": [
+               {
+                   "class": "^Gnome\\-terminal$",
+                   "window_role": "^gnome-terminal-window"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            // splitv split container with 2 children
             "border": "normal",
             "floating": "auto_off",
-            "layout": "splith",
-            "percent": 1,
+            "layout": "splitv",
+            "percent": 0.5,
             "type": "con",
             "nodes": [
                 {
@@ -20,93 +40,37 @@
                     "current_border_width": 2,
                     "floating": "auto_off",
                     "geometry": {
-                       "height": 767,
-                       "width": 654,
+                       "height": 857,
+                       "width": 734,
                        "x": 0,
                        "y": 0
                     },
-                    "name": "Terminal",
-                    "percent": 0.333333333333333,
+                    "name": "Terminal 2",
+                    "percent": 0.75,
                     "swallows": [
                        {
-                           "class": "^Gnome\\-terminal$"
+                           "class": "^Gnome\\-terminal$",
+                           "window_role": "^gnome-terminal-window"
                        }
                     ],
                     "type": "con"
-                },
-                {
-                    // splitv split container with 2 children
-                    "border": "normal",
-                    "floating": "auto_off",
-                    "layout": "splitv",
-                    "percent": 0.333333333333333,
-                    "type": "con",
-                    "nodes": [
-                        {
-                            "border": "normal",
-                            "current_border_width": 2,
-                            "floating": "auto_off",
-                            "geometry": {
-                               "height": 767,
-                               "width": 654,
-                               "x": 0,
-                               "y": 0
-                            },
-                            "name": "Terminal",
-                            "percent": 0.5,
-                            "swallows": [
-                               {
-                                   "class": "^Gnome\\-terminal$"
-                               }
-                            ],
-                            "type": "con"
-                        },
-                        {
-                            // splith split container with 1 children
-                            "border": "normal",
-                            "floating": "auto_off",
-                            "layout": "splith",
-                            "percent": 0.5,
-                            "type": "con",
-                            "nodes": [
-                                {
-                                    "border": "normal",
-                                    "current_border_width": 2,
-                                    "floating": "auto_off",
-                                    "geometry": {
-                                       "height": 767,
-                                       "width": 654,
-                                       "x": 0,
-                                       "y": 0
-                                    },
-                                    "name": "Terminal",
-                                    "percent": 1,
-                                    "swallows": [
-                                       {
-                                           "class": "^Gnome\\-terminal$"
-                                       }
-                                    ],
-                                    "type": "con"
-                                }
-                            ]
-                        }
-                    ]
                 },
                 {
                     "border": "normal",
                     "current_border_width": 2,
                     "floating": "auto_off",
                     "geometry": {
-                       "height": 767,
-                       "width": 654,
+                       "height": 857,
+                       "width": 734,
                        "x": 0,
                        "y": 0
                     },
-                    "name": "Terminal",
-                    "percent": 0.333333333333333,
+                    "name": "Terminal 3",
+                    "percent": 0.25,
                     "swallows": [
                        {
-                           "class": "^Gnome\\-terminal$"
+                           "class": "^Gnome\\-terminal$",
+                           "window_role": "^dmesg$"
                        }
                     ],
                     "type": "con"
