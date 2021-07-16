@@ -27,6 +27,7 @@ alias gdw='git diff -w'
 alias grep='grep --color'
 alias hn=hostname
 alias la='ls -a'
+alias lh='ls -lH'
 alias latr='ls -latr'
 alias ll='ls -l'
 function loc() { locate -i -0 "$1" | xargs --null ls -sd ; }
@@ -38,8 +39,6 @@ alias po='popd'
 alias pu='pushd'
 alias R='R --no-save -q'
 alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
-#alias svn_setexec="svn propset svn:executable 1"
-#alias svn_setkw="svn propset svn:keywords 'Id URL Revision Date'"
 alias tf='tail -f'
 
 if [[ -f /etc/redhat-release ]]; then
@@ -58,6 +57,12 @@ function xurls {
 # directory
 
 if [[ $PWD != */rpmbuild/* ]]; then
+
+    alias auls='pactl list short sinks'
+
+    function auset {
+        pactl set-default-sink $(pactl list short sinks | grep "$1" | awk '{print $1}')
+    }
 
     function cdf {
         typeset fpath

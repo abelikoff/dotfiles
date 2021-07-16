@@ -75,9 +75,12 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-HISTORY_IGNORE="(ls|cd|pwd|exit|cd ..|vlc)"
+HISTORY_IGNORE="(ls *|la *|ll|cd|pwd|exit|cd ..|vlc *|ssh-add)"
 setopt HIST_IGNORE_SPACE
+setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+unsetopt INC_APPEND_HISTORY
 
 
 # export MANPATH="/usr/local/man:$MANPATH"
