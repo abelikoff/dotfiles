@@ -17,11 +17,6 @@ alias cp='cp -i'
 alias e='emacsclient -c'
 alias et='emacsclient -t'
 alias ev='env | grep $@'
-
-if [ $(uname) = Darwin ]; then
-    alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
-fi
-
 alias fdd='find_dups -c "`pwd`/"'
 alias gdw='git diff -w'
 alias grep='grep --color'
@@ -40,6 +35,14 @@ alias pu='pushd'
 alias R='R --no-save -q'
 alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
 alias tf='tail -f'
+
+if [ $(uname) = Darwin ]; then
+    alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+    alias op='open .'
+else
+    alias op='xdg-open . &'
+fi
+
 
 if [[ -f /etc/redhat-release ]]; then
     alias vi='vim'
