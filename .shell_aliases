@@ -65,16 +65,17 @@ if [[ $PWD != */rpmbuild/* ]]; then
     }
 
     function cdf {
-        typeset fpath
+        typeset fpath short_path
 
-        fpath=$(find ~/devel -name "$1" | head -1)
+        fpath=$(find ~/devel -name "$1" | grep -v /.git | head -1)
 
         if [[ -f $fpath ]]; then
             fpath=$(dirname $fpath)
+            short_path="~${fpath#$HOME}"
         fi
 
         if [[ -d $fpath ]]; then
-            echo $fpath
+            echo "Changing to $(tput setaf 2)$short_path$(tput sgr 0)"
             cd $fpath
         fi
     }
