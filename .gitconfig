@@ -1,27 +1,27 @@
 [core]
-	editor = vim
+  editor = vim
 [color]
-	ui = auto
+  ui = auto
 [alias]
-	ci = commit
-	co = checkout
-	br = branch
-	st = status
-  	showtool = "!f() { git difftool $1^ $1; }; f"
-  	added = difftool --cached
+  ci = commit
+  co = checkout
+  br = branch
+  st = status
+    showtool = "!f() { git difftool $1^ $1; }; f"
+    added = difftool --cached
 [user]
-	name = Alexander L. Belikoff
-	email = abelikoff@gmail.com
+  name = Alexander L. Belikoff
+  email = alexander@belikoff.net
 [github]
-	user = abelikoff
+  user = abelikoff
 [push]
-	default = simple
+  default = simple
 [diff]
-  	tool = icdiff
+    tool = icdiff
 [difftool]
-  	prompt = false
+    prompt = false
 [difftool "icdiff"]
-  	#cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE
-  	cmd = icdiff --line-numbers $LOCAL $REMOTE
+    #cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE
+    cmd = icdiff --line-numbers $LOCAL $REMOTE
 [pager]
-  	difftool = true
+    difftool = true
