@@ -67,6 +67,7 @@
                   markdown-mode
                   merlin
                   monokai-theme
+                  nord-theme
                   ocp-indent
                   org-bullets
                   powershell
@@ -242,6 +243,8 @@ frame to the next available font allowing quick assessment of different fonts.
        (load-theme 'monokai t))
       ((file-exists-p "~/.theme-dracula")
        (load-theme 'dracula t))
+      ((file-exists-p "~/.theme-nord")
+       (load-theme 'nord t))
       ((file-exists-p "~/.theme-zenburn")
        (load-theme 'zenburn t))
       ((file-exists-p "~/.theme-onedark")

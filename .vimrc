@@ -33,6 +33,7 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'joshdick/onedark.vim'
 Plugin 'fatih/vim-go'
+Plugin 'arcticicestudio/nord-vim'
 " This is curremtly broken on Catalina
 "Plugin 'zxqfl/tabnine-vim'
 
@@ -79,6 +80,8 @@ elseif filereadable($HOME . "/.theme-dracula")
 elseif filereadable($HOME . "/.theme-zenburn")
   colorscheme zenburn
   let g:airline_theme = 'zenburn'
+elseif filereadable($HOME . "/.theme-nord")
+  colorscheme nord
 elseif filereadable($HOME . "/.theme-codedark")
   colorscheme codedark
   let g:airline_theme = 'codedark'
