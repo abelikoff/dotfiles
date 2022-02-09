@@ -33,3 +33,6 @@ if grep -i lenovo /sys/devices/virtual/dmi/id/sys_vendor > /dev/null 2>&1; then
         xinput set-prop 14 $prop 1
     fi
 fi
+
+# This needs to be in ~/.profile in order to be set in i3
+export CALIBRE_USE_DARK_PALETTE=1
