@@ -1,3 +1,6 @@
+;;; If getting MELPA/ELPA errors, uncomment the following line
+;;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 ;;; figure out what system we are on
 ;;; (need it for window sizing and font selection)
 
