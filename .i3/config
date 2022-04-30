@@ -115,7 +115,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # lock screen (xss-lock/i3lock work with sleep mode)
 # https://www.reddit.com/r/i3wm/comments/msg2bm/lock_screen_with_i3lock_when_laptop_lid_is_closed/
 bindsym $mod+Control+l exec i3lock -d --image $HOME/Pictures/lockscreen.png
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --image $HOME/Pictures/lockscreen.png
 
 # lock screen (xscreensaver mode)
 #exec xscreensaver
