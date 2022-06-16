@@ -79,6 +79,7 @@
                   tuareg
                   use-package
                   web-mode
+                  yaml-mode
                   yasnippet
                   yasnippet-snippets
                   zenburn-theme))
@@ -216,7 +217,7 @@ frame to the next available font allowing quick assessment of different fonts.
 (defconst my-default-fg-color "Gray")
 
 (setq default-frame-alist
-      `((width . 90)
+      `((width . 130)
         (height . ,my-default-height)
         ;;(menu-bar-lines . 0)
         (tool-bar-lines . 0)
