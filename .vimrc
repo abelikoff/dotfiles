@@ -107,10 +107,10 @@ if has("gui_running")
 
   if has("gui_win32")
     "set guifont=Hack:h10
-    set guifont=Berkeley\ Mono:h10
+    set guifont=Berkeley\ Mono:h11
   else
     "set guifont=Hack\ 10
-    set guifont=Berkeley\ Mono\ 12
+    set guifont=Berkeley\ Mono\ 11
   endif
 
   set guioptions-=T     " remove toolbar
