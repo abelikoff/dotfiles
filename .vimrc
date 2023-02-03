@@ -106,9 +106,11 @@ if has("gui_running")
   set columns=80
 
   if has("gui_win32")
-    set guifont=Hack:h10
+    "set guifont=Hack:h10
+    set guifont=Berkeley\ Mono:h10
   else
-    set guifont=Hack\ 10
+    "set guifont=Hack\ 10
+    set guifont=Berkeley\ Mono\ 12
   endif
 
   set guioptions-=T     " remove toolbar
@@ -212,4 +214,3 @@ let s:local_script = $HOME . "/.vimrc.local"
 if filereadable(s:local_script)
   execute 'source' s:local_script
 endif
-
