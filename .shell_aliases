@@ -70,7 +70,7 @@ if [[ $PWD != */rpmbuild/* ]]; then
     function cdf {
         typeset fpath short_path
 
-        fpath=$(find ~/devel -name "$1" | grep -v /.git | head -1)
+        fpath=$(find ~/devel -name "$1" | egrep -v '(/.git|/venvs/)' | head -1)
 
         if [[ -f $fpath ]]; then
             fpath=$(dirname $fpath)
