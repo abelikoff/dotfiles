@@ -52,6 +52,7 @@
 (package-initialize)
 
 (let ((packages '(
+                  apache-mode
                   atom-one-dark-theme
                   column-enforce-mode
                   dracula-theme
