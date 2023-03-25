@@ -30,6 +30,12 @@ alias lrpm='rpm -qvlp'
 alias m='less -i -r -M'
 alias myip="curl -s checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'"
 alias mv='mv -i'
+
+if [ $(uname) = Linux ]; then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+fi
+
 alias po='popd'
 alias pu='pushd'
 alias R='R --no-save -q'
