@@ -12,6 +12,7 @@ else
 fi
 
 #alias btd='btdownloadcurses.bittorrent'
+alias cdw='cd ~/Downloads'
 alias cln='rm *~'
 alias cp='cp -i'
 alias e='emacsclient -c'
