@@ -43,6 +43,10 @@ alias R='R --no-save -q'
 alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
 alias tf='tail -f'
 
+tfc () {
+    tail -f "$@" | ccze -A
+}
+
 if [ $(uname) = Darwin ]; then
     alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
     alias op='open .'
