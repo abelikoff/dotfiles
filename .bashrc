@@ -141,6 +141,17 @@ export ALTERNATE_EDITOR=""
 export EDITOR="vim"
 export VISUAL="vim"
 
-for file in ~/.shell_vars ~/.shell_aliases ~/.shell_paths ~/.bashrc.local; do
-    test -f $file && . $file || true
-done
+if [[ -d ~/.shell.d ]]; then
+    for file in ~/.shell.d/*; do
+        if [[ $file == */README ]]; then
+            continue
+        fi
+
+        . $file
+    done
+else
+    for file in ~/.shell_vars ~/.shell_aliases ~/.shell_paths ~/.bashrc.local; do
+        test -f $file && . $file || true
+    done
+fi
+

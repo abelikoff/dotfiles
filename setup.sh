@@ -17,9 +17,10 @@ CONF_FILES=".astylerc
             .pylintrc
             .Rprofile
             .screenrc
-            .shell_aliases
-            .shell_paths
-            .shell_vars
+            .shell.d/README
+            .shell.d/10_vars.sh
+            .shell.d/11_paths.sh
+            .shell.d/12_aliases.sh
             .tidyrc
             .tmux.conf
             .tmux.dracula.sh
@@ -215,9 +216,9 @@ if [[ ! -d ~/.oh-my-zsh ]]; then
     run_command sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-if [[ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
-    run_command git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-fi
+#if [[ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
+#    run_command git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+#fi
 
 if [[ ! -d ~/.tmux/plugins ]]; then
     run_command git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
