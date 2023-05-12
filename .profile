@@ -33,7 +33,7 @@ if grep -i lenovo /sys/devices/virtual/dmi/id/sys_vendor > /dev/null 2>&1; then
         xinput set-prop 14 $prop 1
     fi
 
-elif grep -i Dell /sys/devices/virtual/dmi/id/sys_vendor > /dev/null 2>&1; then
+elif grep -i Inspiron /sys/devices/virtual/dmi/id/product_family > /dev/null 2>&1; then
     prop=$(xinput list-props 10 | awk -F'[()]' '$1 ~ /libinput Tapping Enabled[ \t]*$/ && $3 ~ /0$/ {print $2}')
 
     if [ -n $prop ]; then
