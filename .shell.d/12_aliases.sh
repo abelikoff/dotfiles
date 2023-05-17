@@ -17,9 +17,24 @@ alias cln='rm *~'
 alias cp='cp -i'
 alias e='emacsclient -c'
 alias et='emacsclient -t'
-alias ev='env | grep $@'
+
+ev () {
+    env | grep "$@"
+}
+
 alias fdd='find_dups -c "`pwd`/"'
 alias gdw='git diff -w'
+
+where glg > /dev/null && unalias glg
+
+glg () {
+    git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(dim white)- %s%C(reset)' --all "$@"
+}
+
+gls () {
+    git log --stat "$@"
+}
+
 alias grep='grep --color'
 alias hn=hostname
 alias la='ls -a'
