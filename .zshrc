@@ -84,6 +84,9 @@ setopt HIST_IGNORE_ALL_DUPS
 unsetopt INC_APPEND_HISTORY
 
 
+# auto-rehash commands in path
+zstyle ':completion:*' rehash true
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
