@@ -66,7 +66,9 @@ fi
 
 # Homebrew
 
-if [ -d $HOME/tools/brew ]; then
+if [ -d /opt/homebrew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -d $HOME/tools/brew ]; then
     PATH=$HOME/tools/brew/opt/python/libexec/bin:$HOME/tools/brew/bin:$PATH
 fi
 
