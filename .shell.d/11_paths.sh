@@ -7,6 +7,11 @@ if [ -d $HOME/bin ]; then
 fi
 
 
+# most used paths
+
+export CDPATH=$HOME:$HOME/devel:$HOME/devel/bitbucket:$HOME/devel/git:$HOME/devel/github
+
+
 # Google cloud SDK
 
 if [ -d $HOME/devel/google-cloud-sdk ]; then
