@@ -9,18 +9,26 @@ fi
 
 # most used paths
 
-export CDPATH=$HOME:$HOME/devel:$HOME/devel/bitbucket:$HOME/devel/git:$HOME/devel/github
+CDPATH=$HOME:$HOME/devel:$HOME/devel/bitbucket:$HOME/devel/git:$HOME/devel/github
+
+if [ -d /var/www/sites ]; then
+    CDPATH=$CDPATH:/var/www/sites
+elif [ -d /var/www/html ]; then
+    CDPATH=$CDPATH:/var/www/html
+fi
+
+export CDPATH
 
 
 # Google cloud SDK
 
-if [ -d $HOME/devel/google-cloud-sdk ]; then
+if [ -d $HOME/devel/tools/google-cloud-sdk ]; then
     if [ -n "$ZSH_VERSION" ]; then
-        source $HOME/devel/google-cloud-sdk/path.zsh.inc
-        source $HOME/devel/google-cloud-sdk/completion.zsh.inc
+        source $HOME/devel/tools/google-cloud-sdk/path.zsh.inc
+        source $HOME/devel/tools/google-cloud-sdk/completion.zsh.inc
     elif [ -n "$BASH_VERSION" ]; then
-        source $HOME/devel/google-cloud-sdk/path.bash.inc
-        source $HOME/devel/google-cloud-sdk/completion.bash.inc
+        source $HOME/devel/tools/google-cloud-sdk/path.bash.inc
+        source $HOME/devel/tools/google-cloud-sdk/completion.bash.inc
     fi
 fi
 
