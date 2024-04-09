@@ -70,6 +70,7 @@ DEFAULT_USER=${USER:-abel}
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+zstyle ':vcs_info:*' disable hg hg-git hg-hgsvn
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
@@ -86,6 +87,9 @@ unsetopt INC_APPEND_HISTORY
 
 # auto-rehash commands in path
 zstyle ':completion:*' rehash true
+
+# disable checks for VCS I don't use
+zstyle ':vcs_info:*' enable git svn
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
