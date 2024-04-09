@@ -26,6 +26,18 @@ URxvt*loginShell: true
 URxvt*fading:  30
 URxvt.intensityStyles: false
 URxvt.geometry: 100x50
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.secondaryWheel: 1
+URxvt.letterSpace: -1
+URxvt.print-pipe: "cat > /dev/null"
+URxvt.perl-ext-common: default,matcher,tabbed
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.tabbed.tabbar-bg: -1
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tab-fg: 3
+URxvt.tabbed.tab-bg: -1
 
 
 ! Dracula Xresources palette
