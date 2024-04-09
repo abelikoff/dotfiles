@@ -6,31 +6,57 @@ xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
 xterm*termName:             xterm-color
 xterm*eightBitInput:        false
 
-! Zenburn
+! urxvt
 
-xterm*background:           #3f3f3f
-xterm*foreground:           #dcdccc
-!black
-xterm*color0:         #353535
-xterm*color8:         #666666
-!red
-xterm*color1:         #AE4747
-xterm*color9:         #EE6363
-!green
-xterm*color2:         #556B2F
-xterm*color10:        #9ACD32
-!brown/yellow
-xterm*color3:         #DAA520
-xterm*color11:        #FFC125
-!blue
-xterm*color4:         #6F99B4
-xterm*color12:        #7C96B0
-!magenta
-xterm*color5:         #8B7B8B
-xterm*color13:        #D8BFD8
-!cyan
-xterm*color6:         #A7A15E
-xterm*color14:        #F0E68C
-!white
-xterm*color7:         #DDDDDD
-xterm*color15:        #FFFFFF
+! URxvt.font: \
+!             xft:Comic Mono:style=Normal:antialias=true:size=16:minspace=False, \
+!             xft:UbuntuMono Nerd Font Mono:style=Regular:antialias=true:size=16:minspace=False, \
+!             xft:SauceCodePro Nerd Font:style=Regular:antialias=true:size=16:minspace=False, \
+!             xft:DejaVuSansMono Nerd Font:antialias=true:size=16:minspace=False, \
+!             xft:DroidSansMono Nerd Font Mono:antialias=true:size=16, \
+!             xft:FuraMono NF:size=16:antialias=true:minspace=False, \
+!             xft:RobotoMono Nerd Font:antialias=true:size=16:minspace=False, \
+!             xft:Noto Sans Mono:antialias=true:size=16:minspace=False, \
+!             xft:Monospace:style=Medium:antialias=true:minspace=False
+URxvt*font: xft:Berkeley Mono:style=Normal:antialias=true:size=11:minspace=False
+URxvt*boldFont: xft:Berkeley Mono:style=Bold:antialias=true:size=11:minspace=False
+URxvt*scrollBar: false
+URxvt*cursorBlink: true
+URxvt*loginShell: true
+URxvt*fading:  30
+URxvt.intensityStyles: false
+URxvt.geometry: 100x50
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.secondaryWheel: 1
+URxvt.letterSpace: -1
+URxvt.print-pipe: "cat > /dev/null"
+URxvt.perl-ext-common: default,matcher,tabbed
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.tabbed.tabbar-bg: -1
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tab-fg: 3
+URxvt.tabbed.tab-bg: -1
+
+
+! Dracula Xresources palette
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #000000
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15:    #E6E6E6
+
