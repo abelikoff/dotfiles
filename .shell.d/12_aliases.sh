@@ -11,6 +11,7 @@ else
     fi
 fi
 
+alias b='batcat'
 #alias btd='btdownloadcurses.bittorrent'
 alias cdw='cd ~/Downloads'
 alias cln='rm *~'
