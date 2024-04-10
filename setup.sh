@@ -49,6 +49,11 @@ function install_file {
 
     cd $tgt_dir || return
 
+    if [[ ! -e $fname ]]; then
+	warning "removing broken symlink $fname"
+	rm -f $fname
+    fi
+
     if [[ -L $fname ]]; then
         old_src_file="$(readlink $fname)"
 
@@ -161,7 +166,7 @@ dry_run=1
 
 while getopts ":fhiVv" opt ; do
     case $opt in
-        f) unset dry_run
+        f) dry_run=""
            ;;
 
         h) usage
@@ -204,6 +209,7 @@ BACKUP_DIR=~/CONFIG_BACKUP.$(date +"%Y%m%d-%H%M%S")
 readonly SRC_DIR=$VC_TOP/deploy
 
 find $SRC_DIR -type f | while read full_path; do
+
     filename="$(basename $full_path)"
     dir="$(dirname $full_path)"
     dir=${dir##$SRC_DIR}
