@@ -2,45 +2,18 @@
 
 # set up configuration files
 
+readonly program_name=${0##*/}
+readonly program_version=2.0
 
-CONF_FILES=".astylerc
-            .bashrc
-            .dircolors
-            .emacs
-            .gitconfig
-            .inputrc
-            .i3
-            .i3-workspace
-            .i3blocks.conf
-            .ocamlinit
-            .profile
-            .pylintrc
-            .Rprofile
-            .screenrc
-            .shell.d/README
-            .shell.d/10_vars.sh
-            .shell.d/11_paths.sh
-            .shell.d/12_aliases.sh
-            .tidyrc
-            .tmux.conf
-            .tmux.dracula.sh
-            .vimrc
-            .xscreensaver
-            .Xresources
-            .zshrc
-            .config/rofi/config
-            bin/i3_local_setup.sh
-            bin/i3_setxkb.sh
-            bin/toggle_touchpad
-            lib/latex/mathmacros.sty"
-
-prog=${0##*/}
-version=1.0
+shopt -s failglob               # fail upon non-matched globs
+#set -e                          # abort on first error
+set -u                          # disallow undefined variables
+set -o pipefail                 # fail the pipe if one component fails
 
 
 function run_command {
     if [[ -n $dry_run ]]; then
-        echo WILL RUN: $@
+        notice WILL RUN: $@
 
     elif [[ -n $do_prompt ]]; then
         echo -n "Run command [" $@ "]? (y/N) "
@@ -80,18 +53,18 @@ function install_file {
         old_src_file="$(readlink $fname)"
 
         if [[ $src_file == $old_src_file ]]; then
-            verbose "NOTICE: $file is already set up correctly - skipping."
+            verbose "$file is already set up correctly - skipping."
             return
         fi
     fi
 
     if [[ -e $fname ]]; then
-        if diff -w $fname $src_file > /dev/null; then
-            echo "NOTICE: $file is same as target - not backing up" >&2
+        if diff -w $fname $src_file > /dev/null 2>&1; then
+            verbose "$file is same as target - not backing up" >&2
             run_command rm -f $fname
         else
             run_command mkdir -p $backup_dir
-            echo "NOTICE: $file will be saved to $BACKUP_DIR" >&2
+            notice "$file will be saved to $BACKUP_DIR" >&2
             run_command mv $fname $backup_dir/
         fi
     fi
@@ -103,12 +76,12 @@ function install_file {
 
 function usage {
     echo "
-    Usage:  $prog  [options]
+    Usage:  $program_name  [options]
 
-$prog sets up configuration files
+$program_name sets up configuration files
 
 
-$prog supports the following options:
+$program_name supports the following options:
 
     -f                        - perform changes (default: dry run)
     -i                        - prompt interactively for each change
@@ -121,35 +94,69 @@ $prog supports the following options:
 }
 
 
-function debug {
-    [[ -n $do_debug ]] && echo "DEBUG: " $@
+verbose() {
+    if [[ -n $verbose_mode ]]; then
+        echo "$@"
+    fi
 }
 
 
-function verbose {
-    [[ -n $do_verbose ]] && echo $@
+debug() {
+    if [[ -n $debug_mode ]]; then
+        echo "$@"
+    fi
 }
 
 
-function error {
-    echo "$prog: ERROR:" $@ >&2
+error() {
+    echo -e "${color_red}ERROR:" "$@" "${color_none}" >&2
 }
 
 
-function fatal {
-    error $@
+fatal() {
+    error "$@"
     exit 1
 }
 
 
-function warning {
-    echo "$prog: WARNING:" $@ >&2
+warning() {
+    echo -e "${color_yellow}WARNING:" "$@" "${color_none}" >&2
 }
+
+
+notice() {
+    echo -e "${color_cyan}$@" "${color_none}" >&2
+}
+
+
+cleanup() {
+  trap - SIGINT SIGTERM ERR EXIT
+  # script cleanup here
+}
+
+
+setup_colors() {
+  if [[ -t 2 ]] && [[ -z "${NO_COLOR-}" ]] && [[ "${TERM-}" != "dumb" ]]; then
+    color_none='[0m' color_red='[0;31m' color_green='[0;32m'
+    color_orange='[0;33m' color_blue='[0;34m' color_purple='[0;35m'
+    color_cyan='[0;36m' color_yellow='[1;33m'
+  else
+    color_none='' color_red='' color_green='' color_orange='' color_blue=''
+    color_purple='' color_cyan='' color_yellow=''
+  fi
+
+  readonly color_none color_red color_green color_orange color_blue \
+    color_purple color_cyan color_yellow
+}
+
+
+setup_colors
 
 
 # parse options
 
-unset do_verbose do_prompt
+verbose_mode=""
+do_prompt=""
 dry_run=1
 
 while getopts ":fhiVv" opt ; do
@@ -165,11 +172,11 @@ while getopts ":fhiVv" opt ; do
            unset dry_run
            ;;
 
-        V) echo "$prog $version"
+        V) echo "$program_name $program_version"
            exit 0
            ;;
 
-        v) do_verbose=1
+        v) verbose_mode=1
            ;;
 
         :) fatal "option '-$OPTARG' requires an argument"
@@ -194,31 +201,33 @@ cd ~ || exit 1
 VC_TOP=${VC_TOP##./}            # remove leading ./
 VC_TOP=${VC_TOP##$(pwd)/}       # change to relative path
 BACKUP_DIR=~/CONFIG_BACKUP.$(date +"%Y%m%d-%H%M%S")
+readonly SRC_DIR=$VC_TOP/deploy
 
-for file in $CONF_FILES; do
-    if [[ $file == */* ]]; then     # subdir
-        install_dir=$HOME/$(dirname $file)
-        path_back=$(echo $(dirname $file) | sed 's|[^/][^/]*|..|g')
-        vc_dir=${path_back}/${VC_TOP}
+find $SRC_DIR -type f | while read full_path; do
+    filename="$(basename $full_path)"
+    dir="$(dirname $full_path)"
+    dir=${dir##$SRC_DIR}
+    dir=${dir#/}
+
+    if [[ -n $dir ]]; then
+        install_dir="$HOME/$dir"
+        path_back=$(echo $dir | sed 's|[^/][^/]*|..|g')
+        vc_dir=${path_back}/${VC_TOP}/deploy/$dir
     else
         install_dir=$HOME
-        vc_dir=$VC_TOP
+        vc_dir=$VC_TOP/deploy
     fi
 
-    install_file $file $install_dir $vc_dir $BACKUP_DIR
-
-    if [[ $file == .vimrc && ! -d ~/.vim//bundle/Vundle.vim ]]; then
-        run_command git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    fi
+    install_file $filename $install_dir $vc_dir $BACKUP_DIR
 done
+
+if [[ ! -d ~/.vim//bundle/Vundle.vim ]]; then
+    run_command git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
 
 if [[ ! -d ~/.oh-my-zsh ]]; then
     run_command sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
-
-#if [[ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
-#    run_command git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-#fi
 
 if [[ ! -d ~/.tmux/plugins ]]; then
     run_command git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
