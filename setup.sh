@@ -37,6 +37,11 @@ function install_file {
     src_file=$vc_dir/$file
     fname=$(basename $file)
 
+    if [[ ! -e $tgt_dir ]]; then
+        warning "removing broken symlink $tgt_dir"
+        rm -f $tgt_dir
+    fi
+
     if [[ ! -d $tgt_dir ]]; then
         run_command mkdir -p $tgt_dir
 
@@ -50,8 +55,8 @@ function install_file {
     cd $tgt_dir || return
 
     if [[ ! -e $fname ]]; then
-	warning "removing broken symlink $fname"
-	rm -f $fname
+        warning "removing broken symlink $fname"
+        rm -f $fname
     fi
 
     if [[ -L $fname ]]; then
@@ -209,7 +214,6 @@ BACKUP_DIR=~/CONFIG_BACKUP.$(date +"%Y%m%d-%H%M%S")
 readonly SRC_DIR=$VC_TOP/deploy
 
 find $SRC_DIR -type f | while read full_path; do
-
     filename="$(basename $full_path)"
     dir="$(dirname $full_path)"
     dir=${dir##$SRC_DIR}
@@ -227,7 +231,11 @@ find $SRC_DIR -type f | while read full_path; do
     install_file $filename $install_dir $vc_dir $BACKUP_DIR
 done
 
-if [[ ! -d ~/.vim//bundle/Vundle.vim ]]; then
+if [[ ! -d ~/.i3-workspace ]]; then
+    run_command mkdir ~/.i3-workspace
+fi
+
+if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
     run_command git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
@@ -237,4 +245,5 @@ fi
 
 if [[ ! -d ~/.tmux/plugins ]]; then
     run_command git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    notice "Make sure to run Ctrl-B I from within tmux"
 fi
