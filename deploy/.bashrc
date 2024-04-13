@@ -48,6 +48,8 @@ if [ "$TERM" = "xterm" ]; then
     fi
 
     export TERM
+elif [[ ( -n "$SSH_CLIENT" || -n "$SSH_TTY" ) && "$TERM" = "xterm-kitty" ]]; then
+    export TERM=xterm-256color
 fi
 
 ## set a fancy prompt (non-color, unless we know we "want" color)
