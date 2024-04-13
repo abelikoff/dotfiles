@@ -239,8 +239,12 @@ if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
     run_command git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
-if [[ ! -d ~/.oh-my-zsh ]]; then
-    run_command sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if type zsh > /dev/null 2>&1 ; then
+    if [[ ! -d ~/.oh-my-zsh ]]; then
+        run_command sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+else
+    notice "ZSH not installed -- skipping Oh my ZSH installation"
 fi
 
 if [[ ! -d ~/.tmux/plugins ]]; then
