@@ -4,7 +4,6 @@ if [[ -f /etc/bashrc ]]; then
     . /etc/bashrc
 fi
 
-
 # only execute for interactive sessions
 
 [ -z "$PS1" ] && return
@@ -21,11 +20,9 @@ HISTIGNORE='ls:bg:fg:history:exit'
 HISTTIMEFORMAT=$(echo -e "\033[0;34m %F %T\033[0;33m  ")
 PROMPT_COMMAND='history -a'
 
-
 # cd helpers
 
 shopt -s cdspell
-
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -48,7 +45,7 @@ if [ "$TERM" = "xterm" ]; then
     fi
 
     export TERM
-elif [[ ( -n "$SSH_CLIENT" || -n "$SSH_TTY" ) && "$TERM" = "xterm-kitty" ]]; then
+elif [[ (-n "$SSH_CLIENT" || -n "$SSH_TTY") && "$TERM" = "xterm-kitty" ]]; then
     export TERM=xterm-256color
 fi
 
@@ -101,12 +98,9 @@ elif [ $(uname) = "Darwin" ]; then
     alias ls='ls -h -G'
 fi
 
-
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
@@ -130,10 +124,9 @@ export PS1
 
 umask 022
 
-
 # useful settings
 
-export GREP_COLOR="43;30"
+export GREP_COLORS='mt=43;30'
 
 # use emacscliet
 #export ALTERNATE_EDITOR=""
@@ -156,4 +149,3 @@ else
         test -f $file && . $file || true
     done
 fi
-
