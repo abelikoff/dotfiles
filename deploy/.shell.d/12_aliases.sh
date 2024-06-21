@@ -2,7 +2,7 @@
 
 # shell aliases
 
-if [ "`whoami`" = root ]; then
+if [ "$(whoami)" = root ]; then
     alias rm='rm -i'
 
 else
@@ -135,7 +135,7 @@ if [[ $PWD != */rpmbuild/* ]]; then
         rc=0
 
         for file in "$@"; do
-            cp -a "$file" "$file.`date +%Y%m%d-%H%M`" || rc=1
+            cp -av "$file" "$file.$(date +%Y%m%d-%H%M)" || rc=1
         done
 
         return $rc

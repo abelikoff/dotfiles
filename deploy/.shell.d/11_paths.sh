@@ -67,8 +67,8 @@ fi
 
 # Golang
 
-if [ -d /usr/local/go ]; then
-    PATH=/usr/local/go/bin:$PATH
+if [ -d /opt/go ]; then
+    PATH=/opt/go/bin:$PATH
 fi
 
 if [ -d $HOME/tools/go ]; then
