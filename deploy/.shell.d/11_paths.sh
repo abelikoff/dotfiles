@@ -107,6 +107,13 @@ if which pyenv > /dev/null 2>&1; then
 fi
 
 
+# Pipx
+
+if [[ -d $HOME/.local/bin ]]; then
+    PATH=$PATH:$HOME/.local/bin
+fi
+
+
 # R
 
 if [ -d $HOME/lib/R ]; then
