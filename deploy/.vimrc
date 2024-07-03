@@ -143,9 +143,8 @@ map Q gq
 
 scriptencoding utf-8
 set encoding=utf-8
-"set list listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
-"set list listchars=trail:·,precedes:«,extends:»,tab:▸▸
-set list listchars=trail:·,precedes:«,extends:»,tab:▸·
+set showbreak=↪\
+set list listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:»,precedes:«
 
 " mark columns beyond 80
 "let &colorcolumn=join(range(80,999),",")
@@ -167,6 +166,7 @@ if has("autocmd")
 
   " In text files, always limit the width of text to 78 characters
   autocmd BufRead *.txt set tw=78
+  autocmd BufRead *.go set nolist
 
   " When editing a file, always jump to the last cursor position
   autocmd BufReadPost *
