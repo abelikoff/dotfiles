@@ -1,5 +1,4 @@
 GRC=$(which grc)
-echo here
 
 if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
     alias grc_colorize="$GRC -es --colour=auto"
@@ -22,4 +21,3 @@ if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
     alias mtr='grc_colorize mtr'
     alias df='grc_colorize df'
 fi
-
