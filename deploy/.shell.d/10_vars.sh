@@ -14,5 +14,6 @@ fi
 
 export CALIBRE_USE_DARK_PALETTE=1
 
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 # vi: ft=bash
