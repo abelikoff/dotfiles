@@ -135,7 +135,7 @@ if [[ $PWD != */rpmbuild/* ]]; then
         rc=0
 
         for file in "$@"; do
-            cp -av "$file" "$file.$(date +%Y%m%d-%H%M)" || rc=1
+            mv -v "$file" "$file.$(date +%Y%m%d-%H%M)" || rc=1
         done
 
         return $rc
