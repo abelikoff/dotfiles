@@ -129,13 +129,17 @@ if [[ $PWD != */rpmbuild/* ]]; then
     }
 
     function fbk {
-        typeset file
-        typeset rc
-
-        rc=0
+        local file
+        local basename
+        local ext
+        local new_name
+        local rc=0
 
         for file in "$@"; do
-            mv -v "$file" "$file.$(date +%Y%m%d-%H%M)" || rc=1
+            basename="${file%.*}"
+            ext="${file##*.}"
+            new_name="${basename}_$(date +%Y%m%d-%H%M).$ext"
+            mv -v "$file" "$new_name" || rc=1
         done
 
         return $rc
