@@ -43,28 +43,6 @@ for dir in $HOME/tools/flutter $HOME/snap/flutter/common/flutter; do
 done
 
 
-# fzf
-
-if [ -n "$ZSH_VERSION" ]; then
-    if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
-        source /usr/share/doc/fzf/examples/key-bindings.zsh
-    fi
-
-    if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
-        source /usr/share/doc/fzf/examples/completion.zsh
-    fi
-
-elif [ -n "$BASH_VERSION" ]; then
-    if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
-        source /usr/share/doc/fzf/examples/key-bindings.bash
-    fi
-
-    if [ -f /usr/share/doc/fzf/examples/completion.bash ]; then
-        source /usr/share/doc/fzf/examples/completion.bash
-    fi
-fi
-
-
 # Golang
 
 if [ -d /opt/go ]; then
