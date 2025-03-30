@@ -126,9 +126,5 @@ if [[ -d ~/.shell.d ]]; then
 
         . $file
     done
-else
-    for file in ~/.shell_vars ~/.shell_aliases ~/.shell_paths ~/.zshrc.local; do
-        test -f $file && . $file || true
-    done
 fi
 
