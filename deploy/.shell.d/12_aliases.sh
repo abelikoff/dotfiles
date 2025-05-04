@@ -80,6 +80,8 @@ function xurls {
         sed -e 's|^href=.||gi' -e 's|[\"'"'"'].*||' | grep -i http
 }
 
+alias ytdf='yt-dlp --cookies-from-browser firefox'
+
 
 # this is a hack for RPM building. /usr/sbin/Check (invoked by rpmbuild) is
 # an sh script but it sources the environment and fails on bash/ksh function
