@@ -12,8 +12,8 @@ else
 fi
 
 alias b='batcat'
-#alias btd='btdownloadcurses.bittorrent'
-alias cdw='cd ~/Downloads'
+alias cdd='cd ~/Downloads'
+alias cdw='cd ~/work'
 alias cln='rm *~'
 alias cp='cp -i'
 alias e='emacsclient -c'
@@ -39,10 +39,8 @@ gls () {
 alias grep='grep --color'
 alias hn=hostname
 alias la='ls -a'
-alias lh='ls -lH'
 alias latr='ls -latr'
-alias ll='ls -l'
-function loc() { locate -i -0 "$1" | xargs --null ls -sd ; }
+alias ll='/bin/ls -lh --color=auto'
 alias lrpm='rpm -qvlp'
 alias m='less -i -r -M'
 alias myip="curl -s checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'"
@@ -56,7 +54,6 @@ fi
 alias po='popd'
 alias pu='pushd'
 alias R='R --no-save -q'
-alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
 alias tf='tail -f'
 
 tfc () {
@@ -72,6 +69,7 @@ fi
 
 
 if [[ -f /etc/redhat-release ]]; then
+    alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
     alias vi='vim'
 fi
 
