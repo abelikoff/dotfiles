@@ -70,10 +70,22 @@ DEFAULT_USER=${USER:-abel}
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-zstyle ':vcs_info:*' disable hg hg-git hg-hgsvn
+zstyle ':vcs_info:*' disable hg hg-git hg-hgsvn svn
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+
+# default completer is extremely slow on SMB shares with many files. Here we
+# disable it for any paths starting with /mnt
+
+zstyle -e ':completion:*' matcher-list '
+  if [[ "$PREFIX" == /mnt(|/*) ]]; then
+    reply=("")
+  else
+    reply=( "m:{a-zA-Z}={A-Za-z}" )
+  fi
+'
 
 # User configuration
 
@@ -88,8 +100,11 @@ unsetopt INC_APPEND_HISTORY
 # auto-rehash commands in path
 zstyle ':completion:*' rehash true
 
+# sped up completion on SMB shares
+#zstyle ':completion:*' matcher-list ''
+
 # disable checks for VCS I don't use
-zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' enable git
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
