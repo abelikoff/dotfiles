@@ -138,7 +138,8 @@ set expandtab
 set softtabstop=4
 set shiftwidth=4
 set smartindent
-set number
+set relativenumber
+set cursorline
 map Q gq
 
 scriptencoding utf-8
@@ -178,7 +179,7 @@ if has("autocmd")
   autocmd BufReadPost COMMIT_EDITMSG
         \ exe "normal! gg"
 
-  autocmd BufWrite * :Autoformat
+  autocmd BufWrite * if index(['yaml', 'anotherformat'], &filetype) < 0 | Autoformat | endif
 endif
 
 

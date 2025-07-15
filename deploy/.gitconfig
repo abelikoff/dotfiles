@@ -3,12 +3,15 @@
 [color]
   ui = auto
 [alias]
+  added = difftool --cached
+  br = branch
   ci = commit
   co = checkout
-  br = branch
+  d = diff -w
+  dw = diff --word-diff
+  lg = log --graph --decorate --pretty=oneline --abbrev-commit --stat
+  showtool = "!f() { git difftool $1^ $1; }; f"
   st = status
-    showtool = "!f() { git difftool $1^ $1; }; f"
-    added = difftool --cached
 [user]
   name = Alexander L. Belikoff
   email = alexander@belikoff.net
@@ -21,7 +24,6 @@
 [difftool]
     prompt = false
 [difftool "icdiff"]
-    #cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE
     cmd = icdiff --line-numbers $LOCAL $REMOTE
 [pager]
     difftool = true
