@@ -119,14 +119,11 @@ tfc() {
 
 if [ $(uname) = Darwin ]; then
     alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
-    alias op='open .'
-else
-    alias op='xdg-open . &'
 fi
 
 if [[ -f /etc/redhat-release ]]; then
     alias rpm-scripts='rpm -q --queryformat "*** pre-install:\n%{PREIN}\n\n*** post-install:\n%{POSTUN}\n"'
-    alias vi='vim'
+    rpmgrep() { rpm -qa | grep "$@"; }
 fi
 
 xurls() {
@@ -206,7 +203,6 @@ mkcd() {
 
 psnam() { ps auxw | grep "$@" | grep -v grep; }
 rpm_xtr() { rpm2cpio $1 | cpio -iv --make-directories; }
-rpmgrep() { rpm -qa | grep "$@"; }
 
 setapp() {
     if [[ -d $1 ]]; then
@@ -223,10 +219,16 @@ setappi() {
 }
 
 oo() {
+    local cmd="xdg-open"
+
+    if [ $(uname) = Darwin ]; then
+        cmd="open"
+    fi
+
     if [ $# -eq 0 ]; then
-        xdg-open . &
+        $cmd . &
     else
-        xdg-open "$@" &
+        $cmd "$@" &
     fi
 }
 
