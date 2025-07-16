@@ -32,6 +32,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'joshdick/onedark.vim'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'arcticicestudio/nord-vim'
 " This is curremtly broken on Catalina
@@ -117,6 +118,7 @@ if has("gui_running")
   set guioptions-=m     " remove menu
 endif
 
+"let g:mapleader = ";"
 set bs=2                " allow backspacing over everything in insert mode
 set ic                  " case-insensitive search
 set hlsearch            " highlite search results
@@ -129,6 +131,7 @@ set textwidth=80
 
 " disable bleeping
 set noerrorbells visualbell t_vb=
+
 if has('autocmd')
   autocmd GUIEnter * set visualbell t_vb=
 endif
@@ -151,14 +154,13 @@ set list listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:»,precedes:«
 "let &colorcolumn=join(range(80,999),",")
 "highlight ColorColumn ctermbg=235 guibg=#6272a4
 
-
 " allow switching of paste mode
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O><F2>
 set pastetoggle=<F2>
 
 
-" show Tabs
+" show Tab characters
 syntax match Tab /\t/
 hi Tab guibg=blue ctermbg=blue
 
