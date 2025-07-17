@@ -29,3 +29,7 @@
     cmd = icdiff --line-numbers $LOCAL $REMOTE
 [pager]
     difftool = true
+[init]
+    defaultBranch = main
+[include]
+    path = ~/.gitconfig.local
