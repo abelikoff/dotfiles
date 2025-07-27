@@ -93,14 +93,13 @@ gls() {
 }
 
 alias grep='grep --color'
-alias hn=hostname
+alias ipinfo="curl -s https://ipinfo.io"
 
 alias la='ls -a'
 alias latr='ls -latr'
 alias ll="$(which -a ls | grep -v alias | head -1) -lh --color=auto"
 alias lrpm='rpm -qvlp'
 alias m='less -i -r -M'
-alias myip="curl -s checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'"
 alias mv='mv -i'
 
 if [ $(uname) = Linux ]; then
@@ -110,7 +109,7 @@ fi
 
 alias po='popd'
 alias pu='pushd'
-alias R='R --no-save -q'
+#alias R='R --no-save -q'
 alias tf='tail -f'
 
 tfc() {
