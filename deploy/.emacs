@@ -71,7 +71,7 @@
                   markdown-mode
                   merlin
                   monokai-theme
-                  nord-theme
+                  nix-mode
                   ocp-indent
                   org-bullets
                   powershell
@@ -421,6 +421,9 @@ frame to the next available font allowing quick assessment of different fonts.
              :ensure t
              :commands yas-minor-mode
              :hook (go-mode . yas-minor-mode))
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
 
 ;;; GDB
 
