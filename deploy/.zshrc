@@ -89,7 +89,7 @@ zstyle -e ':completion:*' matcher-list '
 
 # User configuration
 
-HISTORY_IGNORE="(ls *|la *|ll|cd|pwd|exit|cd ..|vlc *|ssh-add)"
+HISTORY_IGNORE="(l[s,a,l]*|cd|git p?o|git pu[ll,sh] origin*|git ci -a|git [st*,diff]*|gdw|git diff *|pwd|exit|cd ..|vlc *|mpv[x,] *|ssh-add)"
 setopt HIST_IGNORE_SPACE
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
