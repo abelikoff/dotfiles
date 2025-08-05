@@ -79,6 +79,10 @@ if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
     source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
+if [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
 # default completer is extremely slow on SMB shares with many files. Here we
 # disable it for any paths starting with /mnt
 
