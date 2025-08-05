@@ -30,10 +30,12 @@ elif [[ -d /usr/share/doc/fzf/examples ]]; then
         fi
     fi
 
-elif [ -n "$(which fzf)" ]; then   # old way
+elif [ -n "$(which fzf)" ]; then # old way
     if [ -n "$ZSH_VERSION" ]; then
         source <(fzf --zsh)
     elif [ -n "$BASH_VERSION" ]; then
         eval "$(fzf --bash)"
     fi
 fi
+
+export FZF_DEFAULT_OPTS='--height 20% --border'
