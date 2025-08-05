@@ -75,6 +75,9 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 # default completer is extremely slow on SMB shares with many files. Here we
 # disable it for any paths starting with /mnt
