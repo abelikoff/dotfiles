@@ -1,0 +1,25 @@
+configuration {
+    /* Set the modes Rofi can use */
+    modi:               "drun,run,window";
+
+    /* Show application icons */
+    show-icons:         true;
+
+    /* Use the same Nerd Font as Polybar */
+    font:               "FiraCode Nerd Font 12";
+
+    /* Set the theme to a separate file */
+    theme:              "~/.config/rofi/theme.rasi";
+
+    /* Other settings */
+    icon-theme:         "Papirus"; /* Or your preferred icon theme */
+    terminal:           "kitty"; /* Or your terminal of choice */
+    drun-display-format: "{name}";
+    run-command:        "{cmd}";
+    window-format:      "{w} | {c} | {t}";
+}
+
+/*
+ * vi: ft=css
+ */
+
