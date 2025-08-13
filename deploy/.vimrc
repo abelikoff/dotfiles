@@ -25,8 +25,6 @@ call vundle#end()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'dracula/vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'tomasiser/vim-code-dark'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'sheerun/vim-polyglot'
@@ -35,8 +33,6 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
 Plugin 'arcticicestudio/nord-vim'
-" This is curremtly broken on Catalina
-"Plugin 'zxqfl/tabnine-vim'
 
 let g:airline_powerline_fonts = 1
 
