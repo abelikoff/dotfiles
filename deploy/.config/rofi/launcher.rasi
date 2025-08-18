@@ -1,0 +1,19 @@
+/*
+ * ~/.config/rofi/launcher.rasi
+ */
+
+configuration {
+    modi:                       "drun,run,window";
+    font:                       "Hack Nerd Font 12";
+    /* font:                       "JetBrainsMono Nerd Font 12";*/
+    show-icons:                 true;
+    icon-theme:                 "Papirus";
+    display-drun:               " Apps";
+    display-run:                " Run";
+    display-window:             " Windows";
+    drun-display-format:        "{name}";
+    sidebar-mode:               false;
+}
+
+@theme "themes/dracula.rasi"
+

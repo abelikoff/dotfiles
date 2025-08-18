@@ -1,0 +1,43 @@
+/*
+ * ~/.config/rofi/powermenu.rasi
+ */
+
+configuration {
+    /* The dmenu mode is used by the script */
+    modi: "dmenu";
+    show-icons: false;
+    font: "Hack Nerd Font 12";
+    /* font: "JetBrainsMono Nerd Font 12"; */
+}
+
+@theme "themes/dracula.rasi"
+
+/* Override theme settings for a smaller, centered window */
+window {
+    width: 300px;
+    height: 280px;
+    location: center;
+    anchor: center;
+    border: 2px;
+    border-radius: 8px;
+    border-color: @purple;
+}
+
+listview {
+    lines: 5; /* Should match the number of options in your script */
+    border: 0px;
+    padding: 20px 10px 20px 10px;
+}
+
+/* Hide the input bar, since we are just selecting options */
+inputbar {
+    enabled: false;
+}
+
+element-text {
+    horizontal-align: 0.5; /* Center the text */
+}
+
+/*
+ * vi: ft=css
+ */

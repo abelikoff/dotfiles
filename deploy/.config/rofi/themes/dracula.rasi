@@ -1,0 +1,107 @@
+/*
+ * ~/.config/rofi/themes/dracula.rasi
+ *
+ * Dracula theme for Rofi
+ */
+
+* {
+    /* Dracula Theme Colors */
+    background:     #282a36;
+    current-line:   #44475a;
+    foreground:     #f8f8f2;
+    comment:        #6272a4;
+    cyan:           #8be9fd;
+    green:          #50fa7b;
+    orange:         #ffb86c;
+    pink:           #ff79c6;
+    purple:         #bd93f9;
+    red:            #ff5555;
+    yellow:         #f1fa8c;
+
+    /* Other variables */
+    transparent:    rgba(0, 0, 0, 0);
+
+    /* Main-Colors */
+    background-color:           @transparent;
+    text-color:                 @foreground;
+
+    /* Other */
+    border-color:               @purple;
+    spacing:                    2;
+}
+
+window {
+    background-color:           @background;
+    border:                     2px;
+    border-radius:              8px;
+    border-color:               @border-color;
+    padding:                    16px;
+    width:                      600px;
+}
+
+mainbox {
+    border:                     0;
+    padding:                    0;
+}
+
+inputbar {
+    spacing:                    0;
+    text-color:                 @foreground;
+    padding:                    8px;
+    children:                   [ prompt, entry ];
+    background-color:           @current-line;
+    border-radius:              4px;
+    margin:                     0 0 16px 0;
+}
+
+case-indicator,
+entry,
+prompt {
+    spacing:                    0;
+    text-color:                 @foreground;
+}
+
+prompt {
+    margin:                     0 0.3em 0 0;
+    text-color:                 @purple;
+}
+
+listview {
+    fixed-height:               0;
+    border:                     2px 0 0;
+    border-color:               @border-color;
+    spacing:                    5px;
+    scrollbar:                  false;
+    padding:                    8px 0 0;
+    lines:                      8;
+}
+
+element {
+    border:                     0;
+    border-radius:              4px;
+    padding:                    8px;
+}
+
+element-text {
+    background-color:           inherit;
+    text-color:                 inherit;
+}
+
+element.normal.normal {
+    background-color:           @background;
+    text-color:                 @foreground;
+}
+
+element.selected.normal {
+    background-color:           @current-line;
+    text-color:                 @foreground;
+}
+
+element-icon {
+    size:                       1.5em;
+    padding:                    0 10px 0 0;
+}
+
+/*
+ * vi: ft=css
+ */
