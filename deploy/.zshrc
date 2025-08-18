@@ -150,3 +150,7 @@ if [[ -d ~/.shell.d ]]; then
     done
 fi
 
+if [[ -f ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi
+

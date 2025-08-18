@@ -144,8 +144,8 @@ if [[ -d ~/.shell.d ]]; then
 
         . $file
     done
-else
-    for file in ~/.shell_vars ~/.shell_aliases ~/.shell_paths ~/.bashrc.local; do
-        test -f $file && . $file || true
-    done
+fi
+
+if [[ -f ~/.bashrc.local ]]; then
+    . ~/.bashrc.local
 fi
