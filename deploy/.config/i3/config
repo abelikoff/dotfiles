@@ -67,7 +67,7 @@ bindsym $mod+d exec rofi -show drun -config ~/.config/rofi/launcher.rasi
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+l focus up
+#bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
