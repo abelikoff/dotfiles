@@ -194,12 +194,17 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
+# Set keyboard layouts and toggle
+exec --no-startup-id setxkbmap -layout us,ru -variant ",phonetic_mac" -option "grp:win_space_toggle"
+
+# Launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # set wallpaper
 exec --no-startup-id $HOME/bin/wpgallery.sh
 
 # start apps
+exec --no-startup-id pactl set-default-sink @DEFAULT_SINK@
 #exec --no-startup-id i3-msg "workspace 1; exec /usr/bin/x-terminal-emulator"
 
 # machine-specific setup
