@@ -84,10 +84,10 @@ if [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
 fi
 
 # default completer is extremely slow on SMB shares with many files. Here we
-# disable it for any paths starting with /mnt
+# disable it for any paths starting with /mnt/polygon/archive
 
 zstyle -e ':completion:*' matcher-list '
-  if [[ "$PREFIX" == /mnt(|/*) ]]; then
+  if [[ "$PREFIX" == /mnt/polygon/archive(|/*) ]]; then
     reply=("")
   else
     reply=( "m:{a-zA-Z}={A-Za-z}" )

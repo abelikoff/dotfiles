@@ -71,13 +71,6 @@ if [ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
 fi
 
 
-# OPAM
-
-if [ -d $HOME/.opam ]; then
-  . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-fi
-
-
 # pyenv
 
 if which pyenv > /dev/null 2>&1; then
