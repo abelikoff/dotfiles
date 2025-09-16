@@ -28,6 +28,7 @@ arv() {
         case "$1" in
         *.tar.bz2) tar tvjf "$1" ;;
         *.tar.gz) tar tvzf "$1" ;;
+        *.tar.zst) tar tvaf "$1" ;;
         *.rar) unrar l "$1" ;;
         *.tar) tar tvf "$1" ;;
         *.tbz2) tar tvjf "$1" ;;
@@ -51,6 +52,7 @@ arx() {
         case "$1" in
         *.tar.bz2) tar xjf "$1" ;;
         *.tar.gz) tar xzf "$1" ;;
+        *.tar.zst) tar xaf "$1" ;;
         *.bz2) bunzip2 "$1" ;;
         *.rar) unrar x "$1" ;;
         *.gz) gunzip "$1" ;;
