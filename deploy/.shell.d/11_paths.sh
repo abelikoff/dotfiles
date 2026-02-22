@@ -20,6 +20,18 @@ fi
 export CDPATH
 
 
+if [ -d $HOME/.local/bin ]; then
+    PATH=$PATH:$HOME/.local/bin
+fi
+
+
+# Antigravity
+
+if [ -d $HOME/.antigravity/antigravity/bin ]; then
+    PATH=$PATH:$HOME/.antigravity/antigravity/bin
+fi
+
+
 # Google cloud SDK
 
 if [ -d $HOME/devel/tools/google-cloud-sdk ]; then
