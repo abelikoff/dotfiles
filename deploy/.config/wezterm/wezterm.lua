@@ -2,7 +2,7 @@
 
 local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
-
+config.enable_wayland = false
 
 config.initial_cols = 100
 config.initial_rows = 45
