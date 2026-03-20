@@ -197,6 +197,9 @@ bindsym $mod+r mode "resize"
 # Set keyboard layouts and toggle
 exec --no-startup-id setxkbmap -layout us,ru -variant ",phonetic_mac" -option "grp:win_space_toggle"
 
+# Screensaver
+exec --no-startup-id xscreensaver
+
 # Launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 

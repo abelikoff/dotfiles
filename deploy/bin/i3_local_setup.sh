@@ -17,4 +17,5 @@ for x in 1 2 3 4; do
     fi
 done
 
-$ws_dir/start.sh
+exec $ws_dir/start.sh
+exit 1
