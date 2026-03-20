@@ -1,0 +1,79 @@
+format = """\
+$character$directory\
+[](fg:#1C3A5E bg:#3B76F0)\
+$git_branch\
+$git_status\
+$git_metrics\
+"""
+
+right_format = """[](fg:#333399)\
+[ ](bg:#333399)\
+$status\
+${custom.user_prefix}\
+$hostname[ ](fg:#1C3A5E bg:#333399)\
+[ ](fg:#7DF9AA bg:#1C3A5E)\
+$time\
+[](fg:#1C3A5E)\
+"""
+
+[custom.user_prefix]
+# This checks if the user is NOT abel. If so, it prints the username + @
+command = 'if [ "$USER" != "abel" ]; then echo -n "$USER"; fi'
+when = "true" # Always run the check
+shell = ["sh"]
+style = "fg:#7DF9AA bg:#333399"
+format = "[$output]($style)"
+
+[hostname]
+ssh_only = true
+trim_at = "."
+style = "fg:#7DF9AA bg:#1C3A5E"
+format = "[@$hostname]($style)"
+disabled = false
+
+[directory]
+#format = "[ aa \uf07c $path ]($style)"
+style = "fg:#7DF9AA bg:#1C3A5E"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+symbol = "⎇  "
+style = "fg:#E4E4E4 bg:#3B76F0"
+
+[git_status]
+format = '($all_status$ahead_behind )'
+conflicted = "[! ](fg:#1C3A5E bg:#ff3399)[](fg:#ff3399)"
+modified = "[* ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+ahead = "[⇡ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+behind = "[⇣ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+diverged = "[⇕ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+untracked = "[? ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+stashed = "[$ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+staged = "[+ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+renamed = "[» ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+deleted = "[✘ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+up_to_date = "[ ✓ ](fg:#1C3A5E bg:#00cc99)[](fg:#00cc99)"
+
+[git_metrics]
+format = "([+$added]($added_style))[]($added_style)"
+added_style = "fg:#1C3A5E bg:#FCF392"
+deleted_style = "fg:bright-red bg:235"
+disabled = false
+
+[cmd_duration]
+format = "[  $duration ]($style)"
+style = "fg:bright-white bg:18"
+
+[character]
+success_symbol = '[](fg:#333399)[➜  ](fg:#7DF9AA bg:#333399)[](bg:#1C3A5E fg:#333399)'
+error_symbol = '[](fg:#333399)[🛑 ](fg:#ff0000 bg:#333399)[](bg:#1C3A5E fg:#333399)'
+format = '$symbol'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[🕐 $time ](bg:#1C3A5E fg:#8DFBD2)'
