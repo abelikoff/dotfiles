@@ -44,31 +44,32 @@ symbol = "⎇  "
 style = "fg:#E4E4E4 bg:#3B76F0"
 
 [git_status]
-format = '($all_status$ahead_behind )'
-conflicted = "[! ](fg:#1C3A5E bg:#ff3399)[](fg:#ff3399)"
-modified = "[* ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
-ahead = "[⇡ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
-behind = "[⇣ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
-diverged = "[⇕ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
-untracked = "[? ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
-stashed = "[$ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
-staged = "[+ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
-renamed = "[» ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
-deleted = "[✘ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+#format = '($all_status x $ahead_behind y)'
+format = '$ahead_behind '
+conflicted = "[ ! ](fg:#1C3A5E bg:#ff3399)[](fg:#ff3399)"
+modified = "[ * ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+ahead = "[ ⇡ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+behind = "[ ⇣ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+diverged = "[ ⇕ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+untracked = "[ ? ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+stashed = "[ $ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+staged = "[ + ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+renamed = "[ » ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
+deleted = "[ ✘ ](fg:#1C3A5E bg:#FCF392)[](fg:#FCF392)"
 up_to_date = "[ ✓ ](fg:#1C3A5E bg:#00cc99)[](fg:#00cc99)"
 
 [git_metrics]
 format = "([+$added]($added_style))[]($added_style)"
 added_style = "fg:#1C3A5E bg:#FCF392"
 deleted_style = "fg:bright-red bg:235"
-disabled = false
+disabled = true
 
 [cmd_duration]
 format = "[  $duration ]($style)"
 style = "fg:bright-white bg:18"
 
 [character]
-success_symbol = '[](fg:#333399)[➜  ](fg:#7DF9AA bg:#333399)[](bg:#1C3A5E fg:#333399)'
+success_symbol = '[](fg:#333399)[➜ ](fg:#7DF9AA bg:#333399)[](bg:#1C3A5E fg:#333399)'
 error_symbol = '[](fg:#333399)[🛑 ](fg:#ff0000 bg:#333399)[](bg:#1C3A5E fg:#333399)'
 format = '$symbol'
 
