@@ -5,11 +5,10 @@
 readonly program_name=${0##*/}
 readonly program_version=2.0
 
-shopt -s failglob               # fail upon non-matched globs
+shopt -s failglob # fail upon non-matched globs
 #set -e                          # abort on first error
-set -u                          # disallow undefined variables
-set -o pipefail                 # fail the pipe if one component fails
-
+set -u          # disallow undefined variables
+set -o pipefail # fail the pipe if one component fails
 
 function run_command {
     if [[ -n $dry_run ]]; then
@@ -27,12 +26,11 @@ function run_command {
     fi
 }
 
-
 function install_file {
-    file="$1"                   # subpath under $vc_dir
-    tgt_dir="$2"                # where to install the link
-    vc_dir="$3"                 # version control top directory
-    backup_dir="$4"             # backup directory
+    file="$1"       # subpath under $vc_dir
+    tgt_dir="$2"    # where to install the link
+    vc_dir="$3"     # version control top directory
+    backup_dir="$4" # backup directory
 
     src_file=$vc_dir/$file
     fname=$(basename $file)
@@ -69,7 +67,7 @@ function install_file {
     fi
 
     if [[ -e $fname ]]; then
-        if diff -w $fname $src_file > /dev/null 2>&1; then
+        if diff -w $fname $src_file >/dev/null 2>&1; then
             verbose "$file is same as target - not backing up" >&2
             run_command rm -f $fname
         else
@@ -82,7 +80,6 @@ function install_file {
     verbose "$fname -> $src_file"
     run_command ln -s $src_file .
 }
-
 
 function usage {
     echo "
@@ -103,13 +100,11 @@ $program_name supports the following options:
 "
 }
 
-
 verbose() {
     if [[ -n $verbose_mode ]]; then
         echo "$@"
     fi
 }
-
 
 debug() {
     if [[ -n $debug_mode ]]; then
@@ -117,51 +112,43 @@ debug() {
     fi
 }
 
-
 error() {
     echo -e "${color_red}ERROR:" "$@" "${color_none}" >&2
 }
-
 
 fatal() {
     error "$@"
     exit 1
 }
 
-
 warning() {
     echo -e "${color_yellow}WARNING:" "$@" "${color_none}" >&2
 }
-
 
 notice() {
     echo -e "${color_cyan}$@" "${color_none}" >&2
 }
 
-
 cleanup() {
-  trap - SIGINT SIGTERM ERR EXIT
-  # script cleanup here
+    trap - SIGINT SIGTERM ERR EXIT
+    # script cleanup here
 }
-
 
 setup_colors() {
-  if [[ -t 2 ]] && [[ -z "${NO_COLOR-}" ]] && [[ "${TERM-}" != "dumb" ]]; then
-    color_none='[0m' color_red='[0;31m' color_green='[0;32m'
-    color_orange='[0;33m' color_blue='[0;34m' color_purple='[0;35m'
-    color_cyan='[0;36m' color_yellow='[1;33m'
-  else
-    color_none='' color_red='' color_green='' color_orange='' color_blue=''
-    color_purple='' color_cyan='' color_yellow=''
-  fi
+    if [[ -t 2 ]] && [[ -z "${NO_COLOR-}" ]] && [[ "${TERM-}" != "dumb" ]]; then
+        color_none='[0m' color_red='[0;31m' color_green='[0;32m'
+        color_orange='[0;33m' color_blue='[0;34m' color_purple='[0;35m'
+        color_cyan='[0;36m' color_yellow='[1;33m'
+    else
+        color_none='' color_red='' color_green='' color_orange='' color_blue=''
+        color_purple='' color_cyan='' color_yellow=''
+    fi
 
-  readonly color_none color_red color_green color_orange color_blue \
-    color_purple color_cyan color_yellow
+    readonly color_none color_red color_green color_orange color_blue \
+        color_purple color_cyan color_yellow
 }
 
-
 setup_colors
-
 
 # parse options
 
@@ -169,37 +156,44 @@ verbose_mode=""
 do_prompt=""
 dry_run=1
 
-while getopts ":fhiVv" opt ; do
+while getopts ":fhiVv" opt; do
     case $opt in
-        f) dry_run=""
-           ;;
+    f)
+        dry_run=""
+        ;;
 
-        h) usage
-           exit 0
-           ;;
+    h)
+        usage
+        exit 0
+        ;;
 
-        i) do_prompt=1
-           unset dry_run
-           ;;
+    i)
+        do_prompt=1
+        unset dry_run
+        ;;
 
-        V) echo "$program_name $program_version"
-           exit 0
-           ;;
+    V)
+        echo "$program_name $program_version"
+        exit 0
+        ;;
 
-        v) verbose_mode=1
-           ;;
+    v)
+        verbose_mode=1
+        ;;
 
-        :) fatal "option '-$OPTARG' requires an argument"
-           ;;
+    :)
+        fatal "option '-$OPTARG' requires an argument"
+        ;;
 
-        \?) error "unknown option: '-$OPTARG'"
-            usage
-            exit 1
-            ;;
+    \?)
+        error "unknown option: '-$OPTARG'"
+        usage
+        exit 1
+        ;;
     esac
 done
 
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 VC_TOP=$(dirname $0)
 
@@ -208,8 +202,8 @@ if [[ $VC_TOP == "." ]]; then
 fi
 
 cd ~ || exit 1
-VC_TOP=${VC_TOP##./}            # remove leading ./
-VC_TOP=${VC_TOP##$(pwd)/}       # change to relative path
+VC_TOP=${VC_TOP##./}      # remove leading ./
+VC_TOP=${VC_TOP##$(pwd)/} # change to relative path
 BACKUP_DIR=~/CONFIG_BACKUP.$(date +"%Y%m%d-%H%M%S")
 readonly SRC_DIR=$VC_TOP/deploy
 
@@ -237,14 +231,6 @@ fi
 
 if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
     run_command git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-fi
-
-if type zsh > /dev/null 2>&1 ; then
-    if [[ ! -d ~/.oh-my-zsh ]]; then
-        run_command sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    fi
-else
-    notice "ZSH not installed -- skipping Oh my ZSH installation"
 fi
 
 if [[ ! -d ~/.tmux/plugins ]]; then

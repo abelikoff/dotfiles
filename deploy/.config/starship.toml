@@ -1,15 +1,3 @@
-zzformat = """
-[┌](fg:#7DF9AA)\
-$directory\
-$git_branch\
-$git_status\
-$python\
-$nodejs\
-$rust\
-$golang
-[└─](fg:#7DF9AA)$character \
-"""
-
 format = """\
 $character$directory\
 [](fg:#1C3A5E bg:#3B76F0)\
