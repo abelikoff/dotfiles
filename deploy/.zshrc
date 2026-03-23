@@ -10,7 +10,7 @@
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="agnoster"
 
-DEFAULT_USER=${USER:-abel}
+# DEFAULT_USER=${USER:-abel}
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -94,9 +94,12 @@ zstyle -e ':completion:*' matcher-list '
   fi
 '
 
-# User configuration
+# History configuration
 
-HISTORY_IGNORE="(l[s,a,l]*|cd|git p?o|git pu[ll,sh] origin*|git ci -a|git [st*,diff]*|gdw|git diff *|pwd|exit|cd ..|vlc *|mpv[x,] *|ssh-add)"
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=100000
+HISTORY_IGNORE="(l[s,a,l]*|cd|git p?o|git pu[ll,sh] origin*|git ci -a|git [st*,diff]*|gdw|git diff *|pwd|exit|cd ..|vlc *|mpv[x,] *|ssh-add|history |h )"
 setopt HIST_IGNORE_SPACE
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
