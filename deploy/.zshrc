@@ -99,7 +99,7 @@ zstyle -e ':completion:*' matcher-list '
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=100000
-HISTORY_IGNORE="(l[s,a,l]*|cd|git p?o|git pu[ll,sh] origin*|git ci -a|git [st*,diff]*|gdw|git diff *|pwd|exit|cd ..|vlc *|mpv[x,] *|ssh-add|history |h )"
+HISTORY_IGNORE="(l[s,a,l]*|cd|git p?o|git pu[ll,sh] origin*|git ci -a|git [st*,diff]*|gdw|git diff *|pwd|exit|cd ..|vlc *|mpv[x,] *|ssh-add|history |h |yt-dlp *|gallery-dl *)"
 setopt HIST_IGNORE_SPACE
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
