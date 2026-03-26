@@ -32,19 +32,6 @@ if [ -d $HOME/.antigravity/antigravity/bin ]; then
 fi
 
 
-# Google cloud SDK
-
-if [ -d $HOME/devel/tools/google-cloud-sdk ]; then
-    if [ -n "$ZSH_VERSION" ]; then
-        source $HOME/devel/tools/google-cloud-sdk/path.zsh.inc
-        source $HOME/devel/tools/google-cloud-sdk/completion.zsh.inc
-    elif [ -n "$BASH_VERSION" ]; then
-        source $HOME/devel/tools/google-cloud-sdk/path.bash.inc
-        source $HOME/devel/tools/google-cloud-sdk/completion.bash.inc
-    fi
-fi
-
-
 # Flutter
 
 for dir in $HOME/tools/flutter $HOME/snap/flutter/common/flutter; do
