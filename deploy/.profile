@@ -6,6 +6,33 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# Set XDG directories if needed
+
+if [ -z "$XDG_CONFIG_HOME" ]; then
+    export XDG_CONFIG_HOME="$HOME/.config"
+
+    if [ ! -d $XDG_CONFIG_HOME ]; then
+        echo "ERROR: XDG_CONFIG_HOME ($XDG_CONFIG_HOME) does not exist" >&2
+    fi
+fi
+
+if [ -z "$XDG_DATA_HOME" ]; then
+    export XDG_DATA_HOME="$HOME/.local/share"
+
+    if [ ! -d $XDG_DATA_HOME ]; then
+        echo "ERROR: XDG_DATA_HOME ($XDG_DATA_HOME) does not exist" >&2
+    fi
+fi
+
+if [ -z "$XDG_CACHE_HOME" ]; then
+    export XDG_CACHE_HOME="$HOME/.cache"
+
+    if [ ! -d $XDG_CACHE_HOME ]; then
+        echo "ERROR: XDG_CACHE_HOME ($XDG_CACHE_HOME) does not exist" >&2
+    fi
+fi
+
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -40,8 +67,6 @@ elif grep -i Inspiron /sys/devices/virtual/dmi/id/product_family > /dev/null 2>&
         xinput set-prop 10 $prop 1
     fi
 fi
-
-
 
 # This needs to be in ~/.profile in order to be set in i3
 export CALIBRE_USE_DARK_PALETTE=1
