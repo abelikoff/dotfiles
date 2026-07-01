@@ -32,19 +32,6 @@ if [ -d $HOME/.antigravity/antigravity/bin ]; then
 fi
 
 
-# Google cloud SDK
-
-if [ -d $HOME/devel/tools/google-cloud-sdk ]; then
-    if [ -n "$ZSH_VERSION" ]; then
-        source $HOME/devel/tools/google-cloud-sdk/path.zsh.inc
-        source $HOME/devel/tools/google-cloud-sdk/completion.zsh.inc
-    elif [ -n "$BASH_VERSION" ]; then
-        source $HOME/devel/tools/google-cloud-sdk/path.bash.inc
-        source $HOME/devel/tools/google-cloud-sdk/completion.bash.inc
-    fi
-fi
-
-
 # Flutter
 
 for dir in $HOME/tools/flutter $HOME/snap/flutter/common/flutter; do
@@ -69,7 +56,9 @@ fi
 
 # Homebrew
 
-if [ -d /opt/homebrew ]; then
+if [ -d $HOME/homebrew ]; then
+    eval "$($HOME/homebrew/bin/brew shellenv)"
+elif [ -d /opt/homebrew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 elif [ -d $HOME/tools/brew ]; then
     PATH=$HOME/tools/brew/opt/python/libexec/bin:$HOME/tools/brew/bin:$PATH

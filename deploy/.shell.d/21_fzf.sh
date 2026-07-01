@@ -1,5 +1,7 @@
 # fzf setup
 
+which fzf > /dev/null 2>&1 || return
+
 if command -v fzf-share >/dev/null; then
     if [ -n "$BASH_VERSION" ]; then
         source "$(fzf-share)/key-bindings.bash"
@@ -30,7 +32,7 @@ elif [[ -d /usr/share/doc/fzf/examples ]]; then
         fi
     fi
 
-elif [ -n "$(which fzf)" ]; then # old way
+else # old way
     if [ -n "$ZSH_VERSION" ]; then
         source <(fzf --zsh)
     elif [ -n "$BASH_VERSION" ]; then

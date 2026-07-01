@@ -18,10 +18,9 @@ $time\
 """
 
 [custom.user_prefix]
-# This checks if the user is NOT abel. If so, it prints the username + @
 command = 'if [ "$USER" != "abel" ]; then echo -n "$USER"; fi'
 when = "true" # Always run the check
-shell = ["sh"]
+shell = ["bash"]
 style = "fg:#7DF9AA bg:#333399"
 format = "[$output]($style)"
 
