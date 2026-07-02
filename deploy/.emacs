@@ -117,8 +117,7 @@
 ;;  (cond ((and window-system (> (x-display-pixel-width) 2500)) "Fira Code 10")
 ;;        (t "Fira Code-11")))
 
-(defconst my-default-font "Berkeley Mono 11")
-
+(defconst my-default-font "Berkeley Mono 12")
 
 (require 'cl)                           ; required for lexical-let
 
@@ -139,6 +138,7 @@ frame to the next available font allowing quick assessment of different fonts.
                           "Average Mono"
                           "BPmono"
                           "Bitstream Vera Sans Mono"
+                          "BlexMono Nerd Font"
                           "CamingoCode"
                           "Code New Roman"
                           "Consolamono"
@@ -154,21 +154,25 @@ frame to the next available font allowing quick assessment of different fonts.
                           "Fifteen"
                           "Fira Code"
                           "Fira Mono"
+                          "FiraCode Nerd Font"
                           "Fixedsys with Ligatures"
                           "Fixedsys"
                           "GNU Freefont"
                           "GNU Unifont"
                           "Generic Mono"
+                          "Hack Nerd Font"
                           "Hack"
                           "Hasklig"
                           "Hermit"
                           "Inconsolata"
-                          "Inconsolata-g"
                           "Input"
+                          "Iosevka Nerd Font"
                           "Iosevka"
+                          "IosevkaTerm Nerd Font"
+                          "JetBrainsMono Nerd Font"
+                          "JetBrainsMonoNL Nerd Font"
                           "Latin Modern Mono"
                           "Lekton"
-                          "Liberation Mono"
                           "Liberation Mono"
                           "Luculent"
                           "Luxi Mono"
@@ -197,6 +201,8 @@ frame to the next available font allowing quick assessment of different fonts.
                           "VT323"
                           "Verily Serif Mono"
                           "saxMono"
+
+                          
                           "-dec-terminal-medium-r-normal-*-*-140-*-*-c-*-iso8859-1"
                           "-xos4-terminus-medium-r-normal--14-140-*-*-*-*-*-*"
                           ))
@@ -211,14 +217,14 @@ frame to the next available font allowing quick assessment of different fonts.
 
 (defconst my-default-height
   (cond (is-macintosh 55)
-        (is-work-desktop 70)
-        (t 50)))
+        ;;        (is-work-desktop 70)
+        (t 70)))
 
 (defconst my-default-bg-color "Black")
 (defconst my-default-fg-color "Gray")
 
 (setq default-frame-alist
-      `((width . 130)
+      `((width . 120)
         (height . ,my-default-height)
         ;;(menu-bar-lines . 0)
         (tool-bar-lines . 0)
@@ -500,7 +506,7 @@ frame to the next available font allowing quick assessment of different fonts.
 (require 'org-bullets)
 (setq org-bullets-bullet-list
         '("◉" "○" "⚫" "◎" "►" "◇"))
-(set-face-font 'org-level-1 "Fira Code-11")
+(set-face-font 'org-level-1 "JetBrainsMono NF 14")
 (set-face-foreground 'org-scheduled-previously "OrangeRed")
 (set-face-foreground 'org-scheduled-today "Green")
 (set-face-foreground 'org-scheduled "Gray")
