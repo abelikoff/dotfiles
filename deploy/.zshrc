@@ -133,7 +133,7 @@ setopt HIST_EXPIRE_DUPS_FIRST
 setopt INC_APPEND_HISTORY
 unsetopt SHARE_HISTORY
 
-HISTORY_IGNORE="(l[s,a,l]*|cd|git p?o|git pu[ll,sh] origin*|git ci -a|git [st*,diff]*|gdw|git diff *|pwd|exit|cd ..|vlc *|mpv[x,] *|ssh-add|history |h |yt-dlp *|gallery-dl *)"
+HISTORY_IGNORE="(l[s,a,l]*|cd|git p?o|git pu[ll,sh] origin*|git ci -a|git [st*,diff]*|gdw|git diff *|pwd|exit|cd ..|vlc *|mpv[x,] *|ssh-add|history |hh |yt-dlp *|gallery-dl *)"
 
 
 # additional configs
@@ -144,8 +144,6 @@ setopt NUMERIC_GLOB_SORT
 
 # auto-rehash commands in path
 #zstyle ':completion:*' rehash true
-
-
 
 #autoload -Uz compinit
 

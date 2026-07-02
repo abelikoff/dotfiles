@@ -71,7 +71,6 @@ arx() {
 
 alias b='batcat'
 alias cdd='cd ~/Downloads'
-alias cdw='cd ~/work'
 alias cln='rm *~'
 alias cp='cp -i'
 alias e='emacsclient -c'
@@ -81,7 +80,7 @@ ev() {
     env | grep "$@"
 }
 
-alias fdd='find_dups -c "`pwd`/"'
+alias fdd='find_dups .'
 alias gdw='git diff -w'
 
 command -v glg >/dev/null && unalias glg
@@ -95,9 +94,15 @@ gls() {
 }
 
 alias grep='grep --color'
+
+if [ -n "$ZSH_VERSION" ]; then
+    alias hh='history 1'
+elif [ -n "$BASH_VERSION" ]; then
+    alias hh='history'
+fi
+
 alias ipinfo="curl -s https://ipinfo.io"
 
-#alias ls='ls -h --color=auto'
 alias ls="$(which -a ls | grep -v alias | head -1) -h --color=auto"
 alias la='ls -a'
 alias latr='ls -latr'
