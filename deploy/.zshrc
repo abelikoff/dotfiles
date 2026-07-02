@@ -146,7 +146,6 @@ setopt NUMERIC_GLOB_SORT
 #zstyle ':completion:*' rehash true
 
 
-#eval "$(zoxide init zsh)"
 
 #autoload -Uz compinit
 

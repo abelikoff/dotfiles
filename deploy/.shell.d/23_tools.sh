@@ -29,3 +29,13 @@ if command -v fdfind >/dev/null 2>&1; then
     alias fd='fdfind'
 fi
 
+# zoxide
+
+if command -v zoxide >/dev/null 2>&1; then
+    if [ -n "$ZSH_VERSION" ]; then
+        eval "$(zoxide init zsh)"
+    elif [ -n "$BASH_VERSION" ]; then
+        eval "$(zoxide init bash)"
+    fi
+fi
+
