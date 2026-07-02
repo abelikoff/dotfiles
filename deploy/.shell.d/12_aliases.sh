@@ -97,6 +97,8 @@ gls() {
 alias grep='grep --color'
 alias ipinfo="curl -s https://ipinfo.io"
 
+#alias ls='ls -h --color=auto'
+alias ls="$(which -a ls | grep -v alias | head -1) -h --color=auto"
 alias la='ls -a'
 alias latr='ls -latr'
 alias ll="$(which -a ls | grep -v alias | head -1) -lh --color=auto"
