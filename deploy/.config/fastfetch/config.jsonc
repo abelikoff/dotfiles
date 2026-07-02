@@ -1,176 +1,86 @@
-// Inspired by https://github.com/usgraphics/TR-100
+// IBM mainframe-style fastfetch output
+
+// (with some inspiration from https://neil.computer/notes/neofetch/ )
+
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-    "logo": null,
+
+    "logo": {
+        "type": "none"
+    },
+
     "display": {
-        "pipe": true,
-        "key": {
-            "width": 16
-        },
-        "separator": "│ ",
-        "percent": {
-            "type": ["bar", "hide-others"]
+        "separator": "\t",
+        "color": {
+            "keys": "blue",
+            "output": "green"
         },
         "bar": {
-            "borderLeft": "",
-            "borderRight": "",
+            "width": 20,
+            "borderLeft": "[",
+            "borderRight": "]",
             "charElapsed": "█",
-            "charTotal": "░",
-            "width": 40
+            "charTotal": "░"
         },
-        "constants": [
-            "\u001b[42C"
-        ]
-    },
-    "modules": [
-        {
-            "type": "custom",
-            "format": "┌┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┐"
-        },
-        {
-            "type": "custom",
-            "format": "├┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┤"
-        },
-        {
-            "type": "version",
-            "key": " ",
-            "format": "│                   FASTFETCH v{version}                   │"
-        },
-        {
-            "type": "custom",
-            "format": "│                 TR-100 MACHINE REPORT                 │"
-        },
-        {
-            "type": "custom",
-            "format": "├────────────┬──────────────────────────────────────────┤"
-        },
-        {
-            "type": "os",
-            "key": "│ OS         │{$1}"
-        },
-        {
-            "type": "kernel",
-            "key": "│ KERNEL     │{$1}"
-        },
-        {
-            "type": "custom",
-            "format": "├────────────┼──────────────────────────────────────────┤"
-        },
-        {
-            "type": "title",
-            "key": "│ HOSTNAME   │{$1}",
-            "format": "{host-name}"
-        },
-        {
-            "type": "localip",
-            "key": "│ CLIENT IP  │{$1}",
-            "format": "{ipv4}"
-        },
-        {
-            "type": "localip",
-            "key": "│ MAC ADDR   │{$1}",
-            "format": "{mac} ({ifname})",
-            "showIpv4": false,
-            "showMac": true
-        },
-        {
-            "type": "dns",
-            "key": "│ DNS        │{$1}",
-            "showType": "ipv4"
-        },
-        {
-            "type": "title",
-            "key": "│ USER       │{$1}",
-            "format": "{user-name}"
-        },
-        {
-            "type": "host",
-            "key": "│ MACHINE    │{$1}",
-            "format": "{name}"
-        },
-        {
-            "type": "custom",
-            "format": "├────────────┼──────────────────────────────────────────┤"
-        },
-        {
-            "type": "cpu",
-            "key": "│ PROCESSOR  │{$1}",
-            "format": "{name}"
-        },
-        {
-            "type": "cpu",
-            "key": "│ CORES      │{$1}",
-            "format": "{cores-physical} PHYSICAL CORES / {cores-logical} THREADS",
-            "showPeCoreCount": false
-        },
-        {
-            "type": "cpu",
-            "key": "│ CPU FREQ   │{$1}",
-            "format": "{freq-max}{/freq-max}{freq-base}{/}"
-        },
-        {
-            "type": "loadavg",
-            "compact": false,
-            "key": "│ LOAD  {duration>2}m  │{$1}" // pad duration to 2 chars
-        },
-        {
-            "type": "custom",
-            "format": "├────────────┼──────────────────────────────────────────┤"
-        },
-        {
-            "type": "memory",
-            "key": "│ MEMORY     │{$1}",
-            "format": "{used} / {total} [{percentage}]",
-            "percent": {
-                "type": ["num"]
+        "percent": {
+            "type": 3,
+            "color": {
+                "green": "green",
+                "yellow": "yellow",
+                "red": "red"
             }
-        },
-        {
-            "type": "memory",
-            "key": "│ USAGE      │{$1}",
-            "format": "",
-            "percent": {
-                "type": ["bar", "hide-others"]
-            }
-        },
-        {
-            "type": "custom",
-            "format": "├────────────┼──────────────────────────────────────────┤"
-        },
-        {
-            "type": "disk",
-            "key": "│ VOLUME     │{$1}",
-            "format": "{size-used} / {size-total} [{size-percentage}]",
-            "folders": "/",
-            "percent": {
-                "type": ["num"]
-            }
-        },
-        {
-            "type": "disk",
-            "key": "│ DISK USAGE │{$1}",
-            "format": "",
-            "percent": {
-                "type": ["bar", "hide-others"]
-            }
-        },
-        {
-            "type": "custom",
-            "format": "├────────────┼──────────────────────────────────────────┤"
-        },
-        {
-            "type": "users",
-            "key": "│ LAST LOGIN │{$1}",
-            "format": "{login-time}{?client-ip} ({client-ip})",
-            "myselfOnly": true
-        },
-        {
-            "type": "uptime",
-            "key": "│ UPTIME     │{$1}"
-        },
-        {
-            "type": "custom",
-            "format": "└────────────┴──────────────────────────────────────────┘"
         }
+    },
+
+    "modules": [
+        "break",
+
+        // crazy contortions to print uppercased hostname and center it.
+        {
+            "type": "command",
+            "key": " ",
+            "shell": "sh",
+            "text": "HOST=$(hostname | tr '[:lower:]' '[:upper:]'); printf '\\033[0;37m%*s\n' $(( (80 + ${#HOST}) / 2 )) $HOST"
+        },
+
+        {
+            "type": "custom",
+            "format": "                                  {#1;34}SYSTEM STATUS"
+        },
+
+        {
+            "type": "custom",
+            "format": "{#1;34}────────────────────────────────────────────────────────────────────────────────"
+        },
+
+        {
+            "type": "title",
+            "key": "\t User\t",
+            "format": "{#31}{user-name}@{host-name}{#}"
+        },
+
+        "break",
+
+        { "type": "cpu", "key": "\t CPU\t" },
+        { "type": "gpu", "key": "\t GPU\t" },
+        { "type": "os", "key": "\t OS\t" },
+        { "type": "kernel", "key": "\t Kernel\t", "format": "{sysname} {release}" },
+        { "type": "packages", "key": "\t Packages" },
+        { "type": "localip", "key": "\t Local IP" },
+        { "type": "uptime", "key": "\t Uptime\t" },
+
+        "break",
+
+        { "type": "cpuusage", "key": "\t CPU Usage" },
+        { "type": "memory", "key": "\t Memory\t" },
+
+        {
+            "type": "disk",
+            "key": "\t Disk\t",
+            "folders": "/",
+            "format": "{size-percentage-bar} {size-used} / {size-total} ({size-percentage})"
+        },
+
+        "break"
     ]
-  }
+}
