@@ -73,6 +73,7 @@ alias b='batcat'
 alias cdd='cd ~/Downloads'
 alias cln='rm *~'
 alias cp='cp -i'
+alias diffg='diff --exclude=.git'
 alias e='emacsclient -c'
 alias et='emacsclient -t'
 
