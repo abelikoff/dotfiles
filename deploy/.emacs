@@ -4,9 +4,9 @@
 ;;; figure out what system we are on
 ;;; (need it for window sizing and font selection)
 
-(defconst is-work-desktop
-  (string-match "^sho.*e.com" system-name)
-  "Non-nil when running on work desktop.")
+;;(defconst is-work-desktop
+;;  (string-match "^abe.*e.com" system-name)
+;;  "Non-nil when running on work desktop.")
 
 (defconst is-windows
   (if (string-match "mingw" system-configuration) t nil)
@@ -113,11 +113,11 @@
 ;;         (is-macintosh "Hack-12")
 ;;         (t "Hack-9")))
 
-;;(defconst my-default-font
-;;  (cond ((and window-system (> (x-display-pixel-width) 2500)) "Fira Code 10")
-;;        (t "Fira Code-11")))
+(defconst my-default-font
+  (cond ((and window-system (> (x-display-pixel-width) 2500)) "Berkeley Mono 10")
+        (t "Berkeley Mono 12")))
 
-(defconst my-default-font "Berkeley Mono 12")
+;; (defconst my-default-font "Berkeley Mono 12")
 
 (require 'cl)                           ; required for lexical-let
 

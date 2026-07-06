@@ -1,6 +1,6 @@
 # fzf setup
 
-which fzf > /dev/null 2>&1 || return
+which fzf >/dev/null 2>&1 || return
 
 if command -v fzf-share >/dev/null; then
     if [ -n "$BASH_VERSION" ]; then
@@ -40,4 +40,4 @@ else # old way
     fi
 fi
 
-export FZF_DEFAULT_OPTS='--height 20% --border'
+export FZF_DEFAULT_OPTS="--height 40% --border --layout=reverse"

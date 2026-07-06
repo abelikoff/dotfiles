@@ -9,11 +9,12 @@ config.initial_rows = 45
 
 -- or, changing the font size and color scheme.
 config.font = wezterm.font_with_fallback {
+    'Berkeley Mono',
     'JetBrainsMono NF',
     'FiraCode Nerd Font',
     'Hack Nerd Font Mono'
 }
-config.font_size = 12
+config.font_size = 10
 config.color_scheme = 'Dracula (Official)'
 
 return config

@@ -174,7 +174,8 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # custom fzf flags
 # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+#zstyle ':fzf-tab:*' fzf-flags --height 40% --color=fg:1,fg+:2 --border --layout=reverse --bind=tab:down,shift-tab:up
+zstyle ':fzf-tab:*' fzf-flags --height 40% --layout=reverse --bind=tab:down,shift-tab:up --color=fg:#f8f8f2,bg:-1,hl:#8be9fd,fg+:#f8f8f2,bg+:#44475a,hl+:#ff79c6,info:#bd93f9,prompt:#50fa7b,pointer:#ff79c6,marker:#ffb86c,spinner:#ff79c6,header:#6272a4
 # To make fzf-tab follow FZF_DEFAULT_OPTS.
 # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
