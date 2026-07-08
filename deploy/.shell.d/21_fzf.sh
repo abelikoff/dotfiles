@@ -40,4 +40,6 @@ else # old way
     fi
 fi
 
-export FZF_DEFAULT_OPTS="--height 40% --border --layout=reverse"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse
+       --bind=tab:down,shift-tab:up
+       --color=fg:#f8f8f2,bg:-1,hl:#8be9fd,fg+:#f8f8f2,bg+:#44475a,hl+:#ff79c6,info:#bd93f9,prompt:#50fa7b,pointer:#ff79c6,marker:#ffb86c,spinner:#ff79c6,header:#6272a4"
