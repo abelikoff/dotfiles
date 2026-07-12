@@ -54,6 +54,15 @@ if [ -d $HOME/tools/go ]; then
 fi
 
 
+# Grok
+
+if [ -d $HOME/.grok/bin ]; then
+    export PATH="$PATH:$HOME/.grok/bin"
+    fpath=(~/.grok/completions/zsh $fpath)
+    autoload -Uz compinit && compinit -C
+fi
+
+
 # Homebrew
 
 if [ -d $HOME/homebrew ]; then
