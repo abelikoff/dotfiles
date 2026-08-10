@@ -6,6 +6,7 @@ if command -v eza >/dev/null 2>&1; then
     alias ls='eza --icons'
     alias ll='eza -lh --icons --git'
     alias la='eza -lah --icons --git'
+    alias latr='eza -l -a -s modified'
     alias tree="eza --tree --icons"
 
     if [ -n "$ZSH_VERSION" ]; then
