@@ -18,4 +18,21 @@ config.font = wezterm.font_with_fallback {
 config.font_size = 11
 config.color_scheme = 'Dracula (Official)'
 
+local act = wezterm.action
+
+config.mouse_bindings = {
+  -- Disable default single-click opening links and make it select text instead
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'NONE',
+    action = act.CompleteSelection 'ClipboardAndPrimarySelection',
+  },
+  -- Require holding CTRL and left-clicking to open the link at cursor
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'CTRL',
+    action = act.OpenLinkAtMouseCursor,
+  },
+}
+
 return config
