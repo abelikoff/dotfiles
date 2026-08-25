@@ -1,11 +1,17 @@
 " VIM setup
 
 set nocompatible        " Use Vim defaults
+
 filetype off
 set undofile
 set undodir=~/.vim/undo
 set modeline            " modeline detection
 set modelines=5
+
+" disable legacy key protocol
+if exists('+keyprotocol')
+    set keyprotocol=
+endif
 
 " Vundle setup
 if has('win32') || has('win64')
@@ -103,11 +109,10 @@ if has("gui_running")
   set columns=80
 
   if has("gui_win32")
-    "set guifont=Hack:h10
-    set guifont=Berkeley\ Mono:h11
+    set guifont=GeistMono\ Nerd\ Font:h11
   else
     "set guifont=Hack\ 10
-    set guifont=Berkeley\ Mono\ 11
+    set guifont=GeistMono\ Nerd\ Font\ 11
   endif
 
   set guioptions-=T     " remove toolbar
