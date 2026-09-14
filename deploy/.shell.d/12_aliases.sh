@@ -69,7 +69,6 @@ arx() {
     fi
 }
 
-alias b='batcat'
 alias cdd='cd ~/Downloads'
 alias cln='rm *~'
 alias cp='cp -i'

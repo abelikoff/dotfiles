@@ -17,11 +17,10 @@ fi
 # Bat (better cat)
 
 if command -v bat >/dev/null 2>&1; then
-    alias cat='bat'
+    alias b='bat'
 
 elif command -v batcat >/dev/null 2>&1; then
-    alias bat='batcat'
-    alias cat='batcat'
+    alias b='batcat'
 fi
 
 # Fd (better find)
@@ -39,4 +38,3 @@ if command -v zoxide >/dev/null 2>&1; then
         eval "$(zoxide init bash)"
     fi
 fi
-
