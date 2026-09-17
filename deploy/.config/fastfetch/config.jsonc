@@ -3,84 +3,88 @@
 // (with some inspiration from https://neil.computer/notes/neofetch/ )
 
 {
-    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
 
-    "logo": {
-        "type": "none"
+  "logo": {
+    "type": "none",
+  },
+
+  "display": {
+    "separator": "\t",
+    "color": {
+      "keys": "blue",
+      "output": "green",
+    },
+    "bar": {
+      "width": 20,
+      "border": {
+        "left": "[",
+        "right": "]",
+      },
+      "char": {
+        "elapsed": "█",
+        "total": "░",
+      },
+    },
+    "percent": {
+      "type": 3,
+      "color": {
+        "green": "green",
+        "yellow": "yellow",
+        "red": "red",
+      },
+    },
+  },
+
+  "modules": [
+    "break",
+
+    // crazy contortions to print uppercased hostname and center it.
+    {
+      "type": "command",
+      "key": " ",
+      "shell": "sh",
+      "text": "HOST=$(hostname | tr '[:lower:]' '[:upper:]'); printf '\\033[0;37m%*s\n' $(( (80 + ${#HOST}) / 2 )) $HOST",
     },
 
-    "display": {
-        "separator": "\t",
-        "color": {
-            "keys": "blue",
-            "output": "green"
-        },
-        "bar": {
-            "width": 20,
-            "borderLeft": "[",
-            "borderRight": "]",
-            "charElapsed": "█",
-            "charTotal": "░"
-        },
-        "percent": {
-            "type": 3,
-            "color": {
-                "green": "green",
-                "yellow": "yellow",
-                "red": "red"
-            }
-        }
+    {
+      "type": "custom",
+      "format": "                                  {#1;34}SYSTEM STATUS",
     },
 
-    "modules": [
-        "break",
+    {
+      "type": "custom",
+      "format": "{#1;34}────────────────────────────────────────────────────────────────────────────────",
+    },
 
-        // crazy contortions to print uppercased hostname and center it.
-        {
-            "type": "command",
-            "key": " ",
-            "shell": "sh",
-            "text": "HOST=$(hostname | tr '[:lower:]' '[:upper:]'); printf '\\033[0;37m%*s\n' $(( (80 + ${#HOST}) / 2 )) $HOST"
-        },
+    {
+      "type": "title",
+      "key": "\t User\t",
+      "format": "{#31}{user-name}@{host-name}{#}",
+    },
 
-        {
-            "type": "custom",
-            "format": "                                  {#1;34}SYSTEM STATUS"
-        },
+    "break",
 
-        {
-            "type": "custom",
-            "format": "{#1;34}────────────────────────────────────────────────────────────────────────────────"
-        },
+    { "type": "cpu", "key": "\t CPU\t" },
+    { "type": "gpu", "key": "\t GPU\t" },
+    { "type": "os", "key": "\t OS\t" },
+    { "type": "kernel", "key": "\t Kernel\t", "format": "{sysname} {release}" },
+    { "type": "packages", "key": "\t Packages" },
+    { "type": "localip", "key": "\t Local IP" },
+    { "type": "uptime", "key": "\t Uptime\t" },
 
-        {
-            "type": "title",
-            "key": "\t User\t",
-            "format": "{#31}{user-name}@{host-name}{#}"
-        },
+    "break",
 
-        "break",
+    { "type": "cpuusage", "key": "\t CPU Usage" },
+    { "type": "memory", "key": "\t Memory\t" },
 
-        { "type": "cpu", "key": "\t CPU\t" },
-        { "type": "gpu", "key": "\t GPU\t" },
-        { "type": "os", "key": "\t OS\t" },
-        { "type": "kernel", "key": "\t Kernel\t", "format": "{sysname} {release}" },
-        { "type": "packages", "key": "\t Packages" },
-        { "type": "localip", "key": "\t Local IP" },
-        { "type": "uptime", "key": "\t Uptime\t" },
+    {
+      "type": "disk",
+      "key": "\t Disk\t",
+      "folders": "/",
+      "format": "{size-percentage-bar} {size-used} / {size-total} ({size-percentage})",
+    },
 
-        "break",
-
-        { "type": "cpuusage", "key": "\t CPU Usage" },
-        { "type": "memory", "key": "\t Memory\t" },
-
-        {
-            "type": "disk",
-            "key": "\t Disk\t",
-            "folders": "/",
-            "format": "{size-percentage-bar} {size-used} / {size-total} ({size-percentage})"
-        },
-
-        "break"
-    ]
+    "break",
+  ],
 }
