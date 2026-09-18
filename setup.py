@@ -136,7 +136,7 @@ def install_file(src_file, tgt_file, backup_dir, home, runner):
     relative_path = str(tgt_file.relative_to(Path.cwd()))
 
     if tgt_dir.is_symlink() and not tgt_dir.exists():
-        warning(f"removing broken symlink {tgt_dir}")
+        status_message(relative_dir, "removing dangling symlink", COLORS.yellow)
         runner.run(f"rm -f {tgt_dir}", lambda: tgt_dir.unlink())
 
     if not tgt_dir.is_dir():
@@ -157,11 +157,11 @@ def install_file(src_file, tgt_file, backup_dir, home, runner):
     if tgt_file.is_symlink():
         if os.readlink(tgt_file) == str(link_target):
             if VERBOSE_MODE:
-                status_message(relative_path, "already set up", COLORS.green)
+                status_message(relative_path, "already set up", COLORS.blue)
             return
 
         if not tgt_file.exists():
-            warning(f"removing broken symlink {tgt_file}")
+            status_message(relative_path, "removing dangling symlink", COLORS.yellow)
             runner.run(f"rm -f {tgt_file}", lambda: tgt_file.unlink())
 
     if tgt_file.is_symlink() or tgt_file.exists():
@@ -170,7 +170,7 @@ def install_file(src_file, tgt_file, backup_dir, home, runner):
             runner.run(f"rm -f {tgt_file}", lambda: tgt_file.unlink())
         else:
             backup_file = backup_dir / tgt_file.relative_to(home)
-            notice(f"{tgt_file} will be saved to {backup_file}")
+            status_message(relative_path, "backing up", COLORS.magenta)
             runner.run(
                 f"mkdir -p {backup_file.parent}",
                 lambda: backup_file.parent.mkdir(parents=True, exist_ok=True),
@@ -180,7 +180,7 @@ def install_file(src_file, tgt_file, backup_dir, home, runner):
                 lambda: shutil.move(str(tgt_file), str(backup_file)),
             )
 
-    verbose(f"{tgt_file} -> {link_target}")
+    status_message(relative_path, "deploying", COLORS.green)
     runner.run(
         f"ln -s {link_target} {tgt_file}", lambda: tgt_file.symlink_to(link_target)
     )
