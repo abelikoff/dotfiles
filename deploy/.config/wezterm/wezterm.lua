@@ -15,6 +15,7 @@ config.font = wezterm.font_with_fallback {
     'FiraCode Nerd Font',
     'Hack Nerd Font Mono'
 }
+
 config.font_size = 11
 config.color_scheme = 'Dracula (Official)'
 
@@ -34,5 +35,25 @@ config.mouse_bindings = {
     action = act.OpenLinkAtMouseCursor,
   },
 }
+
+-- Load custom.lua (if present). Example of custom.lua:
+--
+-- return function(config)
+--   config.font_size = 16
+-- end
+
+local custom_path = wezterm.config_dir .. "/custom.lua"
+local file = io.open(custom_path, "r")
+
+if file then
+  file:close()
+
+  wezterm.log_info("Loading " .. custom_path)
+  local custom = dofile(custom_path)
+
+  if type(custom) == "function" then
+    custom(config)
+  end
+end
 
 return config
