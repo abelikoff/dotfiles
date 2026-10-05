@@ -82,6 +82,7 @@ ev() {
 
 alias fdd='find_dups .'
 alias gdw='git diff -w'
+alias gldf='gallery-dl --cookies-from-browser firefox'
 
 command -v glg >/dev/null && unalias glg
 
@@ -139,6 +140,7 @@ xurls() {
         sed -e 's|^href=.||gi' -e 's|[\"'"'"'].*||' | grep -i http
 }
 
+alias yt2mp='yt-dlp -f "ba[ext=m4a]"'
 alias ytdf='yt-dlp --cookies-from-browser firefox'
 
 alias auls='pactl list short sinks'
