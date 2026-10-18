@@ -3,11 +3,11 @@
 # Eza (better ls)
 
 if command -v eza >/dev/null 2>&1; then
-    alias ls='eza --icons'
-    alias ll='eza -lh --icons --git'
-    alias la='eza -lah --icons --git'
+    alias ls='eza --icons=auto'
+    alias ll='eza -lh --icons=auto --git'
+    alias la='eza -lah --icons=auto --git'
     alias latr='eza -l -a -s modified'
-    alias tree="eza --tree --icons"
+    alias tree="eza --tree --icons=auto"
 
     if [ -n "$ZSH_VERSION" ]; then
         compdef eza=ls

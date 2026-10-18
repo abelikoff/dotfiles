@@ -81,6 +81,13 @@ if [ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
 fi
 
 
+# Opencode
+
+if [ -d $HOME/.opencode/bin ]; then
+    PATH=$PATH:$HOME/.opencode/bin
+fi
+
+
 # pyenv
 
 if which pyenv > /dev/null 2>&1; then
