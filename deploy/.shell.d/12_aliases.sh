@@ -70,6 +70,7 @@ arx() {
 }
 
 alias cdd='cd ~/Downloads'
+alias cdw='cd ~/work'
 alias cln='rm *~'
 alias cp='cp -i'
 alias diffg='diff --exclude=.git'
