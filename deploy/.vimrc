@@ -84,12 +84,6 @@ syntax on
 try
   if filereadable($HOME . "/.theme-monokai")
     colorscheme hybrid
-  elseif filereadable($HOME . "/.theme-dracula")
-    colorscheme dracula
-
-    if !has('win32') && !has('win64')
-      let g:airline_theme = 'dracula'
-    endif
   elseif filereadable($HOME . "/.theme-zenburn")
     colorscheme zenburn
     let g:airline_theme = 'zenburn'
@@ -105,12 +99,12 @@ try
 
     let g:airline_theme = 'onedark'
     colorscheme onedark
-  else                                " default to solarized
-    "let g:solarized_termcolors=256
-    "set t_Co=256
-    set background=dark
-    colorscheme solarized
-    let g:airline_theme = 'solarized'
+  else                                " default to Dracula
+    colorscheme dracula
+
+    if !has('win32') && !has('win64')
+      let g:airline_theme = 'dracula'
+    endif
   endif
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
