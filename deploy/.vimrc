@@ -2,7 +2,6 @@
 
 set nocompatible        " Use Vim defaults
 
-filetype off
 set undofile
 set undodir=~/.vim/undo
 set modeline            " modeline detection
@@ -13,32 +12,41 @@ if exists('+keyprotocol')
     set keyprotocol=
 endif
 
-" Vundle setup
+" Plugins (vim-plug)
+
 if has('win32') || has('win64')
-  set rtp+=~/vimfiles/bundle/Vundle.vim
+  let s:vim_dir = expand('~/vimfiles')
 else
-  set rtp+=~/.vim/bundle/Vundle.vim
+  let s:vim_dir = expand('~/.vim')
 endif
 
-call vundle#begin()
-
-if has('win32') || has('win64')
-  call vundle#rc('$HOME/vimfiles/bundle/')
+" download vim-plug itself on first run
+let s:plug_file = s:vim_dir . '/autoload/plug.vim'
+if empty(glob(s:plug_file))
+  silent execute '!curl -fLo ' . shellescape(s:plug_file) . ' --create-dirs '
+        \ . 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-call vundle#end()
+call plug#begin(s:vim_dir . '/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'dracula/vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'joshdick/onedark.vim'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'fatih/vim-go'
-Plugin 'arcticicestudio/nord-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'ctrlpvim/ctrlp.vim'               " maintained fork of kien/ctrlp.vim
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-autoformat/vim-autoformat'    " formerly Chiel92/vim-autoformat
+Plug 'joshdick/onedark.vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'fatih/vim-go'
+Plug 'nordtheme/vim', { 'as': 'nord' }  " formerly arcticicestudio/nord-vim
+
+call plug#end()                         " also enables filetype detection & syntax
+
+" install any missing plugins on startup
+autocmd VimEnter *
+      \ if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+      \ |   PlugInstall --sync | source $MYVIMRC
+      \ | endif
 
 let g:airline_powerline_fonts = 1
 
@@ -72,36 +80,40 @@ endif
 
 syntax on
 
-if filereadable($HOME . "/.theme-monokai")
-  colorscheme hybrid
-elseif filereadable($HOME . "/.theme-dracula")
-  colorscheme dracula
+" a missing colorscheme (e.g. before plugins are installed) is not fatal
+try
+  if filereadable($HOME . "/.theme-monokai")
+    colorscheme hybrid
+  elseif filereadable($HOME . "/.theme-dracula")
+    colorscheme dracula
 
-  if !has('win32') && !has('win64')
-    let g:airline_theme = 'dracula'
-  endif
-elseif filereadable($HOME . "/.theme-zenburn")
-  colorscheme zenburn
-  let g:airline_theme = 'zenburn'
-elseif filereadable($HOME . "/.theme-nord")
-  colorscheme nord
-elseif filereadable($HOME . "/.theme-codedark")
-  colorscheme codedark
-  let g:airline_theme = 'codedark'
-elseif filereadable($HOME . "/.theme-onedark")
-  if g:os != "Darwin"
-    let g:onedark_terminal_italics = 1
-  endif
+    if !has('win32') && !has('win64')
+      let g:airline_theme = 'dracula'
+    endif
+  elseif filereadable($HOME . "/.theme-zenburn")
+    colorscheme zenburn
+    let g:airline_theme = 'zenburn'
+  elseif filereadable($HOME . "/.theme-nord")
+    colorscheme nord
+  elseif filereadable($HOME . "/.theme-codedark")
+    colorscheme codedark
+    let g:airline_theme = 'codedark'
+  elseif filereadable($HOME . "/.theme-onedark")
+    if g:os != "Darwin"
+      let g:onedark_terminal_italics = 1
+    endif
 
-  let g:airline_theme = 'onedark'
-  colorscheme onedark
-else                                " default to solarized
-  "let g:solarized_termcolors=256
-  "set t_Co=256
-  set background=dark
-  colorscheme solarized
-  let g:airline_theme = 'solarized'
-endif
+    let g:airline_theme = 'onedark'
+    colorscheme onedark
+  else                                " default to solarized
+    "let g:solarized_termcolors=256
+    "set t_Co=256
+    set background=dark
+    colorscheme solarized
+    let g:airline_theme = 'solarized'
+  endif
+catch /^Vim\%((\a\+)\)\=:E185/
+endtry
 
 
 if has("gui_running")
@@ -182,7 +194,7 @@ if has("autocmd")
   autocmd BufReadPost COMMIT_EDITMSG
         \ exe "normal! gg"
 
-  autocmd BufWrite * if index(['yaml', 'anotherformat'], &filetype) < 0 | Autoformat | endif
+  autocmd BufWrite * if exists(':Autoformat') && index(['yaml', 'anotherformat'], &filetype) < 0 | Autoformat | endif
 endif
 
 

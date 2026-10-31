@@ -202,11 +202,6 @@ def extra_setup(home, runner):
     if not i3_workspace.is_dir():
         runner.run(f"mkdir {i3_workspace}", lambda: i3_workspace.mkdir())
 
-    vundle_dir = home / ".vim" / "bundle" / "Vundle.vim"
-
-    if not vundle_dir.is_dir():
-        clone(runner, "https://github.com/VundleVim/Vundle.vim.git", vundle_dir)
-
     tmux_plugins = home / ".tmux" / "plugins"
 
     if not tmux_plugins.is_dir():

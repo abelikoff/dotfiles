@@ -86,7 +86,36 @@ plugins=(
     #zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
+# Install Oh My Zsh and third-party plugins on first run (needs git).
+
+ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
+
+typeset -A _omz_ext_plugins=(
+    fzf-tab https://github.com/Aloxaf/fzf-tab.git
+)
+
+if (( $+commands[git] )); then
+    if [[ ! -d $ZSH ]]; then
+        echo "Installing Oh My Zsh into $ZSH ..."
+        git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$ZSH"
+    fi
+
+    for _name _url in "${(@kv)_omz_ext_plugins}"; do
+        if [[ -d $ZSH && ! -d $ZSH_CUSTOM/plugins/$_name ]]; then
+            echo "Installing Oh My Zsh plugin $_name ..."
+            git clone --depth=1 "$_url" "$ZSH_CUSTOM/plugins/$_name"
+        fi
+    done
+fi
+
+unset _omz_ext_plugins _name _url
+
+# fzf-tab is useless (and noisy) without fzf
+(( $+commands[fzf] )) || plugins=(${plugins:#fzf-tab})
+
+if [[ -f $ZSH/oh-my-zsh.sh ]]; then
+    source $ZSH/oh-my-zsh.sh
+fi
 
 # User configuration
 
